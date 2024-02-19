@@ -87,7 +87,7 @@ jenis_tugas = []
 ch = -1001522767385
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, '/gbk'))
+    client.loop.run_until_complete(client.send_message(bot_id, krj))
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text

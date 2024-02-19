@@ -37,7 +37,7 @@ narasi_8 = "di sini terdapat berbagai macam burung"
 narasi_9 = "Taman bunga matahari di kaki Gunung"
 
 area_tupai = {
-    "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[C]", "Pisang[D]", "Pisang[E]"
+    "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[A]", "Pisang[B]", "Pisang[C]", "Pisang[D]", "Pisang[E]"
 }
 
 kebun_terbengkalai = {
@@ -212,7 +212,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(2)
             await client.forward_messages(ch, event.message)
             time.sleep(2)
-            await event.respond(tsk)
+            await event.respond('/gbk')
             return
         
         elif any(loc in pesan for loc in jalan):

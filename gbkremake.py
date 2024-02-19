@@ -212,7 +212,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(2)
             await client.forward_messages(ch, event.message)
             time.sleep(2)
-            await event.respond('/gbk')
+            await event.respond(krj)
             return
         
         elif any(loc in pesan for loc in jalan):

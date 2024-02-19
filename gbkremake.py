@@ -210,7 +210,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Berhasil menyelesaikan tugas" in pesan:
             print('-'*30+f"\nTugas sudah di selesaikan\n"+'-'*30)
             time.sleep(2)
-            await client.forward_messages(grup, event.message)
+            await client.forward_messages(ch, event.message)
             time.sleep(2)
             await event.respond(tsk)
             return

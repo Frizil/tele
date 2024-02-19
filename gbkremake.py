@@ -76,7 +76,7 @@ jalan = narasi_gbk
 
 ongoing_tasks = []
 
-emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '▪️', '🍌'], #'🍄'] #Daftar emoji yang mungkin muncul
+emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '▪️', '🍌', '🍄'] #Daftar emoji yang mungkin muncul
 
 jumlah = 0
 misi = []
@@ -98,7 +98,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
-                print("Kondisi Ongoing Task terpenuhi.")
+                print(pesan)
                 jenis_tugas = None
                 narasi = None
                 for emoji in emoji_list:

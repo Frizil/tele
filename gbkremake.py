@@ -76,7 +76,7 @@ jalan = narasi_gbk
 
 ongoing_tasks = []
 
-emoji_list = ['🍎','🍓', '🍅', '🥜', '▪️', '🍌', '🍄', '🌰'] #Daftar emoji yang mungkin muncul
+emoji_list = ['🍎','▪️','🍄','🥜','🌰','🍌','🍓', '🍅']#Daftar emoji yang mungkin muncul
 
 jumlah = 0
 misi = []

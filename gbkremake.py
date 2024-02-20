@@ -98,45 +98,45 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
-                print(pesan)
                 jenis_tugas = None
                 narasi = None
-                for emoji in emoji_list:
-                    if emoji in pesan:
-                        jenis_tugas = pesan.split(emoji, 1)[1].split()[0]
-                        tgs = pesan.splitlines()[12].split()
-                        tugas = str(tgs[0]+tgs[1])
-                        klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
-                        jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
-                        break
-                if jenis_tugas:
-                    time.sleep(2)
-                    await event.respond(gbk)
-                    if jenis_tugas in area_tupai:
-                        narasi = narasi_1
-                    elif jenis_tugas in kebun_terbengkalai:
-                        narasi = narasi_2
-                    elif jenis_tugas in lubang_kelinci_raksasa:
-                        narasi = narasi_3
-                    elif jenis_tugas in gua_beracun:
-                        narasi = narasi_4
-                    elif jenis_tugas in kebun_merah:
-                        narasi = narasi_5
-                    elif jenis_tugas in kolam_kecil:
-                        narasi = narasi_6
-                    elif jenis_tugas in gua_gibi:
-                        narasi = narasi_7
-                    elif jenis_tugas in surga_burung:
-                        narasi = narasi_8
-                    elif jenis_tugas in taman_matahari:
-                        narasi = narasi_9
-                    else:
-                        print("Jenis item tidak di temukan di dalam area")
+                # Cari nama tugas dalam pesan
+                tugas_match = re.search(r'Ongoing Task \(\d+/\d+\):\n(.+?)\s+\((\d+)/(\d+)\)', pesan)
+                if tugas_match:
+                    jenis_tugas = tugas_match.group(1)  # Nama tugas
+                    jumlah = int(tugas_match.group(2))  # Progres saat ini
+                    klem = int(tugas_match.group(3))    # Jumlah yang diperlukan
+            
+                    if jenis_tugas:
                         time.sleep(2)
-                        await event.click(1,0)
-                        return
-                print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-            return
+                        await event.respond(gbk)
+                        if jenis_tugas in area_tupai:
+                            narasi = narasi_1
+                        elif jenis_tugas in kebun_terbengkalai:
+                            narasi = narasi_2
+                        elif jenis_tugas in lubang_kelinci_raksasa:
+                            narasi = narasi_3
+                        elif jenis_tugas in gua_beracun:
+                            narasi = narasi_4
+                        elif jenis_tugas in kebun_merah:
+                            narasi = narasi_5
+                        elif jenis_tugas in kolam_kecil:
+                            narasi = narasi_6
+                        elif jenis_tugas in gua_gibi:
+                            narasi = narasi_7
+                        elif jenis_tugas in surga_burung:
+                            narasi = narasi_8
+                        elif jenis_tugas in taman_matahari:
+                            narasi = narasi_9
+                        else:
+                            print("Jenis item tidak di temukan di dalam area")
+                            time.sleep(2)
+                            await event.click(1,0)
+                            return
+                    print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                return
+              
+
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []
@@ -167,46 +167,43 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(misi[0].get("misi_list"))
             return
     
-        if "Berhasil mengambil tugas" in pesan:
+        if "Berhasil mengambil tugas dengan ID-" in pesan:
             jenis_tugas = None
-            for emoji in emoji_list:
-                if emoji in pesan:
-                    jenis_tugas = pesan.split(emoji,1)[1].split()[0]
-                    break
-            tugass = re.findall(r'dapatkan (\D+) sebanyak', pesan)
-            klems = re.findall(r'sebanyak (\d+) kali', pesan)
-            for tugas in tugass:
-                tugas=str(tugass[0])
-            for klem in klems:
-                klem=int(klems[0])
-            if jenis_tugas:
-                time.sleep(2)
-                await event.respond(gbk)
-                if jenis_tugas in area_tupai:
-                    narasi = narasi_1
-                elif jenis_tugas in kebun_terbengkalai:
-                    narasi = narasi_2
-                elif jenis_tugas in lubang_kelinci_raksasa:
-                    narasi = narasi_3
-                elif jenis_tugas in gua_beracun:
-                    narasi = narasi_4
-                elif jenis_tugas in kebun_merah:
-                    narasi = narasi_5
-                elif jenis_tugas in kolam_kecil:
-                    narasi = narasi_6
-                elif jenis_tugas in gua_gibi:
-                    narasi = narasi_7
-                elif jenis_tugas in surga_burung:
-                    narasi = narasi_8
-                elif jenis_tugas in taman_matahari:
-                    narasi = narasi_9
-                else:
-                    print("Jenis item tidak di temukan di dalam area")
+            tugas_match = re.search(r'Berhasil mengambil tugas dengan ID-\d+, telusuri gunung dan dapatkan (.+?) sebanyak (\d+) kali', pesan)
+            if tugas_match:
+                tugas = tugas_match.group(1)  # Nama tugas
+                klem = int(tugas_match.group(2))  # Jumlah yang diperlukan
+                jenis_tugas = tugas
+                
+                if jenis_tugas:
                     time.sleep(2)
-                    await event.click(1,0)
-            print('-'*30+f"\nBerhasil mengambil tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                    await event.respond(gbk)
+                    if jenis_tugas in area_tupai:
+                        narasi = narasi_1
+                    elif jenis_tugas in kebun_terbengkalai:
+                        narasi = narasi_2
+                    elif jenis_tugas in lubang_kelinci_raksasa:
+                        narasi = narasi_3
+                    elif jenis_tugas in gua_beracun:
+                        narasi = narasi_4
+                    elif jenis_tugas in kebun_merah:
+                        narasi = narasi_5
+                    elif jenis_tugas in kolam_kecil:
+                        narasi = narasi_6
+                    elif jenis_tugas in gua_gibi:
+                        narasi = narasi_7
+                    elif jenis_tugas in surga_burung:
+                        narasi = narasi_8
+                    elif jenis_tugas in taman_matahari:
+                        narasi = narasi_9
+                    else:
+                        print("Jenis item tidak di temukan di dalam area")
+                        time.sleep(2)
+                        await event.click(1,0)
+                print('-'*30+f"\nBerhasil mengambil tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
             return
-          
+ 
+        
         if "Berhasil menyelesaikan tugas" in pesan:
             print('-'*30+f"\nTugas sudah di selesaikan\n"+'-'*30)
             time.sleep(2)
@@ -294,19 +291,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 return
             return
           
-        
         elif 'EXP terpenuhi!! Level pendaki meningkat!!' in pesan:
             print('-'*30+f"\nNaik Level Dik\n"+'-'*30)
             time.sleep(1.5)
             await client.forward_messages(ch, event.message)
             return
           
-        #elif "tidak ada permata berharga" in pesan:
-            #time.sleep(2)
-            #await event.click(0,0)
-            #return
-
-        
     client.start()
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()

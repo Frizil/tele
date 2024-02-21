@@ -162,13 +162,18 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             #KALAU MAU CARI EXP TERDIKIT
             def get_exp(misi):
                 return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=True)
+            misi.sort(key=get_exp, reverse=False)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return
     
         
         if "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+            time.sleep(2)
+            await event.respond(tsk)
+            return
+          
+        if "Berhasil mengambil tugas dengan ID" in pesan:
             time.sleep(2)
             await event.respond(tskg)
             return

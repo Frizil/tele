@@ -31,12 +31,13 @@ alamat = [
 '220751199636',
 '161147437402',
 '902213454212',
+'641932423025',
 ]
 
 bot = 'kampungmaifamxbot'
 hapus = '/makan_KudapanSuci'
 turu = 3
-batch_size = 25
+batch_size = 26
 
 async def send_address_messages():
     client = TelegramClient(sesi_file, api_id, api_hash)

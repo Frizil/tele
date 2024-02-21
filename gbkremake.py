@@ -155,14 +155,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 misi.append({"koin_list": koin_list, "exp_list": exp_list, "misi_list": misi_list})
                 
             #KALAU MAU CARI KOIN TERBANYAK
-            def get_koin(misi):
-                return misi.get("koin_list")
-            misi.sort(key=get_koin, reverse=True)
+            #def get_koin(misi):
+                #return misi.get("koin_list")
+            #misi.sort(key=get_koin, reverse=True)
                 
             #KALAU MAU CARI EXP TERDIKIT
-            #def get_exp(misi):
-                #return misi.get("exp_list")
-            #misi.sort(key=get_exp, reverse=False)
+            def get_exp(misi):
+                return misi.get("exp_list")
+            misi.sort(key=get_exp, reverse=True)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return

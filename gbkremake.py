@@ -299,6 +299,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             print('-'*30+f"\nNaik Level Dik\n"+'-'*30)
             time.sleep(1.5)
             await client.forward_messages(ch, event.message)
+            time.sleep(1.5)
+            await event.respond(tsk)
             return
           
         #elif "tidak ada permata berharga" in pesan:

@@ -98,7 +98,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
-                print("Kondisi Ongoing Task terpenuhi.")
+                print("Ada task nih")
                 jenis_tugas = None
                 narasi = None
                 for emoji in emoji_list:
@@ -167,6 +167,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(misi[0].get("misi_list"))
             return
     
+        
         if "Berhasil mengambil tugas" in pesan:
             jenis_tugas = None
             for emoji in emoji_list:
@@ -303,12 +304,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tsk)
             return
           
-        #elif "tidak ada permata berharga" in pesan:
-            #time.sleep(2)
-            #await event.click(0,0)
-            #return
-
-        
     client.start()
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()

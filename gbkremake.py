@@ -76,7 +76,7 @@ jalan = narasi_gbk
 
 ongoing_tasks = []
 
-emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','▪️'] #Daftar emoji yang mungkin muncul
+emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️'] #Daftar emoji yang mungkin muncul
 
 jumlah = 0
 misi = []
@@ -93,7 +93,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         pesan = event.raw_text
         global misi, jumlah, tugas, klem, narasi, jenis_tugas, item
         if "Selesaikan tugas-tugas yang ada" in pesan:
-            print(pesan)
             if "Tidak ada tugas yang sedang kamu ambil" in pesan:
                 print("Tidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 time.sleep(2)

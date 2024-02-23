@@ -92,8 +92,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     async def handler(event):
         pesan = event.raw_text
         global misi, jumlah, tugas, klem, narasi, jenis_tugas, item
-        if "Selesaikan tugas-tugas" in pesan:
-            if "Tidak ada tugas" in pesan:
+        if "Selesaikan tugas-tugas yang ada" in pesan:
+            if "Tidak ada tugas yang sedang kamu ambil" in pesan:
                 print("Tidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 time.sleep(2)
                 await event.respond(tskg)
@@ -162,50 +162,20 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             #KALAU MAU CARI EXP TERDIKIT
             def get_exp(misi):
                 return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=True)
+            misi.sort(key=get_exp, reverse=False)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return
     
         
-        if "Berhasil mengambil tugas" in pesan:
-            jenis_tugas = None
-            for emoji in emoji_list:
-                if emoji in pesan:
-                    jenis_tugas = pesan.split(emoji,1)[1].split()[0]
-                    break
-            tugass = re.findall(r'dapatkan (\D+) sebanyak', pesan)
-            klems = re.findall(r'sebanyak (\d+) kali', pesan)
-            for tugas in tugass:
-                tugas=str(tugass[0])
-            for klem in klems:
-                klem=int(klems[0])
-            if jenis_tugas:
-                time.sleep(2)
-                await event.respond(gbk)
-                if jenis_tugas in area_tupai:
-                    narasi = narasi_1
-                elif jenis_tugas in kebun_terbengkalai:
-                    narasi = narasi_2
-                elif jenis_tugas in lubang_kelinci_raksasa:
-                    narasi = narasi_3
-                elif jenis_tugas in gua_beracun:
-                    narasi = narasi_4
-                elif jenis_tugas in kebun_merah:
-                    narasi = narasi_5
-                elif jenis_tugas in kolam_kecil:
-                    narasi = narasi_6
-                elif jenis_tugas in gua_gibi:
-                    narasi = narasi_7
-                elif jenis_tugas in surga_burung:
-                    narasi = narasi_8
-                elif jenis_tugas in taman_matahari:
-                    narasi = narasi_9
-                else:
-                    print("Jenis item tidak di temukan di dalam area")
-                    time.sleep(2)
-                    await event.click(1,0)
-            print('-'*30+f"\nBerhasil mengambil tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+        if "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+            time.sleep(2)
+            await event.respond(tsk)
+            return
+          
+        if "Berhasil mengambil tugas dengan ID" in pesan:
+            time.sleep(2)
+            await event.respond(tskg)
             return
           
         if "Berhasil menyelesaikan tugas" in pesan:
@@ -283,7 +253,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(1.5)
             await event.click(0,0)
             return
-           
+        
+        elif "Tugas tidak ditemukan" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
+            return
+        
         elif '- GBK ⛰' in pesan:
             if narasi in pesan:
                 time.sleep(1.5)
@@ -308,4 +283,3 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Berhenti')
-    

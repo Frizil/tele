@@ -198,7 +198,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(2)
             await client.forward_messages(ch, event.message)
             time.sleep(2)
-            await event.respond(tsk)
+            await event.respond(tskg)
             return
         
         elif any(loc in pesan for loc in jalan):
@@ -291,7 +291,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(1.5)
             await client.forward_messages(ch, event.message)
             time.sleep(1.5)
-            await event.respond(tsk)
+            await event.respond(tskg)
             return
           
     client.start()

@@ -104,7 +104,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     async def handler(event):
         pesan = event.raw_text
         global misi, jumlah, tugas, klem, narasi, jenis_tugas, item
-        print()
         if "Selesaikan tugas-tugas" in pesan:
             if "Tidak ada tugas" in pesan:
                 print("Tidak ada tugas yang sedang diambil")

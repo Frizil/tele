@@ -237,7 +237,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond('/gbk')
             if "Berhasil mengirim ke barang:" in pesan:
                 time.sleep(1.5)
-                await event.respond(tsk)
+                await event.respond(tskg)
             if "kamu kosong" in pesan:
                 time.sleep(1.5)
                 await event.respond(tskg)

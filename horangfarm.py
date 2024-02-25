@@ -77,7 +77,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     else:
                         time.sleep(2)
                         await event.respond(ambil)
-                        break
+                        return
                 return
                  
                 

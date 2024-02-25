@@ -101,11 +101,10 @@ area_tugas = [
 ]
 
 def tentukan_narasi(jenis_tugas):
-    for area, narasi in narasi_area.items():
-        if jenis_tugas in area_tugas:
+    for area, narasi in zip(areas, narasi_area):
+        if jenis_tugas in area:
             return narasi
-
-        return None
+    return "Narasi tidak ditemukan"
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))

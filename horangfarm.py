@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
 import time, asyncio, sys, random
 import logging
-
 from telethon import TelegramClient, events, utils
 
 api_id = 18850178 
@@ -13,11 +11,11 @@ siram = '/siram'
 panen = '/ambilPanen'
 farm = '/kebun'
 bot = ['danaudalamhutan', 'KampungMaifamXBot', 'KampungMaifamX4Bot', 'KampungMaifamBot']
-ternak = ['/ambilHasil']
-feed = '/beriMakan'
-jumlah_perolehan = 0
-jumlah_penanaman = 0
-tnk = 0
+ambil = '/ambilHasil'
+beri = '/beriMakan'
+jpanen = 0
+jtanam = 0
+jhasil = 0
 
 logging.basicConfig(level=logging.ERROR)
     
@@ -29,131 +27,108 @@ async def mancingddh(client,w):
         await client.send_message(bot[0], "/fish")
         await bentar(w)
         
-tanam_commands = ['/tanam_Tomat_655', '/tanam_Cabai_655']
-totanam = 2
+tanam = ['/tanam_Tomat_655', '/tanam_Cabai_655']
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    for command in tanam_commands:
+    for command in tanam:
         client.loop.run_until_complete(client.send_message(bot[1], command))
-    
         @client.on(events.NewMessage(from_users=bot[1]))
         async def handler(event):
-            global tnk, jumlah_perolehan, jumlah_penanaman
+            global jtanam, jpanen, jhasil
             pesan = event.raw_text
             
             
             if "Berhasil menyiram tanaman" in pesan:
-                print(time.asctime(), 'Berhasil menyiram')
-                tnk = 0
-                jumlah_perolehan = 0
+                jtanam = 0
+                print(time.asctime(), 'Siram')
                 time.sleep(2)
-                await event.respond(ternak[tnk])
+                await event.respond(ambil)
                 return
     
             if "Kamu berhasil memanen" in pesan:
                 print(time.asctime(), pesan)
-                await asyncio.sleep(2)
-                jumlah_perolehan += 1
-                if jumlah_perolehan >= 1:
-                    await event.respond(command)
-                    jumlah_perolehan = 0
-                else:
-                    if tnk < len(ternak):
-                        time.sleep(2)
-                        await event.respond(feed)
-                        tnk += 1
-                    else:
-                        tnk = 0
-                        time.sleep(2)
-                        await event.respond(feed)
-    
-            if "Kamu memperoleh:" in pesan:
-                print(time.asctime(), 'Hasil ternak')
-                await asyncio.sleep(2)
-                if jumlah_perolehan == 5:
-                    await event.respond(panen)
-                    jumlah_perolehan = 0
-                else:
-                    if tnk < len(ternak):
-                        time.sleep(2)
-                        await event.respond(feed)
-                        tnk += 1
-                    else:
-                        tnk = 0
-                        time.sleep(2)
-                        await event.respond(feed)
-                
-                
-            if "Tak ada yang bisa dipanen" in pesan:
-                print(time.asctime(), pesan)
-                tnk = 0
-                jumlah_perolehan = 0
+                jhasil = 0
                 time.sleep(2)
-                await event.respond(siram)
-                return
-              
-              
-            if "Berhasil memberi makan ternak" in pesan:
-                tnk = 0
-                jumlah_perolehan += 1
-                time.sleep(2)
-                await event.respond(ternak[tnk])
-              
-            if "Tak ada ternak untuk" in pesan:
-                print(time.asctime(), pesan)
-                tnk = 0
-                jumlah_perolehan = 0
-                time.sleep(2)
-                await event.respond(ternak[tnk])
+                for cmd in tanam:
+                    time.sleep(2)
+                    client.send_message(bot[1], cmd)
+                    break
                 return
             
             if "Kamu berhasil menanam" in pesan:
-                jumlah_penanaman += 1
-                time.sleep(2)
-                if jumlah_penanaman == totanam:
-                    await event.respond(siram)
-                    jumlah_penanaman = 0
-                else:
-                    time.sleep(2)
-                    if jumlah_penanaman == 1:
-                        await event.respond(tanam_commands[1])
-                return
-    
-            elif "Lahan tersisa di kebun kamu tidak mencukupi" in pesan:
-                time.sleep(2)
-                await event.respond(panen)
-                return
-             
-            elif 'Kamu tidak memiliki cukup energi' in pesan:
-                print('Energi habis')
-                time.sleep(2)
-                await event.respond('/restore_max_confirm')
+                jtanam += 1
+                if jtanam:
+                   if jtanam >= 2
+                      time.sleep(2)
+                      await event.respond(siram)
+                      break
                 return
                 
-            elif 'Energi berhasil dipulihkan' in pesan:
+    
+            if "Kamu memperoleh:" in pesan:
+                jhasil += 1
+                print(time.asctime(), 'Hasil ternak')
+                time.sleep(2)
+                await event.respond(beri)
+                if jhasil:
+                    if jhasil >= 10
+                        time.sleep(2)
+                        await event.respond(panen)
+                    else:
+                        time.sleep(2)
+                        await event.respond(ambil)
+                        break
+                return
+                 
+                
+            if "Tak ada yang bisa dipanen" in pesan:
+                print(time.asctime(), pesan)
+                time.sleep(2)
+                await event.respond(ambil)
+                return
+              
+            if "Berhasil memberi makan ternak" in pesan:
+                print(time.asctime(), pesan)
+                time.sleep(2)
+                await event.respond(ambil)
+              
+            if "Tak ada ternak untuk" in pesan:
+                print(time.asctime(), pesan)
+                time.sleep(2)
+                await event.respond(ambil)
+                return
+               
+            if "Lahan tersisa di kebun kamu tidak mencukupi" in pesan:
+                time.sleep(2)
+                await event.respond(farm)
+                return
+             
+            if 'Kamu tidak memiliki cukup energi' in pesan:
+                print('Energi habis')
+                time.sleep(2)
+                await event.respond(restore)
+                return
+                
+            if 'Energi berhasil dipulihkan' in pesan:
                 time.sleep(2)
                 await event.respond(siram)
                 return
             
-            elif 'Tak ada tanaman untuk disiram' in pesan:
-                
+            if 'Tak ada tanaman untuk disiram' in pesan:
                 time.sleep(2)
                 await event.respond(farm)
                 return
               
-            elif '🌲 Kebun' in pesan:
+            if '🌲 Kebun' in pesan:
                 if 'siap panen!!' in pesan:
                     time.sleep(2)
                     await event.respond(panen)
+                elif 'siram' in pesan:,
+                    time.sleep(2)
+                    await event.respond(siram)
                 else:
-                    if tnk < len(ternak):
-                        time.sleep(2)
-                        await event.respond(ternak[tnk])
-                        tnk += 1
-                    else:
-                        tnk = 0
-                        time.sleep(2)
-                        await event.respond(ternak[tnk])
+                    time.sleep(2)
+                    await event.respond(ambil)
                 return
               
            

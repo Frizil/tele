@@ -81,7 +81,7 @@ jalan = narasi_gbk
 
 ongoing_tasks = []
 
-emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️'] #Daftar emoji yang mungkin muncul
+emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️']
 
 jumlah = 0
 misi = []
@@ -128,13 +128,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         await event.respond(gbk)
                         narasi = tentukan_narasi(jenis_tugas)
                         print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-                        break  # Keluar dari loop setelah menemukan jenis tugas
+                        break 
                 else:
-                    # Ini akan dijalankan jika tidak ada jenis tugas yang ditemukan
                     print("Jenis tugas tidak ditemukan.")
                     return
                 
-                # Mengatur nilai narasi setelah loop selesai
                 if not narasi:
                     print("Narasi tidak ditemukan.")
                     return
@@ -153,7 +151,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         try:
                             koin_list = int(koin[2].replace("🪙", ""))
                         except ValueError:
-                            pass  # Menangani jika koin tidak bisa dikonversi ke integer
+                            pass 
                 
                 exp_list = None
                 exp_split = [i for i in x.split("\n") if "🎁 EXP:" in i]
@@ -163,7 +161,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         try:
                             exp_list = int(exp[2].replace("❇️", ""))
                         except ValueError:
-                            pass  # Menangani jika exp tidak bisa dikonversi ke integer
+                            pass 
                 
                 misi_split = [i for i in x.split("\n") if "🗒" in i]
                 if misi_split:
@@ -178,7 +176,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             #KALAU MAU CARI EXP TERBANYAK
             def get_exp(misi):
                 return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=True)
+            misi.sort(key=get_exp, reverse=False)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return

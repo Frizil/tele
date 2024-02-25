@@ -61,7 +61,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                    if jtanam >= 2:
                       time.sleep(2)
                       await event.respond(siram)
-                      break
+                      return
                 return
                 
     

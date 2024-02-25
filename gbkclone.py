@@ -136,22 +136,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         task_amount = progress.split("/")[0]  # Mengambil jumlah yang sudah dikerjakan
                         task_total = progress.split("/")[1]  # Mengambil total jumlah tugas
                         print(f"- {task_name}: {task_amount}/{task_total}")
+                        jenis_tugas = task_name
                 
-                jenis_tugas = None
-                narasi = None
-                for area, task_names in zip(areas, [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]):
-                    for task_name in task_names:
-                        if task_name in pesan:
-                            jenis_tugas = task_name
-                            tgs = pesan.splitlines()[12].split()
-                            tugas = str(tgs[0]+tgs[1])
-                            klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
-                            jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
-                            break
                     if jenis_tugas:
                         time.sleep(2)
                         await event.respond(gbk)
                         narasi = tentukan_narasi(jenis_tugas)
+                        tugas = jenis_tugas
                         print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
                         break
                 

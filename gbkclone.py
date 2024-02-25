@@ -68,7 +68,6 @@ taman_matahari = {
 
 jalan = narasi_gbk
 
-ongoing_tasks = []
 
 emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️']
 
@@ -82,17 +81,6 @@ ch = -1001522767385
 
 areas = [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]
 
-narasi_area = {
-    "area_tupai": "Tempat ini dipenuhi tupai",
-    "kebun_terbengkalai": "Dulu sekali seorang petani tinggal",
-    "lubang_kelinci_raksasa": "Di sini tidak benar-benar ada kelinci",
-    "gua_beracun": "Keberadaan tumbuhan-tumbuhan beracun",
-    "kolam_kecil": "di sini mayoritas berwarna merah",
-    "gua_gibi": "Ikan-ikan kecil hidup di sini",
-    "taman_matahari": "Gua kecil di bagian dasar Gunung",
-    "kebun_merah": "di sini terdapat berbagai macam burung",
-    "surga_burung": "Taman bunga matahari di kaki Gunung"
-}
 
 area_tugas = [
     area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa,
@@ -101,10 +89,26 @@ area_tugas = [
 ]
 
 def tentukan_narasi(jenis_tugas):
-    for area, narasi in zip(areas, narasi_area):
-        if jenis_tugas in area:
-            return narasi
-    return "Narasi tidak ditemukan"
+    if jenis_tugas in area_tupai:
+        return "Tempat ini dipenuhi tupai"
+    elif jenis_tugas in kebun_terbengkalai:
+        return "Dulu sekali seorang petani tinggal"
+    elif jenis_tugas in lubang_kelinci_raksasa:
+        return "Di sini tidak benar-benar ada kelinci"
+    elif jenis_tugas in gua_beracun:
+        return "Keberadaan tumbuhan-tumbuhan beracun di gua ini"
+    elif jenis_tugas in kolam_kecil:
+        return "Ikan-ikan kecil hidup di sini"
+    elif jenis_tugas in gua_gibi:
+        return "Gua kecil di bagian dasar Gunung"
+    elif jenis_tugas in taman_matahari:
+        return "Taman bunga matahari di kaki Gunung"
+    elif jenis_tugas in kebun_merah:
+        return "di sini mayoritas berwarna merah"
+    elif jenis_tugas in surga_burung:
+        return "di sini terdapat berbagai macam burung"
+    else:
+        return "Jenis tugas tidak dikenali."
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))

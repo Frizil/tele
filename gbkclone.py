@@ -9,7 +9,7 @@ sesi_file = input('Akun : ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamBot"
+bot_id = "KampungMaifamXBot"
 #bot_id = 5199147926
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
@@ -122,11 +122,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                               tugas = str(tgs[0]+tgs[1])
                               klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
                               jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
+                              narasi = tentukan_narasi(jenis_tugas)  # Perbarui narasi berdasarkan jenis tugas yang ditemukan
                               break
                       if jenis_tugas:
                           time.sleep(2)
                           await event.respond(gbk)
-                          narasi = tentukan_narasi(jenis_tugas)
                           print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
                           break  # Keluar dari loop setelah menemukan jenis tugas
                   else:

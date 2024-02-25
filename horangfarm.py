@@ -25,10 +25,12 @@ async def bentar(w):
 async def cmd_tanam(client, bot):
     tanam = ['/tanam_Tomat_655', '/tanam_Cabai_655']
     for command in tanam:
+        await asyncio.sleep(2)
         await client.send_message(bot, command)
         if len(tanam) <= 1:
+            await asyncio.sleep(2)
             await client.send_message(bot, command)
-        await asyncio.sleep(2)
+        
 
 async def mancingddh(client, w):
     while True:
@@ -62,8 +64,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 if jtanam >= 2:
                     time.sleep(2)
                     await event.respond(siram)
-                elif jtanam <= 1:
-                    await cmd_tanam(client, bot[1])
             return
 
         elif "Kamu memperoleh:" in pesan:

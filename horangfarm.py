@@ -47,14 +47,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         if "Berhasil menyiram tanaman" in pesan:
             print(time.asctime(), 'Siram')
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(beri)
         
         elif "Kamu berhasil memanen" in pesan:
             print(time.asctime(), pesan)
             jhasil = 0
             jtanam = 0
-            time.sleep(2)
+            time.sleep(1.5)
             await cmd_tanam(client, bot[1]) 
             return
         
@@ -62,7 +62,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             jtanam += 1
             if jtanam:
                 if jtanam >= 2:
-                    time.sleep(2)
+                    time.sleep(1.5)
                     await event.respond(siram)
             return
 
@@ -71,47 +71,48 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             print(time.asctime(), f'Hasil ternak = {jhasil}')
             if jhasil:
                 if jhasil >= 10:
-                    time.sleep(2)
+                    time.sleep(1.5)
                     await event.respond(panen)
                 else:
-                    time.sleep(2)
+                    time.sleep(1.5)
                     await event.respond(beri)
             return
             
         elif "Tak ada yang bisa dipanen" in pesan or "Tak ada ternak untuk" in pesan:
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(ambil)
             return
           
         elif "Berhasil memberi makan ternak" in pesan or "Tak ada tanaman untuk disiram" in pesan:
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(ambil)
           
         elif "Lahan tersisa di kebun kamu tidak mencukupi" in pesan:
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(farm)
          
         elif 'Kamu tidak memiliki cukup energi' in pesan:
             print(time.asctime(), pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(restore)
             
         elif 'Energi berhasil dipulihkan' in pesan:
             print(time.asctime(), pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(siram)
         
         elif '🌲 Kebun' in pesan:
             if 'siap panen!!' in pesan:
-                time.sleep(2)
+                time.sleep(1.5)
                 await event.respond(panen)
             elif 'siram' in pesan:
-                time.sleep(2)
+                time.sleep(1.5)
                 await event.respond(siram)
             elif 'Kebun kamu kosong' in pesan:
+                time.sleep(1.5)
                 await cmd_tanam(client, bot[1])
             else:
-                time.sleep(2)
+                time.sleep(1.5)
                 await event.respond(ambil)
 
     client.start() 

@@ -48,7 +48,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Berhasil menyiram tanaman" in pesan:
             print(time.asctime(), 'Siram')
             time.sleep(2)
-            await event.respond(ambil)
+            await event.respond(beri)
         
         elif "Kamu berhasil memanen" in pesan:
             print(time.asctime(), pesan)
@@ -68,7 +68,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
 
         elif "Kamu memperoleh:" in pesan:
             jhasil += 1
-            print(time.asctime(), 'Hasil ternak')
+            print(time.asctime(), f'Hasil ternak = {jhasil}')
             if jhasil:
                 if jhasil >= 10:
                     time.sleep(2)
@@ -79,13 +79,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
             
         elif "Tak ada yang bisa dipanen" in pesan or "Tak ada ternak untuk" in pesan:
-            print(time.asctime(), pesan)
             time.sleep(2)
             await event.respond(ambil)
             return
           
         elif "Berhasil memberi makan ternak" in pesan or "Tak ada tanaman untuk disiram" in pesan:
-            print(time.asctime(), pesan)
             time.sleep(2)
             await event.respond(ambil)
           
@@ -94,11 +92,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(farm)
          
         elif 'Kamu tidak memiliki cukup energi' in pesan:
-            print('Energi habis')
+            print(time.asctime(), pesan)
             time.sleep(2)
             await event.respond(restore)
             
         elif 'Energi berhasil dipulihkan' in pesan:
+            print(time.asctime(), pesan)
             time.sleep(2)
             await event.respond(siram)
         

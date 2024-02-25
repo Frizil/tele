@@ -29,17 +29,6 @@ narasi_gbk = {
     "menemukan sebuah"
 }
 
-narasi_area = [
-    "Tempat ini dipenuhi tupai",
-    "Dulu sekali seorang petani tinggal",
-    "Di sini tidak benar-benar ada kelinci",
-    "Keberadaan tumbuhan-tumbuhan beracun",
-    "di sini mayoritas berwarna merah",
-    "Ikan-ikan kecil hidup di sini",
-    "Gua kecil di bagian dasar Gunung",
-    "di sini terdapat berbagai macam burung",
-    "Taman bunga matahari di kaki Gunung"
-]
 
 area_tupai = {
     "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[C]", "Pisang[D]", "Pisang[E]"
@@ -93,12 +82,30 @@ ch = -1001522767385
 
 areas = [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]
 
-def tentukan_narasi(jenis_tugas):
-    for i, area in enumerate(areas):
-        if jenis_tugas in area:
-            return narasi_area[i]
-    return None
+narasi_area = {
+    "area_tupai": "Tempat ini dipenuhi tupai",
+    "kebun_terbengkalai": "Dulu sekali seorang petani tinggal",
+    "lubang_kelinci_raksasa": "Di sini tidak benar-benar ada kelinci",
+    "gua_beracun": "Keberadaan tumbuhan-tumbuhan beracun",
+    "kolam_kecil": "di sini mayoritas berwarna merah",
+    "gua_gibi": "Ikan-ikan kecil hidup di sini",
+    "taman_matahari": "Gua kecil di bagian dasar Gunung",
+    "kebun_merah": "di sini terdapat berbagai macam burung",
+    "surga_burung": "Taman bunga matahari di kaki Gunung"
+}
 
+area_tugas = [
+    area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa,
+    gua_beracun, kolam_kecil, gua_gibi, taman_matahari,
+    kebun_merah, surga_burung
+]
+
+def tentukan_narasi(jenis_tugas):
+    for area, narasi in narasi_area.items():
+        if jenis_tugas in area_tugas:
+            return narasi
+
+        return None
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))

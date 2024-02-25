@@ -8,7 +8,7 @@ sesi_file = input('Mau sesi mana = ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamBot"
+bot_id = "KampungMaifamXBot"
 #bot_id = 5199147926
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
@@ -136,35 +136,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         
                 print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
             return
-        
-        if "Berikut adalah daftar Tugas" in pesan:
-            misi = []
-            z = [i for i in pesan.split("\n\n") if any(loc in i for loc in emoji_list)]
-            for x in z:
-                koin = [i for i in [i for i in x.split("\n") if "🎁 Koin:" in i][0].split()][2]
-                koin_list = int(koin.replace("🪙", ""))
-                print(koin)
-                exp = [i for i in [i for i in x.split("\n") if "🎁 EXP:" in i][0].split()][2]
-                exp_list = int(exp.replace("❇️", ""))
-                print(exp)
-                misi_list = [i for i in [i for i in x.split("\n") if "🗒" in i][0].split()][1]
-                print(misi_list)
-                print()
-                misi.append({"koin_list": koin_list, "exp_list": exp_list, "misi_list": misi_list})
-                
-            #KALAU MAU CARI KOIN TERBANYAK
-            #def get_koin(misi):
-                #return misi.get("koin_list")
-            #misi.sort(key=get_koin, reverse=True)
-                
-            #KALAU MAU CARI EXP TERDIKIT
-            def get_exp(misi):
-                return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=False)
-            time.sleep(2.0)
-            await event.respond(misi[0].get("misi_list"))
-            return
-
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []

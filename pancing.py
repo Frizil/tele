@@ -84,7 +84,7 @@ narasi = {
     "Pemerintah Maikantri",
 }
         
-tunggu = 2
+tunggu = 1.5
        
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tempat))

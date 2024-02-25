@@ -51,7 +51,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 for cmd in tanam:
                     time.sleep(2)
-                    client.send_message(bot[1], cmd)
+                    await client.send_message(bot[1], cmd)
                     return
                 return
             
@@ -62,7 +62,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         time.sleep(2)
                         await event.respond(siram)
                     elif jtanam <= 1:
-                        client.send_message(bot[1], cmd[1])
+                        await client.send_message(bot[1], cmd)
                         return
                 return
                 
@@ -129,7 +129,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 elif 'Kebun kamu kosong' in pesan:
                     for cmd in tanam:
                         time.sleep(2)
-                        client.send_message(bot[1], cmd)
+                        await client.send_message(bot[1], cmd)
                         return
                 else:
                     time.sleep(2)

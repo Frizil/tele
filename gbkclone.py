@@ -110,32 +110,35 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 await event.respond(cmd)
             elif "Ongoing Task" in pesan:
-                  jenis_tugas = None
-                  narasi = None
-                  klem = 0  # Inisialisasi klem
-                  jumlah = 0  # Inisialisasi jumlah
-                  for area, task_names in zip(areas, [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]):
-                      for task_name in task_names:
-                          if task_name in pesan:
-                              jenis_tugas = task_name
-                              klem = int(re.search(r'\((\d+)x\)', pesan).group(1))  # Menggunakan regex untuk mencari jumlah klem
-                              jumlah = int(re.search(r'\((\d+)/\d+\)', pesan).group(1))  # Menggunakan regex untuk mencari jumlah yang sudah dikerjakan
-                              narasi = tentukan_narasi(jenis_tugas)  # Perbarui narasi berdasarkan jenis tugas yang ditemukan
-                              break
-                      if jenis_tugas:
-                          time.sleep(2)
-                          await event.respond(gbk)
-                          print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-                          break  # Keluar dari loop setelah menemukan jenis tugas
-                  else:
-                      # Ini akan dijalankan jika tidak ada jenis tugas yang ditemukan
-                      print("Jenis tugas tidak ditemukan.")
-                      return
-                  
-                  # Mengatur nilai narasi setelah loop selesai
-                  if not narasi:
-                      print("Narasi tidak ditemukan.")
-                      return
+                jenis_tugas = None
+                narasi = None
+                klem = 0  # Inisialisasi klem
+                jumlah = 0  # Inisialisasi jumlah
+                for area, task_names in zip(areas, [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]):
+                    for task_name in task_names:
+                        if task_name in pesan:
+                            jenis_tugas = task_name
+                            klem_match = re.search(r'\((\d+)x\)', pesan)
+                            jumlah_match = re.search(r'\((\d+)/\d+\)', pesan)
+                            if klem_match and jumlah_match:
+                                klem = int(klem_match.group(1))  # Menggunakan regex untuk mencari jumlah klem
+                                jumlah = int(jumlah_match.group(1))  # Menggunakan regex untuk mencari jumlah yang sudah dikerjakan
+                                narasi = tentukan_narasi(jenis_tugas)  # Perbarui narasi berdasarkan jenis tugas yang ditemukan
+                                break
+                    if jenis_tugas:
+                        time.sleep(2)
+                        await event.respond(gbk)
+                        print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                        break  # Keluar dari loop setelah menemukan jenis tugas
+                else:
+                    # Ini akan dijalankan jika tidak ada jenis tugas yang ditemukan
+                    print("Jenis tugas tidak ditemukan.")
+                    return
+        
+                # Mengatur nilai narasi setelah loop selesai
+                if not narasi:
+                    print("Narasi tidak ditemukan.")
+                    return
                                 
         
         if "Berikut adalah daftar Tugas" in pesan:

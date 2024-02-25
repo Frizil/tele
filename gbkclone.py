@@ -132,12 +132,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if jenis_tugas:
                         time.sleep(2)
                         await event.respond(gbk)
-                        narasi = tentukan_narasi(jenis_tugas)
+                        narasi = narasi_area.get(jenis_tugas, "Narasi tidak ditemukan")
                         print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-                        break 
-                else:
-                    print("Jenis tugas tidak ditemukan.")
-                    return
+                        break
                 
                 if not narasi:
                     print("Narasi tidak ditemukan.")

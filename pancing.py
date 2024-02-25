@@ -113,10 +113,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tempat)
             return
         
-        #if "Your energy is" in pesan or 'Kamu tidak memiliki' in pesan:
-            #time.sleep(tunggu)
-            #await event.respond("/restore")
-            #return
+        if "Your energy is" in pesan or 'Kamu tidak memiliki' in pesan:
+            time.sleep(tunggu)
+            await event.respond("/restore_max_confirm")
+            return
         
         if "Energy Successfully" in pesan or 'Energi berhasil' in pesan:
             time.sleep(tunggu)

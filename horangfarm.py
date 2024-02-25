@@ -123,7 +123,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 if 'siap panen!!' in pesan:
                     time.sleep(2)
                     await event.respond(panen)
-                elif 'siram' in pesan:,
+                elif 'siram' in pesan:
                     time.sleep(2)
                     await event.respond(siram)
                 else:

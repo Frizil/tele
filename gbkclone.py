@@ -118,16 +118,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                       for task_name in task_names:
                           if task_name in pesan:
                               jenis_tugas = task_name
-                              tgs = pesan.splitlines()[12].split()
-                              tugas = str(tgs[0]+tgs[1])
-                              klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
-                              jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
+                              klem = int(re.search(r'\((\d+)x\)', pesan).group(1))  # Menggunakan regex untuk mencari jumlah klem
+                              jumlah = int(re.search(r'\((\d+)/\d+\)', pesan).group(1))  # Menggunakan regex untuk mencari jumlah yang sudah dikerjakan
                               narasi = tentukan_narasi(jenis_tugas)  # Perbarui narasi berdasarkan jenis tugas yang ditemukan
                               break
                       if jenis_tugas:
                           time.sleep(2)
                           await event.respond(gbk)
-                          print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                          print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
                           break  # Keluar dari loop setelah menemukan jenis tugas
                   else:
                       # Ini akan dijalankan jika tidak ada jenis tugas yang ditemukan

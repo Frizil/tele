@@ -58,7 +58,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if "Kamu berhasil menanam" in pesan:
                 jtanam += 1
                 if jtanam:
-                   if jtanam >= 2
+                   if jtanam >= 2:
                       time.sleep(2)
                       await event.respond(siram)
                       break
@@ -71,7 +71,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2)
                 await event.respond(beri)
                 if jhasil:
-                    if jhasil >= 10
+                    if jhasil >= 10:
                         time.sleep(2)
                         await event.respond(panen)
                     else:

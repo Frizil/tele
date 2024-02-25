@@ -39,7 +39,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             
             
             if "Berhasil menyiram tanaman" in pesan:
-                jtanam = 0
                 print(time.asctime(), 'Siram')
                 time.sleep(2)
                 await event.respond(ambil)
@@ -48,6 +47,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if "Kamu berhasil memanen" in pesan:
                 print(time.asctime(), pesan)
                 jhasil = 0
+                jtanam = 0
                 time.sleep(2)
                 for cmd in tanam:
                     time.sleep(2)
@@ -126,6 +126,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 elif 'siram' in pesan:
                     time.sleep(2)
                     await event.respond(siram)
+                elif 'Kebun kamu kosong' in pesan:
+                    for cmd in tanam:
+                        time.sleep(2)
+                        client.send_message(bot[1], cmd)
+                        return
                 else:
                     time.sleep(2)
                     await event.respond(ambil)

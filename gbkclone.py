@@ -1,7 +1,5 @@
 import time, asyncio, sys, random, re
-
 from telethon import TelegramClient, events, utils, Button
-
 import time, os, asyncio, sys, re, random, logging
 logging.basicConfig(level=logging.ERROR)
 
@@ -11,7 +9,7 @@ sesi_file = input('Akun : ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamBot"
+bot_id = "KampungMaifamXBot"
 #bot_id = 5199147926
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
@@ -29,6 +27,17 @@ narasi_gbk = {
     "menemukan sebuah"
 }
 
+narasi_area = [
+    "Tempat ini dipenuhi tupai",
+    "Dulu sekali seorang petani tinggal",
+    "Di sini tidak benar-benar ada kelinci",
+    "Keberadaan tumbuhan-tumbuhan beracun",
+    "di sini mayoritas berwarna merah",
+    "Ikan-ikan kecil hidup di sini",
+    "Gua kecil di bagian dasar Gunung",
+    "di sini terdapat berbagai macam burung",
+    "Taman bunga matahari di kaki Gunung"
+]
 
 area_tupai = {
     "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[C]", "Pisang[D]", "Pisang[E]"
@@ -68,8 +77,9 @@ taman_matahari = {
 
 jalan = narasi_gbk
 
+ongoing_tasks = []
 
-emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️']
+emoji_list = ['🍎','🍓', '🌰', '🍅', '🥜', '🍌', '🍄','🌻','▪️'] #Daftar emoji yang mungkin muncul
 
 jumlah = 0
 misi = []
@@ -81,34 +91,12 @@ ch = -1001522767385
 
 areas = [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]
 
-
-area_tugas = [
-    area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa,
-    gua_beracun, kolam_kecil, gua_gibi, taman_matahari,
-    kebun_merah, surga_burung
-]
-
 def tentukan_narasi(jenis_tugas):
-    if jenis_tugas in area_tupai:
-        return "Tempat ini dipenuhi tupai"
-    elif jenis_tugas in kebun_terbengkalai:
-        return "Dulu sekali seorang petani tinggal"
-    elif jenis_tugas in lubang_kelinci_raksasa:
-        return "Di sini tidak benar-benar ada kelinci"
-    elif jenis_tugas in gua_beracun:
-        return "Keberadaan tumbuhan-tumbuhan beracun di gua ini"
-    elif jenis_tugas in kolam_kecil:
-        return "Ikan-ikan kecil hidup di sini"
-    elif jenis_tugas in gua_gibi:
-        return "Gua kecil di bagian dasar Gunung"
-    elif jenis_tugas in taman_matahari:
-        return "Taman bunga matahari di kaki Gunung"
-    elif jenis_tugas in kebun_merah:
-        return "di sini mayoritas berwarna merah"
-    elif jenis_tugas in surga_burung:
-        return "di sini terdapat berbagai macam burung"
-    else:
-        return "Jenis tugas tidak dikenali."
+    for i, area in enumerate(areas):
+        if jenis_tugas in area:
+            return narasi_area[i]
+    return None
+
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))
@@ -121,31 +109,36 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Tidak ada tugas yang sedang diambil")
                 time.sleep(2)
                 await event.respond(cmd)
-            if "Ongoing Task" in pesan:
-                tasks = []
-                lines = pesan.split("\n")
-                for line in lines:
-                    if "(" in line and ")" in line:
-                        task_info = line.split("(")[0].strip()
-                        task_progress = line.split("(")[1].split(")")[0].strip()
-                        tasks.append((task_info, task_progress))
-                if tasks:
-                    print("Tugas-tugas yang sedang berlangsung:")
-                    for task, progress in tasks:
-                        task_name = task.split()[1]  # Mengambil nama tugas
-                        task_amount = progress.split("/")[0]  # Mengambil jumlah yang sudah dikerjakan
-                        task_total = progress.split("/")[1]  # Mengambil total jumlah tugas
-                        print(f"- {task_name}: {task_amount}/{task_total}")
-                        jenis_tugas = task_name
-                    
-                        if jenis_tugas:
-                            time.sleep(2)
-                            await event.respond(gbk)
-                            narasi = tentukan_narasi(jenis_tugas)
-                            tugas = jenis_tugas
-                            print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-                            break  # Memastikan 'break' berada di dalam loop
+            elif "Ongoing Task" in pesan:
+                  jenis_tugas = None
+                  narasi = None
+                  klem = 0  # Inisialisasi klem
+                  jumlah = 0  # Inisialisasi jumlah
+                  for area, task_names in zip(areas, [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]):
+                      for task_name in task_names:
+                          if task_name in pesan:
+                              jenis_tugas = task_name
+                              tgs = pesan.splitlines()[12].split()
+                              tugas = str(tgs[0]+tgs[1])
+                              klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
+                              jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
+                              break
+                      if jenis_tugas:
+                          time.sleep(2)
+                          await event.respond(gbk)
+                          narasi = tentukan_narasi(jenis_tugas)
+                          print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                          break  # Keluar dari loop setelah menemukan jenis tugas
+                  else:
+                      # Ini akan dijalankan jika tidak ada jenis tugas yang ditemukan
+                      print("Jenis tugas tidak ditemukan.")
+                      return
                   
+                  # Mengatur nilai narasi setelah loop selesai
+                  if not narasi:
+                      print("Narasi tidak ditemukan.")
+                      return
+                                
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []
@@ -160,7 +153,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         try:
                             koin_list = int(koin[2].replace("🪙", ""))
                         except ValueError:
-                            pass 
+                            pass  # Menangani jika koin tidak bisa dikonversi ke integer
                 
                 exp_list = None
                 exp_split = [i for i in x.split("\n") if "🎁 EXP:" in i]
@@ -170,7 +163,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         try:
                             exp_list = int(exp[2].replace("❇️", ""))
                         except ValueError:
-                            pass 
+                            pass  # Menangani jika exp tidak bisa dikonversi ke integer
                 
                 misi_split = [i for i in x.split("\n") if "🗒" in i]
                 if misi_split:
@@ -185,7 +178,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             #KALAU MAU CARI EXP TERBANYAK
             def get_exp(misi):
                 return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=False)
+            misi.sort(key=get_exp, reverse=True)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return

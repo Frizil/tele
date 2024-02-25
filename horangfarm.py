@@ -52,7 +52,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 for cmd in tanam:
                     time.sleep(2)
                     client.send_message(bot[1], cmd)
-                    break
+                    return
                 return
             
             if "Kamu berhasil menanam" in pesan:

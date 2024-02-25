@@ -121,7 +121,22 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Tidak ada tugas yang sedang diambil")
                 time.sleep(2)
                 await event.respond(cmd)
-            elif "Ongoing Task" in pesan:
+            if "Ongoing Task" in pesan:
+                tasks = []
+                lines = pesan.split("\n")
+                for line in lines:
+                    if "(" in line and ")" in line:
+                        task_info = line.split("(")[0].strip()
+                        task_progress = line.split("(")[1].split(")")[0].strip()
+                        tasks.append((task_info, task_progress))
+                if tasks:
+                    print("Tugas-tugas yang sedang berlangsung:")
+                    for task, progress in tasks:
+                        task_name = task.split()[1]  # Mengambil nama tugas
+                        task_amount = progress.split("/")[0]  # Mengambil jumlah yang sudah dikerjakan
+                        task_total = progress.split("/")[1]  # Mengambil total jumlah tugas
+                        print(f"- {task_name}: {task_amount}/{task_total}")
+                
                 jenis_tugas = None
                 narasi = None
                 for area, task_names in zip(areas, [area_tupai, kebun_terbengkalai, lubang_kelinci_raksasa, gua_beracun, kebun_merah, kolam_kecil, gua_gibi, surga_burung, taman_matahari]):

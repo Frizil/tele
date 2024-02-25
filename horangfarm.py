@@ -58,25 +58,25 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if "Kamu berhasil menanam" in pesan:
                 jtanam += 1
                 if jtanam:
-                   if jtanam >= 2:
-                      time.sleep(2)
-                      await event.respond(siram)
-                      return
+                    if jtanam >= 2:
+                        time.sleep(2)
+                        await event.respond(siram)
+                    elif jtanam <= 1:
+                        client.send_message(bot[1], cmd[1])
+                        return
                 return
                 
     
             if "Kamu memperoleh:" in pesan:
                 jhasil += 1
                 print(time.asctime(), 'Hasil ternak')
-                time.sleep(2)
-                await event.respond(beri)
                 if jhasil:
                     if jhasil >= 10:
                         time.sleep(2)
                         await event.respond(panen)
                     else:
                         time.sleep(2)
-                        await event.respond(ambil)
+                        await event.respond(beri)
                         return
                 return
                  

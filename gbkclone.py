@@ -286,21 +286,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
     
         
-        if "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
-            time.sleep(2)
-            await event.respond(tsk)
-            return
-          
-        if "Berhasil mengambil tugas dengan ID" in pesan:
-            print(pesan)
-            time.sleep(2)
-            await event.respond(tskg)
-            return
-        
-        if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-            time.sleep(1.5)
-            await event.respond(tskg)
-            return
         
         if "Berhasil menyelesaikan tugas" in pesan:
             print('-'*30+f"\nTugas sudah di selesaikan\n"+'-'*30)
@@ -355,7 +340,22 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.click(text='Kirim ke Barang')
             return
         
+        elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+            time.sleep(2)
+            await event.respond(tsk)
+            return
+          
+        elif "Berhasil mengambil tugas dengan ID" in pesan:
+            print(pesan)
+            time.sleep(2)
+            await event.respond(tskg)
+            return
         
+        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
+            return
+          
         elif "berhasil mendapat" in pesan:
             await handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal)
       

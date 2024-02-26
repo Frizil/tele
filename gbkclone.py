@@ -106,17 +106,22 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("\nKondisi Ongoing Task terpenuhi.")
                 # Pola regex untuk mengekstrak informasi tugas
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
-
                 tasks = re.findall(pola_tugas, pesan)
-
                 tasks_sorted = sorted(tasks, key=lambda x: x[4])
 
                 for task in tasks_sorted:
                     jenis_tugas = f"{task[0]}[{task[1]}]"
                     total = task[3]
                     progress = task[2]
-                
+                    narasi = None
+
                     if jenis_tugas:
+                        if '[' in jenis_tugas and ']' in jenis_tugas:
+                            jenis_tugas, variasi = jenis_tugas.split('[')
+                            variasi = '[' + variasi
+                        else:
+                            variasi = ''
+
                         if jenis_tugas in area_tupai:
                             narasi = narasi_1
                         elif jenis_tugas in kebun_terbengkalai:
@@ -137,65 +142,61 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                             narasi = narasi_9
                         else:
                             print("\nJenis item tidak ditemukan di dalam area")
-                            narasi =  '⛰ Gunung Belakang Kebun ⛰'
+                            narasi = '⛰ Gunung Belakang Kebun ⛰'
                             break
-                
-                    print('\n'+'-'*30)
+
+                    print('\n' + '-' * 30)
                     print("Tersedia tugas")
-                    print(f"jenis_tugas = {jenis_tugas}")
+                    print(f"jenis_tugas = {jenis_tugas}{variasi}")
                     print(f"jumlah = {total}x")
                     print(f"progres = {progress}")
                     print(f"narasi = {narasi}")
                     print("Selamat menyelesaikan tugas!!")
-                    print('-'*30)
-            
+                    print('-' * 30)
+
+                # Memulai mengerjakan tugas yang paling awal
                 narasi_awal = None
-            
-                if tasks_sorted:
-                    first_task = tasks_sorted[0]
-                    if len(first_task) >= 2:
-                        jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
-                    else:
-                        jenis_tugas_awal = first_task[0]
-            
-                    jumlah_awal = first_task[3]
-                    progres_awal = first_task[2]
-            
-                    if jenis_tugas_awal:
-                        if jenis_tugas_awal in area_tupai:
-                            narasi_awal = narasi_1
-                        elif jenis_tugas_awal in kebun_terbengkalai:
-                            narasi_awal = narasi_2
-                        elif jenis_tugas_awal in lubang_kelinci_raksasa:
-                            narasi_awal = narasi_3
-                        elif jenis_tugas_awal in gua_beracun:
-                            narasi_awal = narasi_4
-                        elif jenis_tugas_awal in kolam_kecil:
-                            narasi_awal = narasi_5
-                        elif jenis_tugas_awal in gua_gibi:
-                            narasi_awal = narasi_6
-                        elif jenis_tugas_awal in taman_matahari:
-                            narasi_awal = narasi_7
-                        elif jenis_tugas_awal in kebun_merah:
-                            narasi_awal = narasi_8
-                        elif jenis_tugas_awal in surga_burung:
-                            narasi_awal = narasi_9
-                        else:
-                            print("\nJenis item tidak ditemukan di dalam area")
-                            narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
-            
-                tugas_awal = f"""
-__{time.strftime('%x - %X %Z')}__
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-**Mulai mengerjakan tugas**
-➱ jenis_tugas = **{jenis_tugas_awal if 'jenis_tugas_awal' in locals() else 'Tidak ada tugas'}**
-➱ jumlah = **{jumlah_awal if 'jumlah_awal' in locals() else 'Tidak ada tugas'}x** 
-➱ progres = **{progres_awal if 'progres_awal' in locals() else 'Tidak ada tugas'}**
-➱ narasi = **{narasi_awal if 'narasi_awal' in locals() else 'Tidak ada tugas'}**
-**Selamat menyelesaikan tugas!!**
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
-                time.sleep(2)
-                print(tugas_awal)
+                first_task = tasks_sorted[0]
+
+                if '[' in first_task[0] and ']' in first_task[0]:
+                    jenis_tugas_awal, variasi_awal = first_task[0].split('[')
+                    variasi_awal = '[' + variasi_awal
+                else:
+                    jenis_tugas_awal = first_task[0]
+                    variasi_awal = ''
+
+                jumlah_awal = first_task[3]
+                progres_awal = first_task[2]
+
+                if jenis_tugas_awal:
+                    if jenis_tugas_awal in area_tupai:
+                        narasi_awal = narasi_1
+                    elif jenis_tugas_awal in kebun_terbengkalai:
+                        narasi_awal = narasi_2
+                    elif jenis_tugas_awal in lubang_kelinci_raksasa:
+                        narasi_awal = narasi_3
+                    elif jenis_tugas_awal in gua_beracun:
+                        narasi_awal = narasi_4
+                    elif jenis_tugas_awal in kolam_kecil:
+                        narasi_awal = narasi_5
+                    elif jenis_tugas_awal in gua_gibi:
+                        narasi_awal = narasi_6
+                    elif jenis_tugas_awal in taman_matahari:
+                        narasi_awal = narasi_7
+                    elif jenis_tugas_awal in kebun_merah:
+                        narasi_awal = narasi_8
+                    elif jenis_tugas_awal in surga_burung: 
+                        narasi_awal = narasi_9 
+                    else: print("\nJenis item tidak ditemukan di dalam area")
+                        narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
+                print('\n' + '-' * 30)
+                print("Memulai tugas")
+                print(f"jenis_tugas = {jenis_tugas_awal}{variasi_awal}")
+                print(f"jumlah = {jumlah_awal}x")
+                print(f"progres = {progres_awal}")
+                print(f"narasi = {narasi_awal}")
+                print("Selamat menyelesaikan tugas!!")
+                print('-' * 30)
                 time.sleep(2)
                 await client.send_message(bot_id, gbk)
                 
@@ -270,7 +271,7 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tsk)
             return
         
-        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas saat masih" in pesan or "hanya bisa mendaki" in pesan:
+        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas" in pesan or "hanya bisa mendaki" in pesan:
             time.sleep(1.5)
             await event.click(text='Turun')
             return
@@ -351,9 +352,10 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        elif "Tugas tidak ditemukan" in pesan or "dengan jenis item yang sama" in pesan:
-            time.sleep(1.5)
-            await event.respond(tskg)
+        if "Task - GunungBelakangKebun" in pesan:
+            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+                time.sleep(1.5)
+                await event.respond(tskg)
             return
           
         if "berhasil mendapat" in pesan:
@@ -377,7 +379,7 @@ __{time.strftime('%x - %X %Z')}__
                 time.sleep(1.5)
                 await event.click(0, 0)
             return
-
+        
         elif "belum menemukan apa-apa" in pesan:
             time.sleep(1.5)
             await event.click(0,0)
@@ -411,4 +413,3 @@ __{time.strftime('%x - %X %Z')}__
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Berhenti')
-    

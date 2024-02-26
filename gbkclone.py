@@ -150,6 +150,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
                 # Memulai mengerjakan tugas yang paling awal
                 
+                narasi_awal = None
+
+                # Mencari tugas pertama yang sedang dikerjakan
                 first_task = tasks_sorted[0]
                 
                 # Mengatur narasi dengan narasi dari tugas pertama
@@ -178,8 +181,29 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
                 jumlah_awal = tasks_sorted[0][3]
                 progres_awal = tasks_sorted[0][2]
-                
-                
+                if jenis_tugas_awal:
+                    if jenis_tugas_awal in area_tupai:
+                        narasi_awal = narasi_1
+                    elif jenis_tugas_awal in kebun_terbengkalai:
+                        narasi_awal = narasi_2
+                    elif jenis_tugas_awal in lubang_kelinci_raksasa:
+                        narasi_awal = narasi_3
+                    elif jenis_tugas_awal in gua_beracun:
+                        narasi_awal = narasi_4
+                    elif jenis_tugas_awal in kolam_kecil:
+                        narasi_awal = narasi_5
+                    elif jenis_tugas_awal in gua_gibi:
+                        narasi_awal = narasi_6
+                    elif jenis_tugas_awal in taman_matahari:
+                        narasi_awal = narasi_7
+                    elif jenis_tugas_awal in kebun_merah:
+                        narasi_awal = narasi_8
+                    elif jenis_tugas_awal in surga_burung:
+                        narasi_awal = narasi_9
+                    else:
+                        print("Jenis item tidak ditemukan di dalam area")
+                        break
+                          
                 print(f"jenis_tugas = {jenis_tugas_awal}")
                 print(f"jumlah = {jumlah_awal}x")
                 print(f"progres = {progres_awal}")

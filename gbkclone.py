@@ -96,7 +96,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         pesan = event.raw_text
         global misi, jumlah, jenis_tugas, jenis_tugas_awal, jumlah_awal, narasi_awal, progres_awal
         
-        if "Selesaikan tugas-tugas" in pesan:
+        if "Task - GunungBelakangKebun" in pesan:
+            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+                time.sleep(1.5)
+                await event.respond(tskg)
+            if "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+                time.sleep(1.5)
+                await event.respond(tsk)
             if "Tidak ada tugas" in pesan:
                 print("\nTidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 time.sleep(2.0)

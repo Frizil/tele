@@ -170,7 +170,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 narasi_awal = None
 
                 #Mencari tugas pertama yang sedang dikerjakan
-                first_task = tasks_sorted[0]
+                first_task = jenis_tugas_awal
                 
                 #Mengatur narasi dengan narasi dari tugas pertama
                 if first_task[0] in area_tupai:

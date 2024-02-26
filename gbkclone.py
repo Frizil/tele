@@ -86,11 +86,11 @@ jenis_tugas = []
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, tsk))
+    client.loop.run_until_complete(client.send_message(bot_id, tskg))
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text
-        global misi, jumlah, tugas, klem, narasi, jenis_tugas, item
+        global misi, jumlah, tugas, klem, narasi, jenis_tugas, item, jenis_tugas_awal, jumlah_awal, narasi_awal, progres_awal
         
         if "Selesaikan tugas-tugas" in pesan:
             if "Tidak ada tugas" in pesan:
@@ -101,51 +101,95 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Kondisi Ongoing Task terpenuhi.")
                 # Pola regex untuk mengekstrak informasi tugas
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
-                
+
                 # Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
                 tasks = re.findall(pola_tugas, pesan)
                 
+                # Mengurutkan tugas berdasarkan waktu
+                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+                
+                narasi = None  # Variabel narasi didefinisikan di luar loop
+                
                 # Menampilkan informasi tugas
-                for task in tasks:
-                    jenis_tugas = task[0]
-                    tingkat = task[1]
-                    progress = task[2]
+                for task in tasks_sorted:
+                    jenis_tugas = f"{task[0]}[{task[1]}]"
                     total = task[3]
-                    waktu = task[4]
+                    progress = task[2]
+                
+                    if jenis_tugas:
+                        if jenis_tugas in area_tupai:
+                            narasi = narasi_1
+                        elif jenis_tugas in kebun_terbengkalai:
+                            narasi = narasi_2
+                        elif jenis_tugas in lubang_kelinci_raksasa:
+                            narasi = narasi_3
+                        elif jenis_tugas in gua_beracun:
+                            narasi = narasi_4
+                        elif jenis_tugas in kolam_kecil:
+                            narasi = narasi_5
+                        elif jenis_tugas in gua_gibi:
+                            narasi = narasi_6
+                        elif jenis_tugas in taman_matahari:
+                            narasi = narasi_7
+                        elif jenis_tugas in kebun_merah:
+                            narasi = narasi_8
+                        elif jenis_tugas in surga_burung:
+                            narasi = narasi_9
+                        else:
+                            print("Jenis item tidak ditemukan di dalam area")
+                            break
+                
                     print('-' * 30)
                     print("Tersedia tugas")
-                    print(f"jenis_tugas = {jenis_tugas}[{tingkat}]")
+                    print(f"jenis_tugas = {jenis_tugas}")
                     print(f"jumlah = {total}x")
                     print(f"progres = {progress}")
+                    print(f"narasi = {narasi}")
                     print("Selamat menyelesaikan tugas!!")
                     print('-' * 30)
-                    
-                    narasi = None
-                    if jenis_tugas in area_tupai:
-                        narasi = narasi_1
-                    elif jenis_tugas in kebun_terbengkalai:
-                        narasi = narasi_2
-                    elif jenis_tugas in lubang_kelinci_raksasa:
-                        narasi = narasi_3
-                    elif jenis_tugas in gua_beracun:
-                        narasi = narasi_4
-                    elif jenis_tugas in kolam_kecil:
-                        narasi = narasi_5
-                    elif jenis_tugas in gua_gibi:
-                        narasi = narasi_6
-                    elif jenis_tugas in taman_matahari:
-                        narasi = narasi_7
-                    elif jenis_tugas in kebun_merah:
-                        narasi = narasi_8
-                    elif jenis_tugas in surga_burung:
-                        narasi = narasi_9
-                    else:
-                        print("Jenis item tidak ditemukan di dalam area")
-                        continue  # Melanjutkan iterasi ke tugas berikutnya jika jenis tugas tidak ditemukan
-                    
-                    print('-'*30)
-                    print(f"Tersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!")
-                    print('-'*30)
+                
+                # Memulai mengerjakan tugas yang paling awal
+                narasi_awal = None
+                first_task = tasks_sorted[0]
+                
+                # Mengatur narasi dengan narasi dari tugas pertama
+                narasi = narasi_awal
+                if first_task[0] in area_tupai:
+                    narasi = narasi_1
+                elif first_task[0] in kebun_terbengkalai:
+                    narasi = narasi_2
+                elif first_task[0] in lubang_kelinci_raksasa:
+                    narasi = narasi_3
+                elif first_task[0] in gua_beracun:
+                    narasi = narasi_4
+                elif first_task[0] in kolam_kecil:
+                    narasi = narasi_5
+                elif first_task[0] in gua_gibi:
+                    narasi = narasi_6
+                elif first_task[0] in taman_matahari:
+                    narasi = narasi_7
+                elif first_task[0] in kebun_merah:
+                    narasi = narasi_8
+                elif first_task[0] in surga_burung:
+                    narasi = narasi_9
+                else:
+                    print("Jenis item tidak ditemukan di dalam area")
+
+                print("\nMulai mengerjakan tugas\n")
+                jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
+                jumlah_awal = tasks_sorted[0][3]
+                progres_awal = tasks_sorted[0][2]
+                narasi_awal = narasi
+                
+                print(f"jenis_tugas = {jenis_tugas_awal}")
+                print(f"jumlah = {jumlah_awal}x")
+                print(f"progres = {progres_awal}")
+                print(f"narasi = {narasi_awal}")
+                
+                time.sleep(2)
+                await client.send_message(bot_id, gbk)
+                
+                  
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []
@@ -256,7 +300,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
         
         if 'berhasil mendapat' in pesan:
-            tugas = jenis_tugas
+            tugas = jenis_tugas_awal
+            klem = jumlah_awal
             item = pesan.splitlines()[4].split('berhasil mendapat ')[1]
             if tugas == item:
                 jumlah+=1
@@ -285,7 +330,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
         
         elif '- GBK ⛰' in pesan:
+            narasi = narasi_awal
             if narasi in pesan:
+                print('-' * 30)
+                print(f"narasi {narasi} di temukan")
+                print('-' * 30)
                 time.sleep(1.5)
                 await event.click(0,0)
                 return

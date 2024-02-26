@@ -85,6 +85,9 @@ klem = []
 jenis_tugas = []
 
 async def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
+    # Inisialisasi item ke None
+    item = None
+    
     # Pola pencarian untuk menemukan jenis item yang berhasil didapat
     pola_item = r"berhasil mendapat ([\w\s\[\]]+)"
     
@@ -97,7 +100,7 @@ async def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
         print(f"Progres {item} = 1")
     
     # Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
-    if jenis_tugas_awal == item:
+    if item and jenis_tugas_awal == item:  # Pastikan item tidak None sebelum digunakan
         jumlah += 1
         print(f'Progres {jenis_tugas_awal} = {jumlah}')
         if jumlah % jumlah_awal == 0:
@@ -111,6 +114,7 @@ async def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
     else:
         time.sleep(1.5)
         await event.click(0, 0)
+
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:

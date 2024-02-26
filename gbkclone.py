@@ -95,8 +95,8 @@ def parse_task_message(pesan):
                     task_parts = task_info.split("(")
                     task_name = task_parts[0].strip()
                     task_progress = task_parts[1].split(")")[0].strip()
-                    task_time = task_info.split("⏱")[1].strip()
-                    ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "waktu": task_time})
+                    task_total = task_progress.split("/")[1].strip()
+                    ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
     return ongoing_tasks
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -113,17 +113,18 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
-               
                 ongoing_tasks = parse_task_message(pesan)
                 for task in ongoing_tasks:
+                    jenis_tugas = task['jenis_tugas']
+                    progress, total = map(int, task['progress'].split('/'))
                     print('-'*30)
-                    print(f"Tersedia tugas")
-                    print(f"jenis_tugas = {task['jenis_tugas']}")
-                    print(f"jumlah = {task['total']}x")
-                    print(f"progres = {task['progress']}")
+                    print("Tersedia tugas")
+                    print(f"jenis_tugas = {jenis_tugas}")
+                    print(f"jumlah = {total}x")
+                    print(f"progres = {progress}")
                     print("Selamat menyelesaikan tugas!!")
                     print('-'*30)
-                
+                    
                     narasi = None
                     if jenis_tugas in area_tupai:
                         narasi = narasi_1
@@ -146,6 +147,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     else:
                         print("Jenis item tidak ditemukan di dalam area")
                         continue  # Melanjutkan iterasi ke tugas berikutnya jika jenis tugas tidak ditemukan
+                    
                     print('-'*30)
                     print(f"Tersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!")
                     print('-'*30)

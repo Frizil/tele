@@ -8,7 +8,7 @@ sesi_file = input('Mau sesi mana = ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamBot"
+bot_id = "KampungMaifamXBot"
 #bot_id = 5199147926
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
@@ -83,39 +83,6 @@ narasi = []
 tugas = []
 klem = []
 jenis_tugas = []
-
-async def handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal):
-    # Inisialisasi item ke None
-    item = None
-    
-    # Pola pencarian untuk menemukan jenis item yang berhasil didapat
-    pola_item = r"berhasil mendapat ([\w\s\[\]]+)"
-    
-    # Mencocokkan pola dengan pesan
-    match = re.search(pola_item, pesan)
-    
-    # Jika ditemukan, ekstrak informasi item dan cetak progresnya
-    if match:
-        item = match.group(1)
-        print(f"Progres {item} = 1")
-    
-    # Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
-    if item and jenis_tugas_awal == item:  # Pastikan item tidak None sebelum digunakan
-        jumlah += 1
-        print(f'Progres {jenis_tugas_awal} = {jumlah}')
-        if jumlah % jumlah_awal == 0:
-            time.sleep(1.5)
-            await event.respond('/gbk_task')
-            jumlah = 0
-            print('Misi selesai. Yuk cari misi lagi!')
-        else:
-            time.sleep(1.5)
-            await event.click(0, 0)
-    else:
-        time.sleep(1.5)
-        await event.click(0, 0)
-
-
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -277,14 +244,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     misi.append({"koin_list": koin_list, "exp_list": exp_list, "misi_list": misi_list})
             
             #KALAU MAU CARI KOIN TERBANYAK
-            def get_koin(misi):
-                return misi.get("koin_list")
-            misi.sort(key=get_koin, reverse=True)
+            #def get_koin(misi):
+                #return misi.get("koin_list")
+            #misi.sort(key=get_koin, reverse=True)
             
             #KALAU MAU CARI EXP TERBANYAK
-            #def get_exp(misi):
-                #return misi.get("exp_list")
-            #misi.sort(key=get_exp, reverse=True)
+            def get_exp(misi):
+                return misi.get("exp_list")
+            misi.sort(key=get_exp, reverse=True)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return
@@ -360,9 +327,23 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tskg)
             return
           
-        elif 'berhasil mendapat' in pesan:
-            await handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal)
-
+        if 'berhasil mendapat' in pesan:
+            item = pesan.splitlines()[4].split('berhasil mendapat ')[1]
+            if jenis_tugas_awal == jumlah_awal:
+                jumlah+=1
+                print(f'Progres {jenis_tugas_awal} = {jumlah}')
+                if jumlah %jumlah_awal == 0:
+                    time.sleep(1.5)
+                    await event.respond(tsk)
+                    jumlah = 0
+                    print('Misi selesai. Yuk cari misi lagi!')
+                else:
+                    time.sleep(1.5)
+                    await event.click(0,0)
+            else:
+                time.sleep(1.5)
+                await event.click(0,0)
+            return
       
         
         elif "belum menemukan apa-apa" in pesan:

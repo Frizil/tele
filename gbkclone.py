@@ -376,10 +376,9 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        if "Task - GunungBelakangKebun" in pesan:
-            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-                time.sleep(1.5)
-                await event.respond(tskg)
+        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
             return
           
         if "berhasil mendapat" in pesan:

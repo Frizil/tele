@@ -118,10 +118,18 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
                 #Menampilkan informasi tugas
                 for task in tasks_sorted:
-                    if len(task) >= 2:
-                        jenis_tugas = f"{task[0]}[{task[1]}]"
+                    if tasks_sorted:
+                        first_task = tasks_sorted[0]
+                        # Proses informasi tugas pertama
+                        if len(first_task) >= 2:
+                            jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
+                        else:
+                            jenis_tugas_awal = first_task[0]
+                        jumlah_awal = first_task[3]
+                        progres_awal = first_task[2]
+                        # Lanjutkan dengan proses berikutnya
                     else:
-                        jenis_tugas = task[0]
+                        print("Tidak ada tugas yang sedang berlangsung.")
                     total = task[3]
                     progress = task[2]
                 

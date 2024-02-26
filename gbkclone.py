@@ -357,8 +357,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         
         elif "berhasil mendapat" in pesan:
-            handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal)
-            return
+            await handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal)
       
         
         elif "belum menemukan apa-apa" in pesan:

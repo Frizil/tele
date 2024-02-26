@@ -102,7 +102,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2.0)
                 await event.respond(tskg)
             if "Ongoing Task" in pesan:
-                time.sleep(2)
+                time.sleep(1.5)
                 #await client.forward_messages(grup, event.message)
                 print("\nKondisi Ongoing Task terpenuhi.")
                 #Pola regex untuk mengekstrak informasi tugas
@@ -221,7 +221,7 @@ __{time.strftime('%x - %X %Z')}__
 **Selamat menyelesaikan tugas!!**
 ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
                 print(tugas_awal)
-                time.sleep(2)
+                time.sleep(1.5)
                 await client.send_message(bot_id, gbk)
                 
         if "Berikut adalah daftar Tugas" in pesan:
@@ -269,9 +269,9 @@ __{time.strftime('%x - %X %Z')}__
         
         if "Berhasil menyelesaikan tugas" in pesan:
             print('\n'+'-'*30+f"\nTugas sudah di selesaikan\n"+'-'*30)
-            time.sleep(2)
+            time.sleep(1.5)
             await client.forward_messages(ch, event.message)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(tskg)
             return
         
@@ -279,6 +279,9 @@ __{time.strftime('%x - %X %Z')}__
             if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
                 time.sleep(1.5)
                 await event.respond(tskg)
+            elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+                time.sleep(1.5)
+                await event.respond(tsk)
             return
         
         elif any(loc in pesan for loc in jalan):
@@ -326,10 +329,6 @@ __{time.strftime('%x - %X %Z')}__
                 await event.click(text='Kirim ke Barang')
             return
         
-        elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
-            time.sleep(2)
-            await event.respond(tsk)
-            return
           
         elif "Berhasil mengambil tugas dengan ID" in pesan:
             jenis_tugas = None
@@ -375,10 +374,10 @@ __{time.strftime('%x - %X %Z')}__
 ➱ 🗒 {misi[0].get("misi_list")}
 ➱ narasi = **{narasi}**
 ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
-            time.sleep(2)
+            time.sleep(1.5)
             print(ambil_tugas)
             print('\n'+pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(tskg)
             return
        

@@ -84,34 +84,6 @@ tugas = []
 klem = []
 jenis_tugas = []
 
-def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
-    # Pola pencarian untuk menemukan jenis item yang berhasil didapat
-    pola_item = r"berhasil mendapat ([\w\s\[\]]+)"
-    
-    # Mencocokkan pola dengan pesan
-    match = re.search(pola_item, pesan)
-    
-    # Jika ditemukan, ekstrak informasi item dan cetak progresnya
-    if match:
-        item = match.group(1)
-        print(f"Progres {item} = 1")
-    
-    # Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
-    if jenis_tugas_awal == item:
-        jumlah += 1
-        print(f'Progres {jenis_tugas_awal} = {jumlah}')
-        if jumlah % jumlah_awal == 0:
-            time.sleep(1.5)
-            await event.respond('/gbk_task')
-            jumlah = 0
-            print('Misi selesai. Yuk cari misi lagi!')
-        else:
-            time.sleep(1.5)
-            await event.click(0, 0)
-    else:
-        time.sleep(1.5)
-        await event.click(0, 0)
-
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))
@@ -349,6 +321,34 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(1.5)
                 await event.click(text='Kirim ke Barang')
             return
+        
+        def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
+            # Pola pencarian untuk menemukan jenis item yang berhasil didapat
+            pola_item = r"berhasil mendapat ([\w\s\[\]]+)"
+            
+            # Mencocokkan pola dengan pesan
+            match = re.search(pola_item, pesan)
+            
+            # Jika ditemukan, ekstrak informasi item dan cetak progresnya
+            if match:
+                item = match.group(1)
+                print(f"Progres {item} = 1")
+            
+            # Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
+            if jenis_tugas_awal == item:
+                jumlah += 1
+                print(f'Progres {jenis_tugas_awal} = {jumlah}')
+                if jumlah % jumlah_awal == 0:
+                    time.sleep(1.5)
+                    await event.respond('/gbk_task')
+                    jumlah = 0
+                    print('Misi selesai. Yuk cari misi lagi!')
+                else:
+                    time.sleep(1.5)
+                    await event.click(0, 0)
+            else:
+                time.sleep(1.5)
+                await event.click(0, 0)
         
         if 'berhasil mendapat' in pesan:
             handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal)

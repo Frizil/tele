@@ -84,20 +84,6 @@ tugas = []
 klem = []
 jenis_tugas = []
 
-def parse_task_message(pesan):
-    ongoing_tasks = []
-    lines = pesan.split('\n')
-    for line in lines:
-        if "Ongoing Task" in line:
-            tasks_info = line.split(":")[1].strip().split("\n")
-            for task_info in tasks_info:
-                if "(" in task_info and ")" in task_info and "⏱" in task_info:
-                    task_parts = task_info.split("(")
-                    task_name = task_parts[0].strip()
-                    task_progress = task_parts[1].split(")")[0].strip()
-                    task_total = task_progress.split("/")[1].strip()
-                    ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
-    return ongoing_tasks
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tsk))
@@ -113,7 +99,18 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
-                ongoing_tasks = parse_task_message(pesan)
+                ongoing_tasks = []
+                lines = pesan.split('\n')
+                for line in lines:
+                    if "Ongoing Task" in line:
+                        tasks_info = line.split(":")[1].strip().split("\n")
+                        for task_info in tasks_info:
+                            if "(" in task_info and ")" in task_info and "⏱" in task_info:
+                                task_parts = task_info.split("(")
+                                task_name = task_parts[0].strip()
+                                task_progress = task_parts[1].split(")")[0].strip()
+                                task_total = task_progress.split("/")[1].strip()
+                                ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
                 for task in ongoing_tasks:
                     jenis_tugas = task['jenis_tugas']
                     progress, total = map(int, task['progress'].split('/'))

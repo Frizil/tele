@@ -112,15 +112,15 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
-        
+                
                 ongoing_tasks = parse_task_message(pesan)
-        
+                
                 for task in ongoing_tasks:
                     jenis_tugas = task["jenis_tugas"]
                     progress = task["progress"]
                     total = task["total"]
                     waktu = task["waktu"]
-        
+                
                     if jenis_tugas:
                         time.sleep(2.0)
                         await event.respond(gbk)
@@ -146,9 +146,16 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                             print("Jenis item tidak di temukan di dalam area")
                             time.sleep(2.0)
                             await event.click(1,0)
-        
-                    print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
-            return
+                        
+                    print('-'*30)
+                    print("Tersedia tugas")
+                    print(f"jenis_tugas = {jenis_tugas}")
+                    print(f"jumlah = {total}x")
+                    print(f"progres = {progress}")
+                    print(f"narasi = {narasi}")
+                    print("Selamat menyelesaikan tugas!!")
+                    print('-'*30)
+                return
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []

@@ -101,7 +101,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("\nTidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 time.sleep(2.0)
                 await event.respond(tskg)
-            if "Ongoing Task" in pesan:
+            elif "Ongoing Task" in pesan:
                 time.sleep(2)
                 #await client.forward_messages(grup, event.message)
                 print("\nKondisi Ongoing Task terpenuhi.")
@@ -376,9 +376,10 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-            time.sleep(1.5)
-            await event.respond(tskg)
+        if "Task - GunungBelakangKebun" in pesan:
+            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+                time.sleep(1.5)
+                await event.respond(tskg)
             return
           
         if "berhasil mendapat" in pesan:

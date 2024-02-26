@@ -90,7 +90,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text
-        global misi, jumlah, tugas, klem, narasi, jenis_tugas, item, jenis_tugas_awal, jumlah_awal, narasi_awal, progres_awal
+        global misi, jumlah, jenis_tugas, jenis_tugas_awal, jumlah_awal, narasi_awal, progres_awal
         
         if "Selesaikan tugas-tugas" in pesan:
             if "Tidak ada tugas" in pesan:
@@ -151,26 +151,26 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 # Memulai mengerjakan tugas yang paling awal
                 
                 first_task = tasks_sorted[0]
-                
+                tnarasi = narasi
                 # Mengatur narasi dengan narasi dari tugas pertama
                 if first_task[0] in area_tupai:
-                    narasi = narasi_1
+                    tnarasi = narasi_1
                 elif first_task[0] in kebun_terbengkalai:
-                    narasi = narasi_2
+                    tnarasi = narasi_2
                 elif first_task[0] in lubang_kelinci_raksasa:
-                    narasi = narasi_3
+                    tnarasi = narasi_3
                 elif first_task[0] in gua_beracun:
-                    narasi = narasi_4
+                    tnarasi = narasi_4
                 elif first_task[0] in kolam_kecil:
-                    narasi = narasi_5
+                    tnarasi = narasi_5
                 elif first_task[0] in gua_gibi:
-                    narasi = narasi_6
+                    tnarasi = narasi_6
                 elif first_task[0] in taman_matahari:
-                    narasi = narasi_7
+                    tnarasi = narasi_7
                 elif first_task[0] in kebun_merah:
-                    narasi = narasi_8
+                    tnarasi = narasi_8
                 elif first_task[0] in surga_burung:
-                    narasi = narasi_9
+                    tnarasi = narasi_9
                 else:
                     print("Jenis item tidak ditemukan di dalam area")
 
@@ -178,7 +178,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
                 jumlah_awal = tasks_sorted[0][3]
                 progres_awal = tasks_sorted[0][2]
-                narasi_awal = narasi
+                narasi_awal = tnarasi
                 
                 print(f"jenis_tugas = {jenis_tugas_awal}")
                 print(f"jumlah = {jumlah_awal}x")

@@ -63,7 +63,8 @@ taman_matahari = {
     "BungaMatahari", "BungaMatahari[A]", "BungaMatahari[B]", "BungaMatahari[C]", "BungaMatahari[D]", "BungaMatahari[E]", "BungaMatahari[S]", "BungaMatahari[SS]", "BungaMatahari[SSS]"
 }
 
-kebun_merah = { "Strawberry", "Strawberry[B]", "Strawberry[C]", "Strawberry[D]", "Strawberry[E]", "Tomat", "Tomat[B]", "Tomat[C]", "Tomat[D]", "Tomat[E]" 
+kebun_merah = { 
+    "Apel", "Apel[B]", "Apel[C]", "Apel[D]", "Apel[E]", "Strawberry", "Strawberry[B]", "Strawberry[C]", "Strawberry[D]", "Strawberry[E]", "Tomat", "Tomat[B]", "Tomat[C]", "Tomat[D]", "Tomat[E]" 
 }
 
 surga_burung = {
@@ -148,11 +149,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     print('-' * 30)
                 
                 # Memulai mengerjakan tugas yang paling awal
-                narasi_awal = None
+                
                 first_task = tasks_sorted[0]
                 
                 # Mengatur narasi dengan narasi dari tugas pertama
-                narasi = narasi_awal
                 if first_task[0] in area_tupai:
                     narasi = narasi_1
                 elif first_task[0] in kebun_terbengkalai:

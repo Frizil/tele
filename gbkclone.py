@@ -100,17 +100,17 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
                 ongoing_tasks = []
-                lines = pesan.split('\n')
-                for line in lines:
-                    if "(" in line and ")" in line and "⏱" in line:
-                        task_parts = line.split("(")
-                        task_name = task_parts[0].strip()
-                        task_progress = task_parts[1].split(")")[0].strip()
-                        task_total = task_progress.split("/")[1].strip()
-                        ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
+                task_pattern = r'\n(\S+)\s\((\d+)/(\d+)\)\n⏱\s(.+?)\n'
+                tasks = re.findall(task_pattern, pesan)
+                
+                for task in tasks:
+                    jenis_tugas, progress, total, waktu = task
+                    ongoing_tasks.append({"jenis_tugas": jenis_tugas, "progress": progress, "total": total, "waktu": waktu})
+                    
                 for task in ongoing_tasks:
                     jenis_tugas = task['jenis_tugas']
-                    progress, total = map(int, task['progress'].split('/'))
+                    progress = int(task['progress'])
+                    total = int(task['total'])
                     print('-'*30)
                     print("Tersedia tugas")
                     print(f"jenis_tugas = {jenis_tugas}")
@@ -141,7 +141,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     else:
                         print("Jenis item tidak ditemukan di dalam area")
                         continue  # Melanjutkan iterasi ke tugas berikutnya jika jenis tugas tidak ditemukan
-                    
+                        
                     print('-'*30)
                     print(f"Tersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!")
                     print('-'*30)

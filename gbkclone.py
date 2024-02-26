@@ -323,23 +323,22 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
         
         if 'berhasil mendapat' in pesan:
-            tugas = jenis_tugas_awal
-            klem = jumlah_awal
-            item = pesan.splitlines()[4].split('berhasil mendapat ')[1]
-            if tugas == item:
-                jumlah+=1
-                print(f'Progres {tugas} = {jumlah}')
-                if jumlah %klem == 0:
+            item_line = pesan.splitlines()[4]  # Ambil baris yang mengandung informasi item
+            item = item_line.split('berhasil mendapat ')[1]  # Ekstrak jenis tugas dari baris tersebut
+            if jenis_tugas_awal == item:
+                jumlah += 1
+                print(f'Progres {jenis_tugas_awal} = {jumlah}')
+                if jumlah % jumlah_awal == 0:
                     time.sleep(1.5)
                     await event.respond('/gbk_task')
                     jumlah = 0
                     print('Misi selesai. Yuk cari misi lagi!')
                 else:
                     time.sleep(1.5)
-                    await event.click(0,0)
+                    await event.click(0, 0)
             else:
                 time.sleep(1.5)
-                await event.click(0,0)
+                await event.click(0, 0)
             return
         
         elif "belum menemukan apa-apa" in pesan:

@@ -86,16 +86,17 @@ jenis_tugas = []
 
 def parse_task_message(pesan):
     ongoing_tasks = []
-    
-    # Mencari tugas yang sedang berlangsung
-    tasks = re.findall(r'\bOngoing Task \(.*?\):\n\n([^:]+) \((\d+)/(\d+)\)\s*\n⏱ (.+?)\n', pesan)
-    
-    for task in tasks:
-        jenis_tugas = task[0].strip()
-        progress = int(task[1])
-        total = int(task[2])
-        waktu = task[3]
-        ongoing_tasks.append({"jenis_tugas": jenis_tugas, "progress": progress, "total": total, "waktu": waktu})
+    lines = pesan.split('\n')
+    for line in lines:
+        if "Ongoing Task" in line:
+            tasks_info = line.split(":")[1].strip().split("\n")
+            for task_info in tasks_info:
+                if "(" in task_info and ")" in task_info and "⏱" in task_info:
+                    task_parts = task_info.split("(")
+                    task_name = task_parts[0].strip()
+                    task_progress = task_parts[1].split(")")[0].strip()
+                    task_time = task_info.split("⏱")[1].strip()
+                    ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "waktu": task_time})
     return ongoing_tasks
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -114,12 +115,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Kondisi Ongoing Task terpenuhi.")
                
                 ongoing_tasks = parse_task_message(pesan)
-                
                 for task in ongoing_tasks:
-                    jenis_tugas = task["jenis_tugas"]
-                    progress = task["progress"]
-                    total = task["total"]
-                    waktu = task["waktu"]
+                    print('-'*30)
+                    print(f"Tersedia tugas")
+                    print(f"jenis_tugas = {task['jenis_tugas']}")
+                    print(f"jumlah = {task['total']}x")
+                    print(f"progres = {task['progress']}")
+                    print("Selamat menyelesaikan tugas!!")
+                    print('-'*30)
                 
                     narasi = None
                     if jenis_tugas in area_tupai:
@@ -143,7 +146,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     else:
                         print("Jenis item tidak ditemukan di dalam area")
                         continue  # Melanjutkan iterasi ke tugas berikutnya jika jenis tugas tidak ditemukan
-                    
                     print('-'*30)
                     print(f"Tersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!")
                     print('-'*30)
@@ -258,6 +260,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
         
         if 'berhasil mendapat' in pesan:
+            tugas = jenis_tugas
             item = pesan.splitlines()[4].split('berhasil mendapat ')[1]
             if tugas == item:
                 jumlah+=1

@@ -108,21 +108,46 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
 
                 tasks = re.findall(pola_tugas, pesan)
-                
-                for task in tasks:
+
+                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+
+                for task in tasks_sorted:
                     jenis_tugas = f"{task[0]}[{task[1]}]"
                     total = task[3]
                     progress = task[2]
-                    waktu = task[4]
                 
-                    print("Jenis Tugas:", jenis_tugas)
-                    print("Total:", total)
-                    print("Progress:", progress)
-                    print("Waktu:", waktu)
-                    print("-" * 30)
-            
-                # Mengurutkan tugas berdasarkan waktu
-                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+                    if jenis_tugas:
+                        if jenis_tugas in area_tupai:
+                            narasi = narasi_1
+                        elif jenis_tugas in kebun_terbengkalai:
+                            narasi = narasi_2
+                        elif jenis_tugas in lubang_kelinci_raksasa:
+                            narasi = narasi_3
+                        elif jenis_tugas in gua_beracun:
+                            narasi = narasi_4
+                        elif jenis_tugas in kolam_kecil:
+                            narasi = narasi_5
+                        elif jenis_tugas in gua_gibi:
+                            narasi = narasi_6
+                        elif jenis_tugas in taman_matahari:
+                            narasi = narasi_7
+                        elif jenis_tugas in kebun_merah:
+                            narasi = narasi_8
+                        elif jenis_tugas in surga_burung:
+                            narasi = narasi_9
+                        else:
+                            print("\nJenis item tidak ditemukan di dalam area")
+                            narasi =  '⛰ Gunung Belakang Kebun ⛰'
+                            break
+                
+                    print('\n'+'-'*30)
+                    print("Tersedia tugas")
+                    print(f"jenis_tugas = {jenis_tugas}")
+                    print(f"jumlah = {total}x")
+                    print(f"progres = {progress}")
+                    print(f"narasi = {narasi}")
+                    print("Selamat menyelesaikan tugas!!")
+                    print('-'*30)
             
                 narasi_awal = None
             

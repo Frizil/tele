@@ -376,7 +376,7 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+        if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
             time.sleep(1.5)
             await event.respond(tskg)
             return

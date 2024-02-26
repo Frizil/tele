@@ -187,7 +187,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         narasi_awal = narasi_8
                     elif jenis_tugas_awal in surga_burung: 
                         narasi_awal = narasi_9 
-                    else: print("\nJenis item tidak ditemukan di dalam area")
+                    else:
+                        print("\nJenis item tidak ditemukan di dalam area")
                         narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
                 print('\n' + '-' * 30)
                 print("Memulai tugas")

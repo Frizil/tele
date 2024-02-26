@@ -97,20 +97,17 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Tidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 time.sleep(2.0)
                 await event.respond(tskg)
-            elif "Ongoing Task" in pesan:
+            if "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
                 ongoing_tasks = []
                 lines = pesan.split('\n')
                 for line in lines:
-                    if "Ongoing Task" in line:
-                        tasks_info = line.split(":")[1].strip().split("\n")
-                        for task_info in tasks_info:
-                            if "(" in task_info and ")" in task_info and "⏱" in task_info:
-                                task_parts = task_info.split("(")
-                                task_name = task_parts[0].strip()
-                                task_progress = task_parts[1].split(")")[0].strip()
-                                task_total = task_progress.split("/")[1].strip()
-                                ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
+                    if "(" in line and ")" in line and "⏱" in line:
+                        task_parts = line.split("(")
+                        task_name = task_parts[0].strip()
+                        task_progress = task_parts[1].split(")")[0].strip()
+                        task_total = task_progress.split("/")[1].strip()
+                        ongoing_tasks.append({"jenis_tugas": task_name, "progress": task_progress, "total": task_total})
                 for task in ongoing_tasks:
                     jenis_tugas = task['jenis_tugas']
                     progress, total = map(int, task['progress'].split('/'))

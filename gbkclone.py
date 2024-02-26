@@ -99,27 +99,28 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             if "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
-                ongoing_tasks = []
-                task_pattern = r'\n(\S+)\s\((\d+)/(\d+)\)\n⏱\s(.+?)\n'
-                tasks = re.findall(task_pattern, pesan)
+                # Pola regex untuk mengekstrak informasi tugas
+                pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
                 
+                # Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
+                tasks = re.findall(pola_tugas, pesan)
+                
+                # Menampilkan informasi tugas
                 for task in tasks:
-                    jenis_tugas, progress, total, waktu = task
-                    ongoing_tasks.append({"jenis_tugas": jenis_tugas, "progress": progress, "total": total, "waktu": waktu})
-                    
-                for task in ongoing_tasks:
-                    jenis_tugas = task['jenis_tugas']
-                    progress = int(task['progress'])
-                    total = int(task['total'])
-                    print('-'*30)
+                    jenis_tugas = task[0]
+                    tingkat = task[1]
+                    progress = task[2]
+                    total = task[3]
+                    waktu = task[4]
+                    print('-' * 30)
                     print("Tersedia tugas")
-                    print(f"jenis_tugas = {jenis_tugas}")
+                    print(f"jenis_tugas = {jenis_tugas}[{tingkat}]")
                     print(f"jumlah = {total}x")
                     print(f"progres = {progress}")
                     print("Selamat menyelesaikan tugas!!")
-                    print('-'*30)
+                    print('-' * 30)
                     
-                    narasi = None
+                if jenis_tugas:
                     if jenis_tugas in area_tupai:
                         narasi = narasi_1
                     elif jenis_tugas in kebun_terbengkalai:

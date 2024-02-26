@@ -9,7 +9,7 @@ sesi_file = input('Mau sesi mana = ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamBot"
+bot_id = "KampungMaifamXBot"
 #bot_id = 5199147926
 #bot_id = "heliavan"
 #grup = "heliavan"
@@ -159,6 +159,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 narasi_awal = None
 
                 #Mencari tugas pertama yang sedang dikerjakan
+                tasks_sorted = sorted(tasks, key=lambda x: x[4])
                 first_task = tasks_sorted[0]
                 
                 #Mengatur narasi dengan narasi dari tugas pertama
@@ -376,7 +377,7 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+        elif "Tugas tidak ditemukan" in pesan or "dengan jenis item yang sama" in pesan:
             time.sleep(1.5)
             await event.respond(tskg)
             return

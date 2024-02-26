@@ -118,18 +118,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
                 #Menampilkan informasi tugas
                 for task in tasks_sorted:
-                    if tasks_sorted:
-                        first_task = tasks_sorted[0]
-                        # Proses informasi tugas pertama
-                        if len(first_task) >= 2:
-                            jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
-                        else:
-                            jenis_tugas_awal = first_task[0]
-                        jumlah_awal = first_task[3]
-                        progres_awal = first_task[2]
-                        # Lanjutkan dengan proses berikutnya
-                    else:
-                        print("Tidak ada tugas yang sedang berlangsung.")
+                    jenis_tugas = f"{task[0]}[{task[1]}]"
                     total = task[3]
                     progress = task[2]
                 
@@ -168,34 +157,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
                 #Memulai mengerjakan tugas yang paling awal
                 narasi_awal = None
+                if tasks_sorted:  # Pastikan tasks_sorted tidak kosong sebelum mengakses elemennya
+                    first_task = tasks_sorted[0]
+                    if len(first_task) >= 2:
+                        jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
+                    else:
+                        jenis_tugas_awal = first_task[0]
 
-                #Mencari tugas pertama yang sedang dikerjakan
-                first_task = jenis_tugas_awal
-                
-                #Mengatur narasi dengan narasi dari tugas pertama
-                if first_task[0] in area_tupai:
-                    narasi_awal = narasi_1
-                elif first_task[0] in kebun_terbengkalai:
-                    narasi_awal = narasi_2
-                elif first_task[0] in lubang_kelinci_raksasa:
-                    narasi_awal = narasi_3
-                elif first_task[0] in gua_beracun:
-                    narasi_awal = narasi_4
-                elif first_task[0] in kolam_kecil:
-                    narasi_awal = narasi_5
-                elif first_task[0] in gua_gibi:
-                    narasi_awal = narasi_6
-                elif first_task[0] in taman_matahari:
-                    narasi_awal = narasi_7
-                elif first_task[0] in kebun_merah:
-                    narasi_awal = narasi_8
-                elif first_task[0] in surga_burung:
-                    narasi_awal = narasi_9
-                else:
-                    print("\nJenis item tidak ditemukan di dalam area")
-                    narasi_awal =  '⛰ Gunung Belakang Kebun ⛰'
-
-                jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
+                #jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
                 jumlah_awal = tasks_sorted[0][3]
                 progres_awal = tasks_sorted[0][2]
                 if jenis_tugas_awal:

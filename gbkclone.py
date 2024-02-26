@@ -149,15 +149,15 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                             narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
             
                 tugas_awal = f"""
-            __{time.strftime('%x - %X %Z')}__
-            ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-            **Mulai mengerjakan tugas**
-            ➱ jenis_tugas = **{jenis_tugas_awal}**
-            ➱ jumlah = **{jumlah_awal}x**
-            ➱ progres = **{progres_awal}**
-            ➱ narasi = **{narasi_awal}**
-            **Selamat menyelesaikan tugas!!**
-            ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+__{time.strftime('%x - %X %Z')}__
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
+**Mulai mengerjakan tugas**
+➱ jenis_tugas = **{jenis_tugas_awal if 'jenis_tugas_awal' in locals() else 'Tidak ada tugas'}**
+➱ jumlah = **{jumlah_awal if 'jumlah_awal' in locals() else 'Tidak ada tugas'}x** 
+➱ progres = **{progres_awal if 'progres_awal' in locals() else 'Tidak ada tugas'}**
+➱ narasi = **{narasi_awal if 'narasi_awal' in locals() else 'Tidak ada tugas'}**
+**Selamat menyelesaikan tugas!!**
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
                 time.sleep(2)
                 print(tugas_awal)
                 time.sleep(2)

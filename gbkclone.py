@@ -262,7 +262,7 @@ __{time.strftime('%x - %X %Z')}__
             #KALAU MAU CARI EXP TERBANYAK
             def get_exp(misi):
                 return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=False)
+            misi.sort(key=get_exp, reverse=True)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return
@@ -273,6 +273,12 @@ __{time.strftime('%x - %X %Z')}__
             await client.forward_messages(ch, event.message)
             time.sleep(2)
             await event.respond(tskg)
+            return
+        
+        if "Task - GunungBelakangKebun" in pesan:
+            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+                time.sleep(1.5)
+                await event.respond(tskg)
             return
         
         elif any(loc in pesan for loc in jalan):
@@ -375,13 +381,7 @@ __{time.strftime('%x - %X %Z')}__
             time.sleep(2)
             await event.respond(tskg)
             return
-        
-        if "Task - GunungBelakangKebun" in pesan:
-            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-                time.sleep(1.5)
-                await event.respond(tskg)
-            return
-          
+       
         if "berhasil mendapat" in pesan:
             pola_item = pesan.splitlines()[4].split('berhasil mendapat')[1]
             pola_item = None

@@ -151,26 +151,26 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 # Memulai mengerjakan tugas yang paling awal
                 
                 first_task = tasks_sorted[0]
-                tnarasi = narasi
+                
                 # Mengatur narasi dengan narasi dari tugas pertama
                 if first_task[0] in area_tupai:
-                    tnarasi = narasi_1
+                    narasi_awal = narasi_1
                 elif first_task[0] in kebun_terbengkalai:
-                    tnarasi = narasi_2
+                    narasi_awal = narasi_2
                 elif first_task[0] in lubang_kelinci_raksasa:
-                    tnarasi = narasi_3
+                    narasi_awal = narasi_3
                 elif first_task[0] in gua_beracun:
-                    tnarasi = narasi_4
+                    narasi_awal = narasi_4
                 elif first_task[0] in kolam_kecil:
-                    tnarasi = narasi_5
+                    narasi_awal = narasi_5
                 elif first_task[0] in gua_gibi:
-                    tnarasi = narasi_6
+                    narasi_awal = narasi_6
                 elif first_task[0] in taman_matahari:
-                    tnarasi = narasi_7
+                    narasi_awal = narasi_7
                 elif first_task[0] in kebun_merah:
-                    tnarasi = narasi_8
+                    narasi_awal = narasi_8
                 elif first_task[0] in surga_burung:
-                    tnarasi = narasi_9
+                    narasi_awal = narasi_9
                 else:
                     print("Jenis item tidak ditemukan di dalam area")
 
@@ -178,7 +178,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
                 jumlah_awal = tasks_sorted[0][3]
                 progres_awal = tasks_sorted[0][2]
-                narasi_awal = tnarasi
+                
                 
                 print(f"jenis_tugas = {jenis_tugas_awal}")
                 print(f"jumlah = {jumlah_awal}x")

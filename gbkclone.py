@@ -361,7 +361,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.click(0,0)
             return
         
-        elif "Tugas tidak ditemukan" in pesan:
+        elif "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
             time.sleep(1.5)
             await event.respond(tskg)
             return

@@ -4,7 +4,7 @@ logging.basicConfig(level=logging.ERROR)
 
 api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
-sesi_file = input('Akun = ')
+sesi_file = input('Mau sesi mana = ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
@@ -84,6 +84,20 @@ tugas = []
 klem = []
 jenis_tugas = []
 
+def parse_task_message(pesan):
+    ongoing_tasks = []
+    
+    # Mencari tugas yang sedang berlangsung
+    tasks = re.findall(r'\bOngoing Task \(.*?\):\n\n([^:]+) \((\d+)/(\d+)\)\s*\n⏱ (.+?)\n', pesan)
+    
+    for task in tasks:
+        jenis_tugas = task[0].strip()
+        progress = int(task[1])
+        total = int(task[2])
+        waktu = task[3]
+        ongoing_tasks.append({"jenis_tugas": jenis_tugas, "progress": progress, "total": total, "waktu": waktu})
+    return ongoing_tasks
+
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tsk))
     @client.on(events.NewMessage(from_users=bot_id))
@@ -98,43 +112,42 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             elif "Ongoing Task" in pesan:
                 print("Kondisi Ongoing Task terpenuhi.")
-                jenis_tugas = None
-                narasi = None
-                for emoji in emoji_list:
-                    if emoji in pesan:
-                        jenis_tugas = pesan.split(emoji, 1)[1].split()[0]
-                        tgs = pesan.splitlines()[12].split()
-                        tugas = str(tgs[0]+tgs[1])
-                        klem = int(pesan.splitlines()[12].split('/')[1].split(')')[0])
-                        jumlah = int(pesan.splitlines()[12].split('(')[1].split('/')[0])
-                        break
-                if jenis_tugas:
-                    time.sleep(2.0)
-                    await event.respond(gbk)
-                    if jenis_tugas in area_tupai:
-                        narasi = narasi_1
-                    elif jenis_tugas in kebun_terbengkalai:
-                        narasi = narasi_2
-                    elif jenis_tugas in lubang_kelinci_raksasa:
-                        narasi = narasi_3
-                    elif jenis_tugas in gua_beracun:
-                        narasi = narasi_4
-                    elif jenis_tugas in kolam_kecil:
-                        narasi = narasi_5
-                    elif jenis_tugas in gua_gibi:
-                        narasi = narasi_6
-                    elif jenis_tugas in taman_matahari:
-                        narasi = narasi_7
-                    elif jenis_tugas in kebun_merah:
-                        narasi = narasi_8
-                    elif jenis_tugas in surga_burung:
-                        narasi = narasi_9
-                    else:
-                        print("Jenis item tidak di temukan di dalam area")
+        
+                ongoing_tasks = parse_task_message(pesan)
+        
+                for task in ongoing_tasks:
+                    jenis_tugas = task["jenis_tugas"]
+                    progress = task["progress"]
+                    total = task["total"]
+                    waktu = task["waktu"]
+        
+                    if jenis_tugas:
                         time.sleep(2.0)
-                        await event.click(1,0)
-                        
-                print('-'*30+f"\nTersedia tugas\njenis_tugas = {tugas}\njumlah = {klem}x\nprogres = {jumlah}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
+                        await event.respond(gbk)
+                        if jenis_tugas in area_tupai:
+                            narasi = narasi_1
+                        elif jenis_tugas in kebun_terbengkalai:
+                            narasi = narasi_2
+                        elif jenis_tugas in lubang_kelinci_raksasa:
+                            narasi = narasi_3
+                        elif jenis_tugas in gua_beracun:
+                            narasi = narasi_4
+                        elif jenis_tugas in kolam_kecil:
+                            narasi = narasi_5
+                        elif jenis_tugas in gua_gibi:
+                            narasi = narasi_6
+                        elif jenis_tugas in taman_matahari:
+                            narasi = narasi_7
+                        elif jenis_tugas in kebun_merah:
+                            narasi = narasi_8
+                        elif jenis_tugas in surga_burung:
+                            narasi = narasi_9
+                        else:
+                            print("Jenis item tidak di temukan di dalam area")
+                            time.sleep(2.0)
+                            await event.click(1,0)
+        
+                    print('-'*30+f"\nTersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!\n"+'-'*30)
             return
         
         if "Berikut adalah daftar Tugas" in pesan:

@@ -120,7 +120,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     print("Selamat menyelesaikan tugas!!")
                     print('-' * 30)
                     
-                if jenis_tugas:
+                    narasi = None
                     if jenis_tugas in area_tupai:
                         narasi = narasi_1
                     elif jenis_tugas in kebun_terbengkalai:
@@ -142,11 +142,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     else:
                         print("Jenis item tidak ditemukan di dalam area")
                         continue  # Melanjutkan iterasi ke tugas berikutnya jika jenis tugas tidak ditemukan
-                        
+                    
                     print('-'*30)
                     print(f"Tersedia tugas\njenis_tugas = {jenis_tugas}\njumlah = {total}x\nprogres = {progress}\nnarasi = {narasi}\nSelamat menyelesaikan tugas!!")
                     print('-'*30)
-                return
         
         if "Berikut adalah daftar Tugas" in pesan:
             misi = []

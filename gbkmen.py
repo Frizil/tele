@@ -76,8 +76,8 @@ surga_burung = {
 
 jalan = narasi_gbk
 
-ch = -1001522767385
-#ch = "heliavan"
+#ch = -1001522767385
+ch = "heliavan"
 
 emoji_list = ['🌻','🍄','🍌','🌰','🥜','🍎','🍓', '🍅','▪️'] 
 full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚']
@@ -87,6 +87,48 @@ narasi = []
 tugas = []
 klem = []
 jenis_tugas = []
+
+#async def handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah):
+    #Inisialisasi item ke None
+    #item = None
+    
+    #Pola pencarian untuk menemukan jenis item yang berhasil didapat
+    #pola_item = pesan.splitlines()[4].split('berhasil mendapat')[1]
+    #pola_item = None
+    #for emoji in emoji_list:
+        #if emoji in pesan:
+            #hasil_item = pesan.split(emoji,1)[1].split()[0]
+            #print()
+            #print(hasil_item)
+            #print()
+    
+    #Mencocokkan pola dengan pesan
+    #match = re.search(pola_item, pesan)
+    #match = re.search(hasil_item, pesan)
+    #print(match)
+    #print()
+    
+    #Jika ditemukan, ekstrak informasi item dan cetak progresnya
+    #if match:
+        #item = match.group(1)
+        #print(item)
+        #print(f"Progres {item} = 1")
+    
+    #Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
+    #if item and jenis_tugas_awal == item:  # Pastikan item tidak None sebelum digunakan
+        #jumlah += 1
+        #print(f'Progres {jenis_tugas_awal} = {jumlah}')
+        #if jumlah % jumlah_awal == 0:
+            #time.sleep(1.5)
+            #await event.respond('/gbk_task')
+            #jumlah = 0
+            #print('Misi selesai. Yuk cari misi lagi!')
+        #else:
+            #time.sleep(1.5)
+            #await event.click(0, 0)
+    #else:
+        #time.sleep(1.5)
+        #await event.click(0, 0)
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -102,7 +144,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 time.sleep(2.0)
                 await event.respond(tskg)
             if "Ongoing Task" in pesan:
-                time.sleep(1.5)
+                time.sleep(2)
                 #await client.forward_messages(grup, event.message)
                 print("\nKondisi Ongoing Task terpenuhi.")
                 #Pola regex untuk mengekstrak informasi tugas
@@ -220,8 +262,9 @@ __{time.strftime('%x - %X %Z')}__
 ➱ narasi = **{narasi_awal}**
 **Selamat menyelesaikan tugas!!**
 ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+                time.sleep(2)
                 print(tugas_awal)
-                time.sleep(1.5)
+                time.sleep(2)
                 await client.send_message(bot_id, gbk)
                 
         if "Berikut adalah daftar Tugas" in pesan:
@@ -269,19 +312,10 @@ __{time.strftime('%x - %X %Z')}__
         
         if "Berhasil menyelesaikan tugas" in pesan:
             print('\n'+'-'*30+f"\nTugas sudah di selesaikan\n"+'-'*30)
-            time.sleep(1.5)
+            time.sleep(2)
             await client.forward_messages(ch, event.message)
-            time.sleep(1.5)
+            time.sleep(2)
             await event.respond(tskg)
-            return
-        
-        if "Task - GunungBelakangKebun" in pesan:
-            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-                time.sleep(1.5)
-                await event.respond(tskg)
-            elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
-                time.sleep(1.5)
-                await event.respond(tsk)
             return
         
         elif any(loc in pesan for loc in jalan):
@@ -304,7 +338,7 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tsk)
             return
         
-        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas" in pesan or "hanya bisa mendaki" in pesan:
+        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas saat masih" in pesan or "hanya bisa mendaki" in pesan:
             time.sleep(1.5)
             await event.click(text='Turun')
             return
@@ -329,6 +363,10 @@ __{time.strftime('%x - %X %Z')}__
                 await event.click(text='Kirim ke Barang')
             return
         
+        elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+            time.sleep(2)
+            await event.respond(tsk)
+            return
           
         elif "Berhasil mengambil tugas dengan ID" in pesan:
             jenis_tugas = None
@@ -374,13 +412,18 @@ __{time.strftime('%x - %X %Z')}__
 ➱ 🗒 {misi[0].get("misi_list")}
 ➱ narasi = **{narasi}**
 ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
-            time.sleep(1.5)
+            time.sleep(2)
             print(ambil_tugas)
             print('\n'+pesan)
+            time.sleep(2)
+            await event.respond(tskg)
+            return
+        
+        elif "Tugas tidak ditemukan" in pesan or "dengan jenis item yang sama" in pesan:
             time.sleep(1.5)
             await event.respond(tskg)
             return
-       
+          
         if "berhasil mendapat" in pesan:
             pola_item = pesan.splitlines()[4].split('berhasil mendapat')[1]
             pola_item = None
@@ -402,6 +445,7 @@ __{time.strftime('%x - %X %Z')}__
                 time.sleep(1.5)
                 await event.click(0, 0)
             return
+            #await handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah)
         
         elif "belum menemukan apa-apa" in pesan:
             time.sleep(1.5)
@@ -436,3 +480,4 @@ __{time.strftime('%x - %X %Z')}__
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Berhenti')
+    

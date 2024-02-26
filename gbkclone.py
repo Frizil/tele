@@ -275,14 +275,6 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        if "Task - GunungBelakangKebun" in pesan:
-            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-                time.sleep(1.5)
-                await event.respond(tskg)
-            elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
-                time.sleep(1.5)
-                await event.respond(tsk)
-            return
         
         elif any(loc in pesan for loc in jalan):
             time.sleep(1.5)
@@ -379,6 +371,15 @@ __{time.strftime('%x - %X %Z')}__
             print('\n'+pesan)
             time.sleep(1.5)
             await event.respond(tskg)
+            return
+          
+        if "Task - GunungBelakangKebun" in pesan:
+            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
+                time.sleep(1.5)
+                await event.respond(tskg)
+            elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
+                time.sleep(1.5)
+                await event.respond(tsk)
             return
        
         if "berhasil mendapat" in pesan:

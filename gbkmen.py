@@ -10,9 +10,6 @@ sesi_file = input('Mau sesi mana = ')
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
 bot_id = "KampungMaifamBot"
-#bot_id = 5199147926
-#bot_id = "heliavan"
-#grup = "heliavan"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
 tskg = '/gbk_task_G'

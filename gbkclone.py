@@ -84,7 +84,7 @@ tugas = []
 klem = []
 jenis_tugas = []
 
-async def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
+async def handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal):
     # Inisialisasi item ke None
     item = None
     
@@ -114,6 +114,7 @@ async def handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal):
     else:
         time.sleep(1.5)
         await event.click(0, 0)
+
 
 
 
@@ -360,8 +361,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tskg)
             return
           
-        elif "berhasil mendapat" in pesan:
-            await handle_task_progress(pesan, jenis_tugas_awal, jumlah_awal)
+        elif 'berhasil mendapat' in pesan:
+            await handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal)
+
       
         
         elif "belum menemukan apa-apa" in pesan:

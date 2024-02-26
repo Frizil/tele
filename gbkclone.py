@@ -88,48 +88,6 @@ tugas = []
 klem = []
 jenis_tugas = []
 
-#async def handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah):
-    #Inisialisasi item ke None
-    #item = None
-    
-    #Pola pencarian untuk menemukan jenis item yang berhasil didapat
-    #pola_item = pesan.splitlines()[4].split('berhasil mendapat')[1]
-    #pola_item = None
-    #for emoji in emoji_list:
-        #if emoji in pesan:
-            #hasil_item = pesan.split(emoji,1)[1].split()[0]
-            #print()
-            #print(hasil_item)
-            #print()
-    
-    #Mencocokkan pola dengan pesan
-    #match = re.search(pola_item, pesan)
-    #match = re.search(hasil_item, pesan)
-    #print(match)
-    #print()
-    
-    #Jika ditemukan, ekstrak informasi item dan cetak progresnya
-    #if match:
-        #item = match.group(1)
-        #print(item)
-        #print(f"Progres {item} = 1")
-    
-    #Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
-    #if item and jenis_tugas_awal == item:  # Pastikan item tidak None sebelum digunakan
-        #jumlah += 1
-        #print(f'Progres {jenis_tugas_awal} = {jumlah}')
-        #if jumlah % jumlah_awal == 0:
-            #time.sleep(1.5)
-            #await event.respond('/gbk_task')
-            #jumlah = 0
-            #print('Misi selesai. Yuk cari misi lagi!')
-        #else:
-            #time.sleep(1.5)
-            #await event.click(0, 0)
-    #else:
-        #time.sleep(1.5)
-        #await event.click(0, 0)
-
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))
@@ -160,7 +118,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
                 #Menampilkan informasi tugas
                 for task in tasks_sorted:
-                    jenis_tugas = f"{task[0]}[{task[1]}]"
+                    if len(task) >= 2:
+                        jenis_tugas = f"{task[0]}[{task[1]}]"
+                    else:
+                        jenis_tugas = task[0]
                     total = task[3]
                     progress = task[2]
                 
@@ -445,8 +406,7 @@ __{time.strftime('%x - %X %Z')}__
                 time.sleep(1.5)
                 await event.click(0, 0)
             return
-            #await handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah)
-        
+
         elif "belum menemukan apa-apa" in pesan:
             time.sleep(1.5)
             await event.click(0,0)

@@ -73,7 +73,7 @@ surga_burung = {
 
 jalan = narasi_gbk
 
-ongoing_tasks = []
+ch = -1001522767385
 
 emoji_list = ['🌻','🍄','🍌','🌰','🥜','🍎','🍓', '🍅','▪️'] 
 

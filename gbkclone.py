@@ -202,7 +202,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         narasi_awal = narasi_9
                     else:
                         print("Jenis item tidak ditemukan di dalam area")
-                        break
+                        
                           
                 print(f"jenis_tugas = {jenis_tugas_awal}")
                 print(f"jumlah = {jumlah_awal}x")

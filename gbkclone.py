@@ -103,103 +103,61 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             if "Ongoing Task" in pesan:
                 time.sleep(2)
-                #await client.forward_messages(grup, event.message)
                 print("\nKondisi Ongoing Task terpenuhi.")
-                #Pola regex untuk mengekstrak informasi tugas
+                # Pola regex untuk mengekstrak informasi tugas
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
-
-                #Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
+            
+                # Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
                 tasks = re.findall(pola_tugas, pesan)
-                
-                #Mengurutkan tugas berdasarkan waktu
+            
+                # Mengurutkan tugas berdasarkan waktu
                 tasks_sorted = sorted(tasks, key=lambda x: x[4])
-                
-                narasi = None  # Variabel narasi didefinisikan di luar loop
-                
-                #Menampilkan informasi tugas
-                for task in tasks_sorted:
-                    jenis_tugas = f"{task[0]}[{task[1]}]"
-                    total = task[3]
-                    progress = task[2]
-                
-                    if jenis_tugas:
-                        if jenis_tugas in area_tupai:
-                            narasi = narasi_1
-                        elif jenis_tugas in kebun_terbengkalai:
-                            narasi = narasi_2
-                        elif jenis_tugas in lubang_kelinci_raksasa:
-                            narasi = narasi_3
-                        elif jenis_tugas in gua_beracun:
-                            narasi = narasi_4
-                        elif jenis_tugas in kolam_kecil:
-                            narasi = narasi_5
-                        elif jenis_tugas in gua_gibi:
-                            narasi = narasi_6
-                        elif jenis_tugas in taman_matahari:
-                            narasi = narasi_7
-                        elif jenis_tugas in kebun_merah:
-                            narasi = narasi_8
-                        elif jenis_tugas in surga_burung:
-                            narasi = narasi_9
-                        else:
-                            print("\nJenis item tidak ditemukan di dalam area")
-                            narasi =  '⛰ Gunung Belakang Kebun ⛰'
-                            break
-                
-                    print('\n'+'-'*30)
-                    print("Tersedia tugas")
-                    print(f"jenis_tugas = {jenis_tugas}")
-                    print(f"jumlah = {total}x")
-                    print(f"progres = {progress}")
-                    print(f"narasi = {narasi}")
-                    print("Selamat menyelesaikan tugas!!")
-                    print('-'*30)
-                
-                #Memulai mengerjakan tugas yang paling awal
+            
                 narasi_awal = None
-                if tasks_sorted:  # Pastikan tasks_sorted tidak kosong sebelum mengakses elemennya
+            
+                if tasks_sorted:
                     first_task = tasks_sorted[0]
                     if len(first_task) >= 2:
                         jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
                     else:
                         jenis_tugas_awal = first_task[0]
-
-                #jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
-                jumlah_awal = tasks_sorted[0][3]
-                progres_awal = tasks_sorted[0][2]
-                if jenis_tugas_awal:
-                    if jenis_tugas_awal in area_tupai:
-                        narasi_awal = narasi_1
-                    elif jenis_tugas_awal in kebun_terbengkalai:
-                        narasi_awal = narasi_2
-                    elif jenis_tugas_awal in lubang_kelinci_raksasa:
-                        narasi_awal = narasi_3
-                    elif jenis_tugas_awal in gua_beracun:
-                        narasi_awal = narasi_4
-                    elif jenis_tugas_awal in kolam_kecil:
-                        narasi_awal = narasi_5
-                    elif jenis_tugas_awal in gua_gibi:
-                        narasi_awal = narasi_6
-                    elif jenis_tugas_awal in taman_matahari:
-                        narasi_awal = narasi_7
-                    elif jenis_tugas_awal in kebun_merah:
-                        narasi_awal = narasi_8
-                    elif jenis_tugas_awal in surga_burung:
-                        narasi_awal = narasi_9
-                    else:
-                        print("\nJenis item tidak ditemukan di dalam area")
-                        narasi_awal =  '⛰ Gunung Belakang Kebun ⛰'
-                        
+            
+                    jumlah_awal = first_task[3]
+                    progres_awal = first_task[2]
+            
+                    if jenis_tugas_awal:
+                        if jenis_tugas_awal in area_tupai:
+                            narasi_awal = narasi_1
+                        elif jenis_tugas_awal in kebun_terbengkalai:
+                            narasi_awal = narasi_2
+                        elif jenis_tugas_awal in lubang_kelinci_raksasa:
+                            narasi_awal = narasi_3
+                        elif jenis_tugas_awal in gua_beracun:
+                            narasi_awal = narasi_4
+                        elif jenis_tugas_awal in kolam_kecil:
+                            narasi_awal = narasi_5
+                        elif jenis_tugas_awal in gua_gibi:
+                            narasi_awal = narasi_6
+                        elif jenis_tugas_awal in taman_matahari:
+                            narasi_awal = narasi_7
+                        elif jenis_tugas_awal in kebun_merah:
+                            narasi_awal = narasi_8
+                        elif jenis_tugas_awal in surga_burung:
+                            narasi_awal = narasi_9
+                        else:
+                            print("\nJenis item tidak ditemukan di dalam area")
+                            narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
+            
                 tugas_awal = f"""
-__{time.strftime('%x - %X %Z')}__
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-**Mulai mengerjakan tugas**
-➱ jenis_tugas = **{jenis_tugas_awal}**
-➱ jumlah = **{jumlah_awal}x** 
-➱ progres = **{progres_awal}**
-➱ narasi = **{narasi_awal}**
-**Selamat menyelesaikan tugas!!**
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+            __{time.strftime('%x - %X %Z')}__
+            ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
+            **Mulai mengerjakan tugas**
+            ➱ jenis_tugas = **{jenis_tugas_awal}**
+            ➱ jumlah = **{jumlah_awal}x**
+            ➱ progres = **{progres_awal}**
+            ➱ narasi = **{narasi_awal}**
+            **Selamat menyelesaikan tugas!!**
+            ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
                 time.sleep(2)
                 print(tugas_awal)
                 time.sleep(2)

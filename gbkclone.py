@@ -106,9 +106,20 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("\nKondisi Ongoing Task terpenuhi.")
                 # Pola regex untuk mengekstrak informasi tugas
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
-            
-                # Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
+
                 tasks = re.findall(pola_tugas, pesan)
+                
+                for task in tasks:
+                    jenis_tugas = f"{task[0]}[{task[1]}]"
+                    total = task[3]
+                    progress = task[2]
+                    waktu = task[4]
+                
+                    print("Jenis Tugas:", jenis_tugas)
+                    print("Total:", total)
+                    print("Progress:", progress)
+                    print("Waktu:", waktu)
+                    print("-" * 30)
             
                 # Mengurutkan tugas berdasarkan waktu
                 tasks_sorted = sorted(tasks, key=lambda x: x[4])

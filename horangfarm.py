@@ -30,7 +30,7 @@ async def cmd_tanam(client, bot):
         if len(tanam) <= 1:
             await asyncio.sleep(3)
             await client.send_message(bot, command)
-        elif len(tanam) >= 2:
+        elif len(tanam) >= 3:
             await asyncio.sleep(3)
             await client.send_message(bot, siram)
         

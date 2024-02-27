@@ -79,14 +79,56 @@ jalan = narasi_gbk
 ch = -1001522767385
 #ch = "heliavan"
 
-emoji_list = ['🌻','🍄','🍌','🌰','🥜','🍎','🍓', '🍅','▪️'] 
-full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚']
+emoji_list = ['🌻','🍄','🍌','🌰','🥜','🍎','🍓', '🍅','🥑','🥚','▪️'] 
+full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚', '🥑']
 jumlah = 0
 misi = []
 narasi = []
 tugas = []
 klem = []
 jenis_tugas = []
+
+#async def handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah):
+    #Inisialisasi item ke None
+    #item = None
+    
+    #Pola pencarian untuk menemukan jenis item yang berhasil didapat
+    #pola_item = pesan.splitlines()[4].split('berhasil mendapat')[1]
+    #pola_item = None
+    #for emoji in emoji_list:
+        #if emoji in pesan:
+            #hasil_item = pesan.split(emoji,1)[1].split()[0]
+            #print()
+            #print(hasil_item)
+            #print()
+    
+    #Mencocokkan pola dengan pesan
+    #match = re.search(pola_item, pesan)
+    #match = re.search(hasil_item, pesan)
+    #print(match)
+    #print()
+    
+    #Jika ditemukan, ekstrak informasi item dan cetak progresnya
+    #if match:
+        #item = match.group(1)
+        #print(item)
+        #print(f"Progres {item} = 1")
+    
+    #Memeriksa apakah item yang berhasil didapat sama dengan tugas awal
+    #if item and jenis_tugas_awal == item:  # Pastikan item tidak None sebelum digunakan
+        #jumlah += 1
+        #print(f'Progres {jenis_tugas_awal} = {jumlah}')
+        #if jumlah % jumlah_awal == 0:
+            #time.sleep(1.5)
+            #await event.respond('/gbk_task')
+            #jumlah = 0
+            #print('Misi selesai. Yuk cari misi lagi!')
+        #else:
+            #time.sleep(1.5)
+            #await event.click(0, 0)
+    #else:
+        #time.sleep(1.5)
+        #await event.click(0, 0)
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -103,25 +145,26 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 await event.respond(tskg)
             if "Ongoing Task" in pesan:
                 time.sleep(2)
+                #await client.forward_messages(grup, event.message)
                 print("\nKondisi Ongoing Task terpenuhi.")
-                # Pola regex untuk mengekstrak informasi tugas
+                #Pola regex untuk mengekstrak informasi tugas
                 pola_tugas = r'([A-Za-z]+)\[([A-Z])\] \((\d+)/(\d+)\)\n⏱ (.+?)\n'
-                tasks = re.findall(pola_tugas, pesan)
-                tasks_sorted = sorted(tasks, key=lambda x: x[4])
 
+                #Mencocokkan pola regex dengan pesan untuk mengekstrak informasi tugas
+                tasks = re.findall(pola_tugas, pesan)
+                
+                #Mengurutkan tugas berdasarkan waktu
+                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+                
+                narasi = None  # Variabel narasi didefinisikan di luar loop
+                
+                #Menampilkan informasi tugas
                 for task in tasks_sorted:
                     jenis_tugas = f"{task[0]}[{task[1]}]"
                     total = task[3]
                     progress = task[2]
-                    narasi = None
-
+                
                     if jenis_tugas:
-                        if '[' in jenis_tugas and ']' in jenis_tugas:
-                            jenis_tugas, variasi = jenis_tugas.split('[')
-                            variasi = '[' + variasi
-                        else:
-                            variasi = ''
-
                         if jenis_tugas in area_tupai:
                             narasi = narasi_1
                         elif jenis_tugas in kebun_terbengkalai:
@@ -142,32 +185,50 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                             narasi = narasi_9
                         else:
                             print("\nJenis item tidak ditemukan di dalam area")
-                            narasi = '⛰ Gunung Belakang Kebun ⛰'
+                            narasi =  '⛰ Gunung Belakang Kebun ⛰'
                             break
-
-                    print('\n' + '-' * 30)
+                
+                    print('\n'+'-'*30)
                     print("Tersedia tugas")
-                    print(f"jenis_tugas = {jenis_tugas}{variasi}")
+                    print(f"jenis_tugas = {jenis_tugas}")
                     print(f"jumlah = {total}x")
                     print(f"progres = {progress}")
                     print(f"narasi = {narasi}")
                     print("Selamat menyelesaikan tugas!!")
-                    print('-' * 30)
-
-                # Memulai mengerjakan tugas yang paling awal
+                    print('-'*30)
+                
+                #Memulai mengerjakan tugas yang paling awal
                 narasi_awal = None
+
+                #Mencari tugas pertama yang sedang dikerjakan
                 first_task = tasks_sorted[0]
-
-                if '[' in first_task[0] and ']' in first_task[0]:
-                    jenis_tugas_awal, variasi_awal = first_task[0].split('[')
-                    variasi_awal = '[' + variasi_awal
+                
+                #Mengatur narasi dengan narasi dari tugas pertama
+                if first_task[0] in area_tupai:
+                    narasi_awal = narasi_1
+                elif first_task[0] in kebun_terbengkalai:
+                    narasi_awal = narasi_2
+                elif first_task[0] in lubang_kelinci_raksasa:
+                    narasi_awal = narasi_3
+                elif first_task[0] in gua_beracun:
+                    narasi_awal = narasi_4
+                elif first_task[0] in kolam_kecil:
+                    narasi_awal = narasi_5
+                elif first_task[0] in gua_gibi:
+                    narasi_awal = narasi_6
+                elif first_task[0] in taman_matahari:
+                    narasi_awal = narasi_7
+                elif first_task[0] in kebun_merah:
+                    narasi_awal = narasi_8
+                elif first_task[0] in surga_burung:
+                    narasi_awal = narasi_9
                 else:
-                    jenis_tugas_awal = first_task[0]
-                    variasi_awal = ''
+                    print("\nJenis item tidak ditemukan di dalam area")
+                    narasi_awal =  '⛰ Gunung Belakang Kebun ⛰'
 
-                jumlah_awal = first_task[3]
-                progres_awal = first_task[2]
-
+                jenis_tugas_awal = f"{tasks_sorted[0][0]}[{tasks_sorted[0][1]}]"
+                jumlah_awal = tasks_sorted[0][3]
+                progres_awal = tasks_sorted[0][2]
                 if jenis_tugas_awal:
                     if jenis_tugas_awal in area_tupai:
                         narasi_awal = narasi_1
@@ -185,19 +246,24 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         narasi_awal = narasi_7
                     elif jenis_tugas_awal in kebun_merah:
                         narasi_awal = narasi_8
-                    elif jenis_tugas_awal in surga_burung: 
-                        narasi_awal = narasi_9 
+                    elif jenis_tugas_awal in surga_burung:
+                        narasi_awal = narasi_9
                     else:
                         print("\nJenis item tidak ditemukan di dalam area")
-                        narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
-                print('\n' + '-' * 30)
-                print("Memulai tugas")
-                print(f"jenis_tugas = {jenis_tugas_awal}{variasi_awal}")
-                print(f"jumlah = {jumlah_awal}x")
-                print(f"progres = {progres_awal}")
-                print(f"narasi = {narasi_awal}")
-                print("Selamat menyelesaikan tugas!!")
-                print('-' * 30)
+                        narasi_awal =  '⛰ Gunung Belakang Kebun ⛰'
+                        
+                tugas_awal = f"""
+__{time.strftime('%x - %X %Z')}__
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
+**Mulai mengerjakan tugas**
+➱ jenis_tugas = **{jenis_tugas_awal}**
+➱ jumlah = **{jumlah_awal}x** 
+➱ progres = **{progres_awal}**
+➱ narasi = **{narasi_awal}**
+**Selamat menyelesaikan tugas!!**
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+                time.sleep(2)
+                print(tugas_awal)
                 time.sleep(2)
                 await client.send_message(bot_id, gbk)
                 
@@ -272,7 +338,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tsk)
             return
         
-        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas" in pesan or "hanya bisa mendaki" in pesan:
+        elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas saat masih" in pesan or "hanya bisa mendaki" in pesan:
             time.sleep(1.5)
             await event.click(text='Turun')
             return
@@ -353,10 +419,9 @@ __{time.strftime('%x - %X %Z')}__
             await event.respond(tskg)
             return
         
-        if "Task - GunungBelakangKebun" in pesan:
-            if "Tugas tidak ditemukan" in pesan or "Kamu tidak bisa mengambil" in pesan:
-                time.sleep(1.5)
-                await event.respond(tskg)
+        elif "Tugas tidak ditemukan" in pesan or "dengan jenis item yang sama" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
             return
           
         if "berhasil mendapat" in pesan:
@@ -380,6 +445,7 @@ __{time.strftime('%x - %X %Z')}__
                 time.sleep(1.5)
                 await event.click(0, 0)
             return
+            #await handle_task_progress(event, pesan, jenis_tugas_awal, jumlah_awal, jumlah)
         
         elif "belum menemukan apa-apa" in pesan:
             time.sleep(1.5)
@@ -414,3 +480,4 @@ __{time.strftime('%x - %X %Z')}__
     print(time.asctime(), '-', 'Mulai')
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Berhenti')
+    

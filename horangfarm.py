@@ -30,11 +30,7 @@ async def cmd_tanam(client, bot):
         if len(tanam) <= 1:
             await asyncio.sleep(3)
             await client.send_message(bot, command)
-        elif len(tanam) >= 3:
-            await asyncio.sleep(3)
-            await client.send_message(bot, siram)
         
-
 async def mancingddh(client, w):
     while True:
         await client.send_message(bot[0], "/fish")
@@ -63,11 +59,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         elif "Kamu berhasil menanam" in pesan:
             print(pesan)
-            #jtanam += 1
-            #if jtanam:
-                #if jtanam >= 2:
-                    #time.sleep(2)
-                    #await event.respond(siram)
+            jtanam += 1
+            if jtanam:
+                if jtanam >= 2:
+                    time.sleep(2)
+                    await event.respond(siram)
             return
 
         elif "Kamu memperoleh:" in pesan:

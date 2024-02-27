@@ -58,7 +58,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
         
         elif "Kamu berhasil menanam" in pesan:
-            print(pesan)
             jtanam += 1
             if jtanam:
                 if jtanam >= 2:

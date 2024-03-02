@@ -23,7 +23,7 @@ async def bentar(w):
     await asyncio.sleep(w)
 
 async def cmd_tanam(client, bot):
-    tanam = ['/tanam_Tomat_655', '/tanam_Cabai_655']
+    tanam = ['/tanam_Mentimun_664', '/tanam_Jagung_663']
     for command in tanam:
         await asyncio.sleep(3)
         await client.send_message(bot, command)

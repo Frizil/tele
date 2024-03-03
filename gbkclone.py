@@ -236,15 +236,15 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
       
                 tugas_awal = f"""
-      __{time.strftime('%x - %X %Z')}__
-      ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-      Mulai mengerjakan tugas
-      ➱ jenis_tugas = {jenis_tugas_awal}
-      ➱ jumlah = {jumlah_awal}x
-      ➱ progres = {progres_awal}
-      ➱ narasi = {narasi_awal}
-      Selamat menyelesaikan tugas!!
-      ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+__{time.strftime('%x - %X %Z')}__
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
+Mulai mengerjakan tugas
+➱ jenis_tugas = {jenis_tugas_awal}
+➱ jumlah = {jumlah_awal}x
+➱ progres = {progres_awal}
+➱ narasi = {narasi_awal}
+Selamat menyelesaikan tugas!!
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
                 time.sleep(2)
                 print(tugas_awal)
                 time.sleep(2)
@@ -351,6 +351,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             time.sleep(2)
             await event.respond(tsk)
             return
+        
+        elif "Tugas tidak ditemukan" in pesan or "dengan jenis item yang sama" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
+            return
           
         elif "Berhasil mengambil tugas dengan ID" in pesan:
             jenis_tugas = None
@@ -386,16 +391,16 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 else:
                     narasi = '⛰ Gunung Belakang Kebun ⛰'
             ambil_tugas = f"""
-      __{time.strftime('%x - %X %Z')}__
-      ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-      +Berhasil mengambil tugas 
-      ➱ jenis_tugas = {tugas}
-      ➱ jumlah = {klem}x 
-      ➱ koin pendaki = {misi[0].get("koin_list")}🪙
-      ➱ exp pendaki = {misi[0].get("exp_list")}❇️
-      ➱ 🗒 {misi[0].get("misi_list")}
-      ➱ narasi = {narasi}
-      ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
+__{time.strftime('%x - %X %Z')}__
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
++Berhasil mengambil tugas 
+➱ jenis_tugas = {tugas}
+➱ jumlah = {klem}x 
+➱ koin pendaki = {misi[0].get("koin_list")}🪙
+➱ exp pendaki = {misi[0].get("exp_list")}❇️
+➱ 🗒 {misi[0].get("misi_list")}
+➱ narasi = {narasi}
+----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----"""
             time.sleep(2)
             print(ambil_tugas)
             #print('\n'+pesan)

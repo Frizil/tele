@@ -306,7 +306,12 @@ Selamat menyelesaikan tugas!!
             time.sleep(1.5)
             await event.click(0,0)
             return
-                
+        
+        elif "Tugas tidak ditemukan" in pesan or "silakan pilih tugas lain" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
+            return
+        
         elif "Gunung dipenuhi" in pesan:
             time.sleep(1.5)
             await event.respond(krj)
@@ -350,11 +355,6 @@ Selamat menyelesaikan tugas!!
         elif "Kamu masih memiliki 3 tugas aktif untuk dikerjakan" in pesan:
             time.sleep(2)
             await event.respond(tsk)
-            return
-        
-        elif "Tugas tidak ditemukan" in pesan or "silakan pilih tugas lain" in pesan:
-            time.sleep(1.5)
-            await event.respond(tskg)
             return
           
         elif "Berhasil mengambil tugas dengan ID" in pesan:

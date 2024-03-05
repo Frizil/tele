@@ -1,4 +1,3 @@
-#by Aditz
 from telethon import TelegramClient,events
 import time, re
 import random
@@ -61,7 +60,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             jumdon += int(jmlh)
             print(time.asctime(), jumdon)
             if jumdon == total_donasi:
-                print("Jumlah total donasi telah mencapai target. Berhenti donasi.")
+                print("Jumlah total donasi telah mencapai target")
                 client.disconnect()
             else:
                 time.sleep(nunggu)
@@ -91,8 +90,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Berhasil mengambil" in message:
             jumdon += int(jmlh)
             print(time.asctime(), jumdon)
-            time.sleep(4)
-            await event.respond(tempat)
+            if jumdon == total_donasi:
+                print("Jumlah total donasi telah mencapai target")
+                client.disconnect()
+            else:
+                time.sleep(nunggu)
+                await event.respond(tempat)
             return
             
         if "No" in message:
@@ -113,4 +116,3 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     print(time.asctime(), '-', tempat)
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Berhenti')
-   

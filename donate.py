@@ -83,7 +83,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             await event.respond(tempat)
             return
 
-        if "Guild tidak memiliki" in message or "Berhasil mengambil" in message:
+        if "Guild tidak memiliki" in message:
+            time.sleep(4)
+            await event.respond(tempat)
+            return
+          
+        if "Berhasil mengambil" in message:
+            jumdon += int(jmlh)
+            print(time.asctime(), jumdon)
             time.sleep(4)
             await event.respond(tempat)
             return

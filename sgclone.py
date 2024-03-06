@@ -143,7 +143,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
         if 'Berhasil menggabungkan' in pesan:
             await bentar(0.9)
             msg = await client.get_messages(bot[1],ids = idMer)
-            await msg.click(0,2)
+            await msg.click(0,0)
             return
           
                 

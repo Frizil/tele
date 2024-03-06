@@ -190,14 +190,14 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
             if total < 500:
                 await msg.click(text="Gabung 5")
                 return
-            #elif total >= 500 and total < 1000:
-                #await msg.click(text="Gabung 5")
-                #return
-            #elif total >= 1000 and total < 1500:
-                #await msg.click(text="Gabung 5")
-                #return
-            #elif total >= 1500:
-                #await msg.click(text="Gabung 5")
+            elif total >= 500 and total < 1000:
+                await msg.click(text="Gabung 5")
+                return
+            elif total >= 1000 and total < 1500:
+                await msg.click(text="Gabung 5")
+                return
+            elif total >= 1500:
+                await msg.click(text="Gabung 5")
             return
           
             

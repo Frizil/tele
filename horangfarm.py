@@ -23,13 +23,13 @@ async def bentar(w):
     await asyncio.sleep(w)
 
 async def cmd_tanam(client, bot):
-    tanam = ['/tanam_Mentimun_664', '/tanam_Jagung_663']
+    tanam = ['/tanam_Nanas_531']
     for command in tanam:
         await asyncio.sleep(3)
         await client.send_message(bot, command)
-        if len(tanam) <= 1:
-            await asyncio.sleep(3)
-            await client.send_message(bot, command)
+        #if len(tanam) <= 1:
+            #await asyncio.sleep(3)
+            #await client.send_message(bot, command)
         
 async def mancingddh(client, w):
     while True:
@@ -59,10 +59,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         elif "Kamu berhasil menanam" in pesan:
             jtanam += 1
-            if jtanam:
-                if jtanam >= 2:
-                    time.sleep(2)
-                    await event.respond(siram)
+            #if jtanam:
+                #if jtanam >= 2:
+                    #time.sleep(2)
+                    #await event.respond(siram)
+            time.sleep(2)
+            await event.respond(siram)
             return
         
         elif "Tak ada yang bisa dipanen" in pesan or "Tak ada ternak untuk" in pesan:

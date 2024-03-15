@@ -55,6 +55,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 return
 
             elif "Kamu mendapat" in pesan or "Wow kamu berhasil" in pesan or "Bomb meledak di bagian" in pesan:
+                print(time.asctime(), 'Tambang')
                 time.sleep(2)
                 await event.click(text=Alat)
                 return

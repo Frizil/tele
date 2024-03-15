@@ -43,6 +43,8 @@ elif mpm == '6':
     Alat = '⛏⛏⛏⛏⛏'
 
 
+bom = '/belixx_bomb_1000_confirm'
+
 with TelegramClient(sesi_file, api_id, api_hash) as client:
         client.loop.run_until_complete(client.send_message(bot_id, Alat))
         @client.on(events.NewMessage(from_users=bot_id))
@@ -55,21 +57,27 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 return
 
             elif "Kamu mendapat" in pesan or "Wow kamu berhasil" in pesan or "Bomb meledak di bagian" in pesan:
-                print(time.asctime(), 'Tambang')
                 time.sleep(2)
                 await event.click(text=Alat)
                 return
                 
-            elif 'Kamu tidak memiliki' in pesan:
+            elif 'tidak memiliki cukup energi' in pesan:
                 time.sleep(2)
                 await event.respond('/restore_max_confirm')
                 print(time.asctime(), 'Isi Ulang Energi')
                 return
-                
-            elif 'Energi berhasil' in pesan:
+            
+            
+            elif 'Energi berhasil' in pesan or 'Berhasil membeli 1000💣 bomb' in pesan:
                 time.sleep(2)
                 await event.respond(Alat) 
                 return
+              
+            elif 'Kamu tidak memiliki bom' in pesan:
+                time.sleep(2)
+                await event.respond(bom) 
+                return
+             
             
             else :
                 time.sleep(2)

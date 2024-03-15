@@ -52,13 +52,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if "Tingkatkan kemampuanmu" in pesan:
                 time.sleep(2)
                 await event.click(text=Alat)
-                print(pesan)
                 return
 
-            elif "Kamu mendapat" in pesan:
+            elif "Kamu mendapat" in pesan or "Wow kamu berhasil" in pesan or "Bomb meledak di bagian" in pesan:
                 time.sleep(2)
                 await event.click(text=Alat)
-                print(pesan)
                 return
                 
             elif 'Kamu tidak memiliki' in pesan:

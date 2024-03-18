@@ -32,7 +32,8 @@ narasi = {
     "Orang-orang mengklaim kalau mereka",
     "Bertahun-tahun yang lalu",
     "Laut aneh berbahaya",
-    "Laut terkutuk yang dipenuhi hantu"
+    "Laut terkutuk yang dipenuhi hantu",
+    "berhasil mendapatkan"
 }
 
 area = [

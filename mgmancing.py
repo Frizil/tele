@@ -52,7 +52,7 @@ waktu = 8
 i = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, mg+str(area[i]))
+    client.loop.run_until_complete(client.send_message(bot_id, "/mg24_SungaiLala")
     @client.on(events.NewMessage(incoming=True, from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text

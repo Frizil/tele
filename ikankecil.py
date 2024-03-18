@@ -40,16 +40,10 @@ area = [
   "SungaiLala",
   "SungaiMimi",
   "SungaiBadabu",
-  "DanauSoprano",
-  "TelukBulari",
-  "LautSempit",
-  "LautGabagaba",
-  "LautPurba",
-  "LautBerhantu"
 ]
 
 mg = "/mg24_"
-waktu = 15
+waktu = 10
 i = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -66,7 +60,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
          
         if "silakan memancing di tempat lain" in pesan:
             while "silakan memancing di tempat lain" in pesan:
-                waktu = 15
+                waktu = 10
                 i = (i + 1) % len(area) 
                 time.sleep(2)
                 await client.send_message(bot_id, mg+str(area[i]))

@@ -1,113 +1,435 @@
-import time, os
-
+import time
 import asyncio
-
-import sys, re
-import random
-import datetime
-from time import sleep
-from random import randint
-from datetime import datetime
-from telethon import TelegramClient, events, utils, Button
+import sys
+import threading
+import re
+from telethon import TelegramClient, events, utils
 from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
 
 api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
-sesi_file = input("Akun : ")
+sesi_fil = input('Siapa: ')
 
-print("\ncontoh: Angka = 2")
-print("Pilih bot yng digunakan")
-mpm = input("\tKetik 1 untuk Bot Alpha\n\tKetik 2 untuk Bot X\n\tKetik 3 untuk Bot X4\n   Angka = ")
-if mpm == '1':
-    bot_id = 'KampungMaifamBot'
-elif mpm == '2':
-    bot_id = 'KampungMaifamXBot'
-elif mpm == '3':
-    bot_id = 'KampungMaifamX4Bot'
+count = 0
 
+def fani():
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    with TelegramClient(sesi_fil, api_id, api_hash, loop=loop) as clien:
+        clien.loop.run_until_complete(clien.send_message("kampungmaifambot", '/mg2024_game_Tambang_23'))
 
-area = "GuaSihir"
-mg = "/mg24_"
-jeda = 5
-cmd = mg+str(area)
-skill = 0 
-koin = 0
-buffe = "/mg2024_buff_Energi"
-buffk = "/mg2024_buff_DoublePoint"
-kurangi = "/mg2024_kurangiskill_100"
-palu = "⛏⛏⛏⛏⛏"
-
-with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, cmd))
-    @client.on(events.NewMessage(incoming=True, from_users=bot_id))
-    async def handler(event):
-        pesan = event.raw_text
-        global jeda, skill, koin
-        
-      
-        if "Berada jauh di pedalaman Hutan Maifam" in pesan:
-            time.sleep(jeda)
-            await event.click(0,0)
-            return
-          
-        if "Kamu mendapat" in pesan:
-            narasi = event.raw_text
-            pola = r"Tunggu (\d+) detik sampai kamu bisa menambang lagi\.\.\."
-            pola_kemampuan = r"Kemampuan Menambang \+(\d+)"
-            pola_koin = r"Koin Tambang \+(\d+)"
-            pola_energi = r"Energi: (\d+)%"
-            hasil_kemampuan = re.search(pola_kemampuan, narasi)
-            hasil_koin = re.search(pola_koin, narasi)
-            hasil_pencarian = re.search(pola, pesan)
-            hasil_energi = re.search(pola_energi, pesan)
-            kemampuan = int(hasil_kemampuan.group(1))
-            koin_tambang = int(hasil_koin.group(1))
-            jeda = int(hasil_pencarian.group(1))
-           
-            if hasil_kemampuan and hasil_koin:
-                os.system("clear")
-                skill+=kemampuan
-                koin+=koin_tambang
-                print("Skill =", skill)
-                print("Koin =", koin)
-                if koin >= 1500:
-                    time.sleep(2)
-                    await event.respond(buffk)
-
-                
-            if hasil_energi:
-                persentase_energi = int(hasil_energi.group(1))
-                if persentase_energi <= 70 and koin >= 100:
-                    time.sleep(2)
-                    await event.respond(buffe)
+        @clien.on(events.NewMessage(from_users="kampungmaifambot"))
+        async def handler(event):
+            global idMer
+            global count
+            global angka
+            print(event.raw_text)
+            print(count)
+            
+            if 'Tunggu 20' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(17.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(17.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
                 else:
-                    time.sleep(jeda)
-                    await event.click(text=palu)
-            return
-          
-        if "Pelan-pelan, kamu masih terlalu lelah" in pesan:
-            time.sleep(jeda)
-            await event.click(text=palu)
-            return
-          
-        if "Energi dipulihkan menjadi" in pesan:
-            jeda = 5
-            koin -= 150
-            time.sleep(2)
-            await event.respond(cmd)
-            return
-          
-        if "Buff dibeli!! Selama 5 menit" in pesan:
-            koin -= 1000
-            time.sleep(2)
-            await event.respond(cmd)
-            return
-          
-        if "Permainan selesai!!" in pesan:
-            print("Game Berakhir")
-            return
+                     time.sleep(19.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 19' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(16.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(16.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(18.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 18' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(15.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(15.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(17.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 17' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(14.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(14.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(16.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 16' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(13.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(13.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(15.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
         
-    client.start()
-    print(time.asctime(), '-', 'Mulai')
-    client.run_until_disconnected()
-    print(time.asctime(), '-', 'Berhanti')
+            if 'Tunggu 15' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(12.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(12.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(14.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 14' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(11.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(11.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(13.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 13' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(10.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(10.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(12.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 12' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(9.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(9.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(11.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+                
+            if 'Tunggu 11' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(8.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(8.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(10.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 10' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(7.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(7.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(9.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 9' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(6.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(6.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(8.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+        
+            if 'Tunggu 8' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(5.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(5.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(7.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 7' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(4.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(4.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(6.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+            
+            if 'Tunggu 6' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(3.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(3.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(5.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return   
+            
+            if 'Tunggu 5' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(2.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(2.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(4.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return   
+
+            if 'Tunggu 4' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(3.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return        
+
+            if 'Tunggu 3' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(2.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return                     
+
+            if 'Tunggu 2' in event.raw_text:
+                o = re.findall('\d+', event.raw_text)
+                angka = int(o[1])
+                count += angka
+                if "Energi: 91%" in event.raw_text:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_Energi') 
+                    return
+                elif count >= 1000:
+                    time.sleep(1.5)
+                    await event.respond('/mg2024_buff_DoublePoint') 
+                    return
+                else:
+                     time.sleep(1.5)
+                     msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                     await msg.click(0)
+                     return  
+                return  
+                
+            if "dari menambang di Gua Sihir" in event.raw_text:
+                time.sleep(1.5)
+                await event.click(text='START')
+                return
+                
+            if "Apa kamu yakin ingin" in event.raw_text:
+                time.sleep(1)
+                await event.click(text='Confirm')
+                return
+                
+            if "Energi dipulihkan menjadi 100%!!" in event.raw_text:
+                count -= 150
+                time.sleep(1.5)
+                await event.respond('/mg2024_GuaSihir')
+                return
+                
+            if "Buff dibeli!!" in event.raw_text:
+                count -= 1000
+                time.sleep(1.5)
+                await event.respond('/mg2024_GuaSihir')
+                return
+                
+            if "Permainan dimulai" in event.raw_text:
+                time.sleep(1)
+                await event.respond('/mg24_GuaSihir')
+                return
+                
+            if 'Berada jauh di' in event.raw_text:
+                idMer = event.id
+                time.sleep(1)
+                await clien(GetBotCallbackAnswerRequest(
+                    peer=await event.get_sender(),
+                    msg_id=event.message.id,
+                    data=event.message.reply_markup.rows[0].buttons[0].data
+                    ))
+        
+
+        clien.run_until_disconnected()
+        print(time.asctime(), '-', 'Stop')
+
+threading.Thread(target=fani).start()
+print(time.asctime(), '-', 'Cha Alay')
+
+#if abis == 2 :
+#    client.disconnect()
+#    clien.disconnect()

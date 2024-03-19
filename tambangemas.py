@@ -75,7 +75,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if skill:
                 if skill >= 500:
                     time.sleep(2)
-                    client.send_message(bot_id,kurangi)
+                    await evend.respond(kurangi)
             
             if hasil_energi:
                 persentase_energi = int(hasil_energi.group(1))

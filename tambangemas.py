@@ -33,6 +33,7 @@ koin = 0
 buffe = "/mg2024_buff_Energi"
 buffk = "/mg2024_buff_DoublePoint"
 kurangi = "/mg2024_kurangiskill_500"
+palu = "⛏⛏"
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, cmd))
@@ -44,7 +45,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
       
         if "Tingkatkan kemampuanmu dan bawa pulang" in pesan:
             time.sleep(jeda)
-            await event.click(text="⛏")
+            await event.click(text=palu)
             return
           
         if "Kamu mendapat" in pesan:
@@ -83,15 +84,15 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if skill >= 500:
                         time.sleep(2)
                         await event.respond(kurangi)
-            else:
+            if persentase_energi > 50:
                 time.sleep(jeda)
-                await event.click(text="⛏")
+                await event.click(text=palu)
             return
         
        
         if "Pelan-pelan, kamu masih terlalu lelah" in pesan:
             time.sleep(jeda)
-            await event.click(text="⛏")
+            await event.click(text=palu)
             return
           
         if "Energi dipulihkan menjadi" in pesan:

@@ -44,7 +44,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
       
         if "Tingkatkan kemampuanmu dan bawa pulang" in pesan:
             time.sleep(jeda)
-            await event.respond(kurangi)
+            await event.click(text="⛏")
             return
           
         if "Kamu mendapat" in pesan:
@@ -85,13 +85,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         await event.respond(kurangi)
                 else:
                     time.sleep(jeda)
-                    await event.click(text="⛏⛏⛏⛏")
+                    await event.click(text="⛏")
             return
         
        
         if "Pelan-pelan, kamu masih terlalu lelah" in pesan:
             time.sleep(jeda)
-            await event.click(text="⛏⛏⛏⛏")
+            await event.click(text="⛏")
             return
           
         if "Energi dipulihkan menjadi" in pesan:

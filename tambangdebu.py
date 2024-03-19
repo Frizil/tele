@@ -14,7 +14,7 @@ def fani():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     with TelegramClient(sesi_fil, api_id, api_hash, loop=loop) as clien:
-        clien.loop.run_until_complete(clien.send_message("kampungmaifambot", '/mg2024_game_Tambang_20'))
+        clien.loop.run_until_complete(clien.send_message("kampungmaifambot", '/mg2024_game_Tambang_25'))
 
         @clien.on(events.NewMessage(from_users="kampungmaifambot"))
         async def handler(event):

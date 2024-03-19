@@ -82,7 +82,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 if persentase_energi <= 50:
                     time.sleep(2)
                     await event.respond(buffe)
-            else:
+            if hasil_energi > 50:
                 time.sleep(jeda)
                 await event.click(text="⛏⛏⛏⛏")
             return

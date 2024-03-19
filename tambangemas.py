@@ -104,8 +104,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
           
         if "dikurangi dari kemampuan tambang" in pesan:
             skill -= 500
-            time.sleep(2)
-            await event.respond(cmd)
             return
             
         if "yang kamu dapat akan dilipatgandakan" in pesan:

@@ -32,7 +32,7 @@ skill = 0
 koin = 0
 buffe = "/mg2024_buff_Energi"
 buffk = "/mg2024_buff_DoublePoint"
-kurangi = "/mg2024_kurangiskill_100"
+kurangi = "/mg2024_kurangiskill_400"
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, cmd))
@@ -67,13 +67,16 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 koin+=koin_tambang
                 print("Skill =", skill)
                 print("Koin =", koin)
+                
+            if koin:
                 if koin >= 1500:
                     time.sleep(2)
                     await event.respond(buffk)
-                #if skill >= 250:
-                   #time.sleep(2)
-                   #await event.respond(kurangi)
-                
+            if skill:
+                if skill >= 500:
+                    time.sleep(2)
+                    client.send_message(bot_id,kurangi)
+            
             if hasil_energi:
                 persentase_energi = int(hasil_energi.group(1))
                 if persentase_energi == 0:

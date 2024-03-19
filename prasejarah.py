@@ -26,6 +26,11 @@ def fani():
             print(event.raw_text)
             print(count)
             
+            if 'Kamu memerlukan' in event.raw_text:
+                time.sleep(1.5)
+                await event.respond('/mg2024_GuaTambang')
+                return     
+            
             if "Energi: 72%" in event.raw_text:
                 time.sleep(1)
                 await event.respond('/mg2024_buff_Energi')
@@ -392,10 +397,7 @@ def fani():
                      return  
                 return 
 
-            if 'Kamu memerlukan' in event.raw_text:
-                time.sleep(1.5)
-                await event.respond('/mg2024_GuaTambang')
-                return                   
+                          
                 
             if "dari menambang fosil" in event.raw_text:
                 time.sleep(1.5)

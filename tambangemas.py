@@ -26,7 +26,7 @@ elif mpm == '3':
 
 area = "GuaTambang"
 mg = "/mg24_"
-jeda = 3
+jeda = 4
 cmd = mg+str(area)
 skill = 0 
 koin = 0
@@ -82,9 +82,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 if persentase_energi <= 50:
                     time.sleep(2)
                     await event.respond(buffe)
-                else:
-                    time.sleep(jeda)
-                    await event.click(text="⛏⛏⛏⛏")
+            else:
+                time.sleep(jeda)
+                await event.click(text="⛏⛏⛏⛏")
             return
           
         if "Pelan-pelan, kamu masih terlalu lelah" in pesan:
@@ -93,7 +93,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             return
           
         if "Energi dipulihkan menjadi" in pesan:
-            jeda = 3
+            jeda = 4
             koin -= 150
             time.sleep(2)
             await event.respond(cmd)

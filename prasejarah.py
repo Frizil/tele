@@ -394,8 +394,7 @@ def fani():
 
             if 'Kamu memerlukan' in event.raw_text:
                 time.sleep(1.5)
-                msg = await clien.get_messages(await event.get_sender(),ids = idMer)
-                await msg.click(0)
+                await event.respond('/mg2024_GuaTambang')
                 return                   
                 
             if "dari menambang fosil" in event.raw_text:

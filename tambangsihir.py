@@ -16,7 +16,7 @@ def fani():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     with TelegramClient(sesi_fil, api_id, api_hash, loop=loop) as clien:
-        clien.loop.run_until_complete(clien.send_message("kampungmaifambot", '/mg24_game_Tambang_28'))
+        clien.loop.run_until_complete(clien.send_message("kampungmaifambot", '/mg2024_game_Tambang_28'))
 
         @clien.on(events.NewMessage(from_users="kampungmaifambot"))
         async def handler(event):
@@ -26,11 +26,16 @@ def fani():
             print(event.raw_text)
             print(count)
             
+            if "Energi: 72%" in event.raw_text:
+                time.sleep(1)
+                await event.respond('/mg2024_buff_Energi')
+                return
+            
             if 'Tunggu 20' in event.raw_text:
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(17.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -49,7 +54,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(16.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -68,7 +73,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(15.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -87,7 +92,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(14.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -106,7 +111,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(13.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -125,7 +130,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(12.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -144,7 +149,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(11.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -163,7 +168,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(10.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -182,7 +187,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(9.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -201,7 +206,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(8.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -220,7 +225,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(7.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -239,7 +244,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(6.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -258,7 +263,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(5.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -277,12 +282,12 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
-                    time.sleep(4.5)
+                if "Energi: 82%" in event.raw_text:
+                    time.sleep(3.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
                 elif count >= 1000:
-                    time.sleep(4.5)
+                    time.sleep(3.5)
                     await event.respond('/mg2024_buff_DoublePoint') 
                     return
                 else:
@@ -296,12 +301,12 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
-                    time.sleep(3.5)
+                if "Energi: 82%" in event.raw_text:
+                    time.sleep(2.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
                 elif count >= 1000:
-                    time.sleep(3.5)
+                    time.sleep(2.5)
                     await event.respond('/mg2024_buff_DoublePoint') 
                     return
                 else:
@@ -315,12 +320,12 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
-                    time.sleep(2.5)
+                if "Energi: 82%" in event.raw_text:
+                    time.sleep(1.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
                 elif count >= 1000:
-                    time.sleep(2.5)
+                    time.sleep(1.5)
                     await event.respond('/mg2024_buff_DoublePoint') 
                     return
                 else:
@@ -334,7 +339,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(1.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -353,7 +358,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(1.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -372,7 +377,7 @@ def fani():
                 o = re.findall('\d+', event.raw_text)
                 angka = int(o[1])
                 count += angka
-                if "Energi: 92%" in event.raw_text:
+                if "Energi: 82%" in event.raw_text:
                     time.sleep(1.5)
                     await event.respond('/mg2024_buff_Energi') 
                     return
@@ -385,7 +390,13 @@ def fani():
                      msg = await clien.get_messages(await event.get_sender(),ids = idMer)
                      await msg.click(0)
                      return  
-                return  
+                return 
+
+            if 'Kamu memerlukan' in event.raw_text:
+                time.sleep(1.5)
+                msg = await clien.get_messages(await event.get_sender(),ids = idMer)
+                await msg.click(0)
+                return                   
                 
             if "dari menambang di Gua Sihir" in event.raw_text:
                 time.sleep(1.5)
@@ -399,6 +410,12 @@ def fani():
                 
             if "Energi dipulihkan menjadi 100%!!" in event.raw_text:
                 count -= 150
+                time.sleep(1.5)
+                await event.respond('/mg2024_buff_Kemampuan')
+                return
+                
+            if "5000 Kemampuan Tambang ditambahkan!!" in event.raw_text:
+                count -= 100
                 time.sleep(1.5)
                 await event.respond('/mg2024_GuaSihir')
                 return

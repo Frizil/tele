@@ -77,7 +77,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 
             if hasil_energi:
                 persentase_energi = int(hasil_energi.group(1))
-                if persentase_energi == 0:
+                if persentase_energi <= 70 and koin >= 100:
                     time.sleep(2)
                     await event.respond(buffe)
                 else:

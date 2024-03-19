@@ -83,9 +83,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if skill >= 500:
                         time.sleep(2)
                         await event.respond(kurangi)
-                else:
-                    time.sleep(jeda)
-                    await event.click(text="⛏")
+            else:
+                time.sleep(jeda)
+                await event.click(text="⛏")
             return
         
        

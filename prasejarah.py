@@ -398,7 +398,7 @@ def fani():
                 await msg.click(0)
                 return                   
                 
-            if "dari menambang di Gua Sihir" in event.raw_text:
+            if "dari menambang fosil" in event.raw_text:
                 time.sleep(1.5)
                 await event.click(text='START')
                 return

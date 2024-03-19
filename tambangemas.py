@@ -75,11 +75,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if skill:
                 if skill >= 500:
                     time.sleep(2)
-                    await evend.respond(kurangi)
+                    await event.respond(kurangi)
             
             if hasil_energi:
                 persentase_energi = int(hasil_energi.group(1))
-                if persentase_energi == 0:
+                if persentase_energi <= 50:
                     time.sleep(2)
                     await event.respond(buffe)
                 else:
@@ -95,6 +95,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Energi dipulihkan menjadi" in pesan:
             jeda = 3
             koin -= 150
+            time.sleep(2)
+            await event.respond(cmd)
+            return
+          
+        if "dikurangi dari kemampuan tambang" in pesan:
+            skill -= 400
             time.sleep(2)
             await event.respond(cmd)
             return

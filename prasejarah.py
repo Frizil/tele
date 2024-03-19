@@ -431,7 +431,7 @@ def fani():
                 await event.respond('/mg2024_GuaTambang')
                 return
                 
-            if 'Berada jauh di' in event.raw_text:
+            if 'Tingkatkan kemampuanmu' in event.raw_text:
                 idMer = event.id
                 time.sleep(1)
                 await clien(GetBotCallbackAnswerRequest(

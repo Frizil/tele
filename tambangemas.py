@@ -52,17 +52,21 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             pola = r"Tunggu (\d+) detik sampai kamu bisa menambang lagi\.\.\."
             pola_kemampuan = r"Kemampuan Menambang \+(\d+)"
             pola_koin = r"Koin Tambang \+(\d+)"
-            pola_energi = r"Energi: (\d+)%"
+            
             
             hasil_kemampuan = re.search(pola_kemampuan, narasi)
             hasil_koin = re.search(pola_koin, narasi)
             hasil_pencarian = re.search(pola, pesan)
-            hasil_energi = re.search(pola_energi, pesan)
-            persentase_energi = int(hasil_energi.group(1))
+            
+            
             kemampuan = int(hasil_kemampuan.group(1))
             koin_tambang = int(hasil_koin.group(1))
             jeda = int(hasil_pencarian.group(1))
            
+            pola_energi = r"Energi: (\d+)%"
+            hasil_energi = re.search(pola_energi, pesan)
+            persentase_energi = int(hasil_energi.group(1))
+            
             if hasil_kemampuan and hasil_koin:
                 os.system("clear")
                 skill+=kemampuan
@@ -78,7 +82,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 if skill >= 500:
                     time.sleep(2)
                     await event.respond(kurangi)
-
+            
             if persentase_energi > 50:
                 time.sleep(jeda)
                 await event.click(text="⛏⛏⛏⛏")
@@ -86,6 +90,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             if persentase_energi < 50:
                 time.sleep(jeda)
                 await event.respond(buffe) 
+                
             return
           
         if "Pelan-pelan, kamu masih terlalu lelah" in pesan:
@@ -102,7 +107,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
           
         if "dikurangi dari kemampuan tambang" in pesan:
             skill -= 400
+            if persentase_energi > 50:
+                time.sleep(jeda)
+                await event.click(text="⛏⛏⛏⛏")
+            if persentase_energi < 50:
+                time.sleep(jeda)
+                await event.respond(buffe) 
             return
+            
           
         if "yang kamu dapat akan dilipatgandakan" in pesan:
             koin -= 1000

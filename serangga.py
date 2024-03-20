@@ -50,8 +50,8 @@ async def main():
                    return
                 return
             
-            if 'Tunggu' in pesan:
-                pattern = r'\bTunggu\s+(\d+)\s+detik\b'
+            if 'Silakan pilih hewan mana' in pesan:
+                pattern = r'\bTunggu\s+(\d+)\s+(?:detik\b)?'
                 match = re.search(pattern, pesan)
                 if match:
                     angka = match.group(1)

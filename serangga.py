@@ -32,6 +32,7 @@ async def main():
                 await asyncio.sleep(1.5)
                 await event.respond('/mg2024_buff_Energi')
                 return
+              
             
             if 'menjadi target buruan kamu' in pesan:
                 pesan = event.text
@@ -57,6 +58,7 @@ async def main():
                 if match:
                     angka = match.group(1)
                     detik = int(angka)
+                    
                     if detik >= 8:
                         
                         jeda = detik - 5.5
@@ -73,10 +75,7 @@ async def main():
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Babihutan')
                             return
-                        if '/mg2024_tangkap_Babi' in pesan:
-                            await asyncio.sleep(jeda)
-                            await event.respond('/mg2024_tangkap_Babi')
-                            return
+                        
                         if '/mg2024_tangkap_Gorila' in pesan:
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Gorila')
@@ -133,10 +132,12 @@ async def main():
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Kelelawar')
                             return
-                        if "Babi tidak ditemukan" in pesan:
+                        
+                        elif '/mg2024_tangkap_Babi' in pesan:
                             await asyncio.sleep(jeda)
-                            await event.respond('/mg2024_tangkap_BabiHutan')
+                            await event.respond('/mg2024_tangkap_Babi')
                             return
+                        
                         else:
                             tmp = 0
                             maling2 = pesan.split()
@@ -159,10 +160,7 @@ async def main():
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Babihutan')
                             return
-                        if '/mg2024_tangkap_Babi' in pesan:
-                            await asyncio.sleep(jeda)
-                            await event.respond('/mg2024_tangkap_Babi')
-                            return
+                      
                         if '/mg2024_tangkap_Gorila' in pesan:
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Gorila')
@@ -219,10 +217,11 @@ async def main():
                             await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Kelelawar')
                             return
-                        if "Babi tidak ditemukan" in pesan:
+                        elif '/mg2024_tangkap_Babi' in pesan:
                             await asyncio.sleep(jeda)
-                            await event.respond('/mg2024_tangkap_BabiHutan')
+                            await event.respond('/mg2024_tangkap_Babi')
                             return
+                        
                         else:
                             tmp = 0
                             maling2 = pesan.split()

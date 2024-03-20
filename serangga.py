@@ -14,7 +14,7 @@ bot = 'kampungmaifambot'
 
 async def main():
     async with TelegramClient(sesi_fil, api_id, api_hash) as clien:
-        await clien.send_message("kampungmaifambot", '/mg2024_game_Berburu_30')
+        await clien.send_message("kampungmaifambot", '/mg2024_game_Berburu_31')
 
         @clien.on(events.NewMessage(from_users="kampungmaifambot"))
         async def handler(event):
@@ -22,9 +22,9 @@ async def main():
             global coin
             global tmp
             global maling2
+            pesan = event.raw_text
             print(pesan)
             print(skill)
-            pesan = event.raw_text
             
             if 'kemampuan saat ini: 7,000' in pesan:
                 skill = 7000

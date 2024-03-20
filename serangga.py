@@ -1,81 +1,136 @@
-import time
 import asyncio
-import threading
+import sys
 import re
 from telethon import TelegramClient, events
 
-api_id = 18850178
-api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
+api_id = 224069
+api_hash = 'f2ddfd53867f28a3b6b98e80fa010e9d'
 sesi_fil = input('Siapa: ')
 
-async def handle_event(clien, event):
-    global skill
-    global skillasli
-    
-    print(event.raw_text)
-    print(skill)
-    
-    if 'kemampuan saat ini: 7,000' in event.raw_text:
-        skill = 7000
-        await asyncio.sleep(1.5)
-        await event.respond('/mg2024_buff_Energi')
-        return
-    elif 'menjadi target buruan kamu' in event.raw_text:
-        pesan = event.text
-        angka = re.findall('\d+', event.raw_text)
-        angka1 = int(angka[0])
-        skill += angka1
-        a = skill - 7000
-        if skill > 7000:
-            await asyncio.sleep(1.5)
-            await event.respond("/mg24_kurangiSkill_" + str(a))
-        elif skill < 7000:
-            await asyncio.sleep(1.5)
-            await event.respond('/mg2024_buff_Energi')
-    elif 'Tunggu' in event.raw_text:
-        time_to_sleep = int(re.findall(r'Tunggu (\d+)', event.raw_text)[0]) - 3
-        await asyncio.sleep(time_to_sleep)
-        tangkap = re.findall(r'/mg2024_tangkap_\w+', event.raw_text)
-        if tangkap:
-            await event.respond(tangkap[0])
-        else:
-            maling2 = event.raw_text.split()
-            maling = [i for i in maling2 if '/mg2024_tangkap' in i]
-            await clien.send_message(bot, maling[0])
-    elif "dikurangi dari kemampuan berburu" in event.raw_text:
-        skill -= int(re.findall('\d+', event.raw_text)[0])
-        await asyncio.sleep(1.5)
-        await event.respond('/mg2024_buff_Energi')
-    elif "Pelan-pelan, amati sekitar" in event.raw_text:
-        await asyncio.sleep(1.5)
-        await event.click(text="Cari Hewan")
-    elif "Kamu memerlukan " in event.raw_text:
-        await asyncio.sleep(1.5)
-        await event.respond('/mg2024_Hutan4')
-    elif "Energi dipulihkan menjadi 100%!!" in event.raw_text:
-        await asyncio.sleep(1.5)
-        await event.respond('/mg2024_Hutan4')
-    elif "Kumpulkan poin sebanyak-banyaknya" in event.raw_text:
-        await asyncio.sleep(1.5)
-        await event.click(text="START")
-    elif "Apa kamu yakin" in event.raw_text:
-        await asyncio.sleep(0.5)
-        await event.click(text="Confirm")
-    elif "Permainan dimulai" in event.raw_text:
-        await asyncio.sleep(0.5)
-        await event.respond('/mg2024_Hutan4')
+skill = 1000
+tmp = 0
+skillasli = []
+bot = 'kampungmaifambot'
 
 async def main():
-    sesi_fil = input('Siapa: ')
-    skill = 1000
-    skillasli = []
+    async with TelegramClient(sesi_fil, api_id, api_hash) as clien:
+        await clien.send_message("kampungmaifambot", '/mg2024_game_Berburu_30')
 
-    async with TelegramClient(sesi_fil, api_id, api_hash) as client:
-        client.loop.create_task(client.send_message("kampungmaifambot", '/mg2024_game_Berburu_30'))
+        @clien.on(events.NewMessage(from_users="kampungmaifambot"))
+        async def handler(event):
+            global skill
+            global coin
+            global tmp
+            global maling2
+            print(pesan)
+            print(skill)
+            pesan = event.raw_text
+            
+            if 'kemampuan saat ini: 7,000' in pesan:
+                skill = 7000
+                await asyncio.sleep(1.5)
+                await event.respond('/mg2024_buff_Energi')
+                return
+            
+            if 'menjadi target buruan kamu' in pesan:
+                pesan = event.text
+                a = pesan.split('\n\n')
+                o = re.findall('\d+', pesan)
+                angka1 = int(o[0])
+                skill += angka1  
+                a = skill - 7000 
+                skillasli.append(a)
+                if skill > 7000:
+                   await asyncio.sleep(1.5)
+                   await event.respond("/mg24_kurangiSkill_"+str(a))
+                   return
+                elif skill < 7000:
+                   await asyncio.sleep(1.5)
+                   await event.respond('/mg2024_buff_Energi')
+                   return
+                return
+            
+            if 'Tunggu' in pesan:
+                pattern = r'\bTunggu\s+(\d+)\b'
+    
+                match = re.search(pattern, pesan)
+                if match:
+                    angka = match.group(1)
+                    jeda = int(angka) - 5.5
+                    if jeda > 0:
+                        await asyncio.sleep(jeda)
+                        if '/mg2024_tangkap_Tupai' in pesan:
+                            await event.respond('/mg2024_tangkap_Tupai')
+                            return
+                        if '/mg2024_tangkap_Monyet' in pesan:
+                            await asyncio.sleep(11.5)
+                            await event.respond('/mg2024_tangkap_Monyet')
+                            return
+                        if '/mg2024_tangkap_Babihutan' in pesan:
+                            await asyncio.sleep(11.5)
+                            await event.respond('/mg2024_tangkap_Babihutan')
+                            return
+                        if '/mg2024_tangkap_Babi' in pesan:
+                            await asyncio.sleep(11.5)
+                            await event.respond('/mg2024_tangkap_Babi')
+                            return
+                        if '/mg2024_tangkap_Gorila' in pesan:
+                            await asyncio.sleep(11.5)
+                            await event.respond('/mg2024_tangkap_Gorila')
+                            return
+                        if '/mg2024_tangkap_Rusa' in pesan:
+                            await asyncio.sleep(11.5)
+                            await event.respond('/mg2024_tangkap_Rusa')
+                            return
+                        else:
+                            tmp = 0
+                            maling2 = pesan.split()
+                            maling = [i for i in maling2 if '/mg2024_tangkap' in i]
+                            await asyncio.sleep(11.5)
+                            await clien.send_message(bot, maling[tmp])
+                            return
+                        return 
+                    else:
+                        print("Waktu jeda sudah habis atau tidak ada")
+                else:
+                    print("Angka tidak ditemukan dalam pesan.")
+            
+            if "dikurangi dari kemampuan berburu" in pesan:
+                skill -= skillasli[0]
+                skillasli.clear()
+                await asyncio.sleep(1.5)
+                await event.respond('/mg2024_buff_Energi')
+                return
+                
+            if "Pelan-pelan, amati sekitar" in pesan:
+                await asyncio.sleep(1.5)
+                await event.click(text="Cari Hewan")
+                return
+                
+            if "Kamu memerlukan " in pesan:
+                await asyncio.sleep(1.5)
+                await event.respond('/mg2024_Hutan4')
+                return
+                
+            if "Energi dipulihkan menjadi 100%!!" in pesan:
+                await asyncio.sleep(1.5)
+                await event.respond('/mg2024_Hutan4')
+                return
+                
+            if "Kumpulkan poin sebanyak-banyaknya" in pesan:
+                await asyncio.sleep(1.5)
+                await event.click(text="START")
+                return
+                
+            if "Apa kamu yakin" in pesan:
+                await asyncio.sleep(0.5)
+                await event.click(text="Confirm")
+                return
+                
+            if "Permainan dimulai" in pesan:
+                await asyncio.sleep(0.5)
+                await event.respond('/mg2024_Hutan4')
+                return
 
-        client.add_event_handler(lambda event: handle_event(client, event), events.NewMessage(from_users="kampungmaifambot"))
-
-        await client.run_until_disconnected()
-
-print(time.asctime(), '-', 'Cha Alay')
-threading.Thread(target=lambda: asyncio.run(main())).start()
+asyncio.run(main())
+print('Cha Alay')

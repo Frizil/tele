@@ -17,7 +17,7 @@ async def handle_event(clien, event):
     
     if 'kemampuan saat ini: 7,000' in event.raw_text:
         skill = 7000
-        time.sleep(1.5)
+        await asyncio.sleep(1.5)
         await event.respond('/mg2024_buff_Energi')
         return
     elif 'menjadi target buruan kamu' in event.raw_text:
@@ -66,12 +66,16 @@ async def handle_event(clien, event):
         await event.respond('/mg2024_Hutan4')
 
 async def main():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    async with TelegramClient(sesi_fil, api_id, api_hash, loop=loop) as clien:
-        clien.loop.create_task(clien.send_message("kampungmaifambot", '/mg2024_game_Berburu_30'))
-        clien.add_event_handler(handle_event, events.NewMessage(from_users="kampungmaifambot"), clien)
-        await clien.run_until_disconnected()
+    sesi_fil = input('Siapa: ')
+    skill = 1000
+    skillasli = []
 
-threading.Thread(target=lambda: asyncio.run(main())).start()
+    async with TelegramClient(sesi_fil, api_id, api_hash) as client:
+        client.loop.create_task(client.send_message("kampungmaifambot", '/mg2024_game_Berburu_30'))
+
+        client.add_event_handler(lambda event: handle_event(client, event), events.NewMessage(from_users="kampungmaifambot"))
+
+        await client.run_until_disconnected()
+
 print(time.asctime(), '-', 'Cha Alay')
+threading.Thread(target=lambda: asyncio.run(main())).start()

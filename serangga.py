@@ -32,7 +32,11 @@ async def main():
                 await asyncio.sleep(1.5)
                 await event.respond('/mg2024_buff_Energi')
                 return
-              
+            
+            if "area berburu bisa dikunjungi" in pesan:
+                await asyncio.sleep(0.5)
+                await event.respond(area)
+                return
             
             if 'menjadi target buruan kamu' in pesan:
                 pesan = event.text
@@ -270,10 +274,7 @@ async def main():
                 await event.respond(area)
                 return
               
-            if "area berburu bisa dikunjungi" in pesan:
-                await asyncio.sleep(0.5)
-                await event.respond(area)
-                return
+            
             
         print(time.asctime(), '-', 'Mulai')
         await clien.run_until_disconnected()

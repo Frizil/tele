@@ -25,7 +25,7 @@ async def main():
             global maling2
             pesan = event.raw_text
             print(skill)
-            jeda = 0
+           
             
             if 'kemampuan saat ini: 7,000' in pesan:
                 skill = 7000
@@ -58,9 +58,11 @@ async def main():
                     angka = match.group(1)
                     detik = int(angka)
                     if detik >= 8:
+                        
                         jeda = detik - 5.5
                         print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Tupai')
                             return
                         if '/mg2024_tangkap_Monyet' in pesan:
@@ -143,6 +145,7 @@ async def main():
                         jeda = detik - int(detik - 1)
                         print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Tupai')
                             return
                         if '/mg2024_tangkap_Monyet' in pesan:

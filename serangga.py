@@ -55,9 +55,89 @@ async def main():
                 match = re.search(pattern, pesan)
                 if match:
                     angka = match.group(1)
-                    jeda = int(angka) - 5.5
-                    if jeda > 0:
-                        await asyncio.sleep(jeda)
+                    if jeda >= 8:
+                        jeda = int(angka) - 5.5
+                        if '/mg2024_tangkap_Tupai' in pesan:
+                            await event.respond('/mg2024_tangkap_Tupai')
+                            return
+                        if '/mg2024_tangkap_Monyet' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Monyet')
+                            return
+                        if '/mg2024_tangkap_Babihutan' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Babihutan')
+                            return
+                        if '/mg2024_tangkap_Babi' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Babi')
+                            return
+                        if '/mg2024_tangkap_Gorila' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Gorila')
+                            return
+                        if '/mg2024_tangkap_Rusa' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Rusa')
+                            return
+                        if '/mg2024_tangkap_Badak' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Badak')
+                            return
+                        if '/mg2024_tangkap_Gajah' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Gajah')
+                            return
+                        if '/mg2024_tangkap_Mammoth' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Mammoth')
+                            return
+                        if '/mg2024_tangkap_Harimau' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Harimau')
+                            return
+                        if '/mg2024_tangkap_Puma' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Puma')
+                            return
+                        if '/mg2024_tangkap_Citah' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Citah')
+                            return
+                        if '/mg2024_tangkap_Jaguar' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Jaguar')
+                            return
+                        if '/mg2024_tangkap_Panther' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Panther')
+                            return
+                        if '/mg2024_tangkap_GorilaAlbino' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_GorilaAlbino')
+                            return
+                        if '/mg2024_tangkap_BayiUnicorn' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_BayiUnicorn')
+                            return
+                        if '/mg2024_tangkap_Unicorn' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Unicorn')
+                            return
+                        if '/mg2024_tangkap_Kelelawar' in pesan:
+                            await asyncio.sleep(jeda)
+                            await event.respond('/mg2024_tangkap_Kelelawar')
+                            return
+                        else:
+                            tmp = 0
+                            maling2 = pesan.split()
+                            maling = [i for i in maling2 if '/mg2024_tangkap' in i]
+                            await asyncio.sleep(jeda)
+                            await clien.send_message(bot, maling[tmp])
+                            return
+                        return 
+                    elif jeda <= 6:
+                        jeda = int(angka) - int(angka - 1)
                         if '/mg2024_tangkap_Tupai' in pesan:
                             await event.respond('/mg2024_tangkap_Tupai')
                             return

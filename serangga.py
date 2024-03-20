@@ -7,6 +7,7 @@ api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 sesi_fil = input('Siapa: ')
 
+area = "/mg2024_Hutan4"
 skill = 1000
 tmp = 0
 skillasli = []
@@ -237,12 +238,12 @@ async def main():
                 
             if "Kamu memerlukan " in pesan:
                 await asyncio.sleep(1.5)
-                await event.respond('/mg2024_Hutan4')
+                await event.respond(area)
                 return
                 
             if "Energi dipulihkan menjadi 100%!!" in pesan:
                 await asyncio.sleep(1.5)
-                await event.respond('/mg2024_Hutan4')
+                await event.respond(area)
                 return
                 
             if "Kumpulkan poin sebanyak-banyaknya" in pesan:
@@ -257,7 +258,12 @@ async def main():
                 
             if "Permainan dimulai" in pesan:
                 await asyncio.sleep(0.5)
-                await event.respond('/mg2024_Hutan4')
+                await event.respond(area)
+                return
+              
+            if "area berburu bisa dikunjungi" in pesan:
+                await asyncio.sleep(0.5)
+                await event.respond(area)
                 return
             
         print(time.asctime(), '-', 'Mulai')

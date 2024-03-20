@@ -226,7 +226,7 @@ async def main():
                 await event.click(text="Cari Hewan")
                 return
                 
-             "Kamu memerlukan " in pesan:
+            if "Kamu memerlukan " in pesan:
                 await asyncio.sleep(1.5)
                 await event.respond(area)
                 return

@@ -3,8 +3,8 @@ import sys
 import re
 from telethon import TelegramClient, events
 
-api_id = 224069
-api_hash = 'f2ddfd53867f28a3b6b98e80fa010e9d'
+api_id = 18850178
+api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 sesi_fil = input('Siapa: ')
 
 skill = 1000

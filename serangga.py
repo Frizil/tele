@@ -144,7 +144,7 @@ async def main():
                             await asyncio.sleep(jeda)
                             await clien.send_message(bot, maling[tmp])
                         
-                    elif detik <= 6:
+                    elif detik <= 7:
                         jeda = detik - int(detik - 1)
                         print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:

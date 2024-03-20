@@ -23,7 +23,6 @@ async def main():
             global tmp
             global maling2
             pesan = event.raw_text
-            print(pesan)
             print(skill)
             
             if 'kemampuan saat ini: 7,000' in pesan:
@@ -57,6 +56,7 @@ async def main():
                     angka = match.group(1)
                     if jeda >= 8:
                         jeda = int(angka) - 5.5
+                        print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
                             await event.respond('/mg2024_tangkap_Tupai')
                             return
@@ -138,6 +138,7 @@ async def main():
                         return 
                     elif jeda <= 6:
                         jeda = int(angka) - int(angka - 1)
+                        print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
                             await event.respond('/mg2024_tangkap_Tupai')
                             return

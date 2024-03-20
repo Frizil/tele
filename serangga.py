@@ -1,6 +1,6 @@
 import asyncio
 import sys
-import re
+import re, time
 from telethon import TelegramClient, events
 
 api_id = 18850178
@@ -63,30 +63,30 @@ async def main():
                             await event.respond('/mg2024_tangkap_Tupai')
                             return
                         if '/mg2024_tangkap_Monyet' in pesan:
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Monyet')
                             return
                         if '/mg2024_tangkap_Babihutan' in pesan:
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Babihutan')
                             return
                         if '/mg2024_tangkap_Babi' in pesan:
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Babi')
                             return
                         if '/mg2024_tangkap_Gorila' in pesan:
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Gorila')
                             return
                         if '/mg2024_tangkap_Rusa' in pesan:
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await event.respond('/mg2024_tangkap_Rusa')
                             return
                         else:
                             tmp = 0
                             maling2 = pesan.split()
                             maling = [i for i in maling2 if '/mg2024_tangkap' in i]
-                            await asyncio.sleep(11.5)
+                            await asyncio.sleep(jeda)
                             await clien.send_message(bot, maling[tmp])
                             return
                         return 

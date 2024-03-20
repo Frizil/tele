@@ -131,6 +131,11 @@ async def main():
                 await asyncio.sleep(0.5)
                 await event.respond('/mg2024_Hutan4')
                 return
+            
+        print(time.asctime(), '-', 'Mulai')
+        await clien.run_until_disconnected()
+        print(time.asctime(), '-', 'Berhenti')
+            
 
 asyncio.run(main())
 print('Cha Alay')

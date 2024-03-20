@@ -7,7 +7,7 @@ api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 sesi_fil = input('Siapa: ')
 
-area = "/mg2024_Hutan4"
+area = "/mg2024_Gurun3"
 skill = 1000
 tmp = 0
 skillasli = []

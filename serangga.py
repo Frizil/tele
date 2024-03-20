@@ -139,8 +139,7 @@ async def main():
                             maling = [i for i in maling2 if '/mg2024_tangkap' in i]
                             await asyncio.sleep(jeda)
                             await clien.send_message(bot, maling[tmp])
-                            return
-                        return 
+                        
                     elif detik <= 6:
                         jeda = detik - int(detik - 1)
                         print(jeda)
@@ -219,11 +218,9 @@ async def main():
                         else:
                             tmp = 0
                             maling2 = pesan.split()
-                            maling = [i for i in maling2 if '/mg2024_tangkap' in i]
+                            maling = [i for i in maling2 if '/mg2024_tangkap_' in i]
                             await asyncio.sleep(jeda)
                             await clien.send_message(bot, maling[tmp])
-                            return
-                        return 
                     else:
                         print("Waktu jeda sudah habis atau tidak ada")
                 else:

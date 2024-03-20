@@ -25,6 +25,7 @@ async def main():
             global maling2
             pesan = event.raw_text
             print(skill)
+            jeda = 0
             
             if 'kemampuan saat ini: 7,000' in pesan:
                 skill = 7000
@@ -55,8 +56,9 @@ async def main():
                 match = re.search(pattern, pesan)
                 if match:
                     angka = match.group(1)
-                    if jeda >= 8:
-                        jeda = int(angka) - 5.5
+                    detik = int(angka)
+                    if detik >= 8:
+                        jeda = detik - 5.5
                         print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
                             await event.respond('/mg2024_tangkap_Tupai')
@@ -137,8 +139,8 @@ async def main():
                             await clien.send_message(bot, maling[tmp])
                             return
                         return 
-                    elif jeda <= 6:
-                        jeda = int(angka) - int(angka - 1)
+                    elif detik <= 6:
+                        jeda = detik - int(detik - 1)
                         print(jeda)
                         if '/mg2024_tangkap_Tupai' in pesan:
                             await event.respond('/mg2024_tangkap_Tupai')

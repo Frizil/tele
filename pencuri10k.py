@@ -9,7 +9,7 @@ api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 sesi_fil = input('Siapa: ')
 
 cabang = "/mg24_game_Mencuri_44"
-jenis = "_curiUang"
+jenis = "_curiuang"
 hapus = "/mg2024_hapusBuronan"
 rumah = "/mg2024_RumahWarga"
 i = 0
@@ -37,11 +37,10 @@ async def main():
                     if '/mg2024_x_' in baris_teks:
                         alamat.append(baris_teks.strip())  # Menambahkan ke list
                 print(alamat)  # Mencetak list alamat
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(1.5)
                 if alamat:
-                    await asyncio.sleep(0.5)
-                    await event.respond(alamat[i].replace('🏘', ''))
-                    await asyncio.sleep(0.5)
+                    
+                    await asyncio.sleep(1.5)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
 
@@ -51,31 +50,30 @@ async def main():
                 print('=' * 30)
                 i += 1
                 if 1 <= i <= 2:
-                    await asyncio.sleep(0.5)
+                    await asyncio.sleep(1.5)
                     await event.respond(hapus)
                 elif 3 <= i <= 5:
-                    await asyncio.sleep(0.5)
+                    await asyncio.sleep(1.5)
                     await event.respond(hapus)
                 return
               
             if "Apa kamu yakin ingin menghapus" in pesan:
                 print('=' * 30)
                 print('Konfirmasi Penghapusan Buron')
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(1.5)
                 await event.click(text="Confirm")
                 return
             
-            if "Harga buronan dihapus" in pesan or "Saat ini kamu bersih" in pesan:
+            if "Harga buronan dihapus" in pesan or "Saat ini kamu bersih" in pesan or "Kamu tidak memiliki uang" in pesan:
                 print('=' * 30)
                 print('Kondisi Buron di hapus / Tidak ada buron')
                 print('=' * 30)
                 if i >= 5:
-                    await asyncio.sleep(0.5)
+                    await asyncio.sleep(1.5)
                     await event.respond(rumah)
                 elif alamat and i < len(alamat):
-                    await asyncio.sleep(0.5)
-                    await event.respond(alamat[i].replace('🏘', ''))
-                    await asyncio.sleep(0.5)
+                    
+                    await asyncio.sleep(1.5)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
               
@@ -83,7 +81,7 @@ async def main():
                 print('=' * 30)
                 print('Kumpulkan poin sebanyak-banyaknya / Permainan dimulai')
                 print('=' * 30)
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(1.5)
                 await event.respond(rumah)
                 return
               
@@ -115,9 +113,8 @@ async def main():
                         print('=' * 30)
                         print('Lanjut Mencuri')
                         print('=' * 30)
-                        await asyncio.sleep(0.5)
-                        await event.respond(alamat[i].replace('🏘', ''))
-                        await asyncio.sleep(0.5)
+                        
+                        await asyncio.sleep(1.5)
                         await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
                         

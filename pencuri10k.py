@@ -37,8 +37,11 @@ async def main():
                     if '/mg2024_x_' in baris_teks:
                         alamat.append(baris_teks.strip())  # Menambahkan ke list
                 print(alamat)  # Mencetak list alamat
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.5)
                 if alamat:
+                    await asyncio.sleep(0.5)
+                    await event.respond(alamat[i].replace('🏘', ''))
+                    await asyncio.sleep(0.5)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
 
@@ -70,6 +73,9 @@ async def main():
                     await asyncio.sleep(0.5)
                     await event.respond(rumah)
                 elif alamat and i < len(alamat):
+                    await asyncio.sleep(0.5)
+                    await event.respond(alamat[i].replace('🏘', ''))
+                    await asyncio.sleep(0.5)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
               
@@ -109,6 +115,9 @@ async def main():
                         print('=' * 30)
                         print('Lanjut Mencuri')
                         print('=' * 30)
+                        await asyncio.sleep(0.5)
+                        await event.respond(alamat[i].replace('🏘', ''))
+                        await asyncio.sleep(0.5)
                         await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
                         

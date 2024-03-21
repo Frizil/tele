@@ -77,7 +77,7 @@ async def main():
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
             
-            if "Berhasil membeli 5000 KemampuanMencuri" in pesan 
+            if "Berhasil membeli 5000 KemampuanMencuri" in pesan:
                 await asyncio.sleep(1.5)
                 await event.respond(beli)
                 return

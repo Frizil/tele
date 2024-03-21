@@ -9,7 +9,7 @@ api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 sesi_fil = input('Siapa: ')
 
 cabang = "/mg24_game_Mencuri_40"
-jenis = "_curiuang"
+jenis = "_curipanen"
 hapus = "/mg2024_hapusBuronan"
 rumah = "/mg2024_RumahWarga"
 i = 0

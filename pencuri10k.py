@@ -13,8 +13,9 @@ jenis = "_curiUang"
 hapus = "/mg2024_hapusBuronan"
 rumah = "/mg2024_RumahWarga"
 i = 0
-bot = 'catlovy'
-alamat = []  # Menggunakan list untuk menyimpan alamat
+#bot = 'catlovy'
+bot = 'KampungMaifamBot'
+alamat = []  
 
 async def main():
     async with TelegramClient(sesi_fil, api_id, api_hash) as clien:

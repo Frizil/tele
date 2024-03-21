@@ -64,6 +64,13 @@ async def main():
                 await asyncio.sleep(1.5)
                 await event.click(text="Confirm")
                 return
+              
+            if "Kumpulkan poin sebanyak-banyaknya" in pesan:
+                print('=' * 30)
+                print('Konfirmasi Penghapusan Buron')
+                await asyncio.sleep(1.5)
+                await event.click(text="START")
+                return
             
             if "Harga buronan dihapus" in pesan or "Saat ini kamu bersih" in pesan or "Kamu tidak memiliki uang" in pesan:
                 print('=' * 30)

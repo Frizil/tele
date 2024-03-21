@@ -45,7 +45,7 @@ async def main():
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
 
-            if "Berhasil mencuri uang" in pesan:
+            if "Berhasil mencuri" in pesan:
                 print('=' * 30)
                 print('Kondisi Berhasil Mencuri')
                 print('=' * 30)

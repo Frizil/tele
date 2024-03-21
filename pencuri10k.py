@@ -28,7 +28,7 @@ async def main():
             pesan = event.raw_text
             
             if "bisa saja polisi menangkap dan memenjarakanmu" in pesan:
-                alamat.clear()  # Menghapus semua elemen dari list
+                alamat.clear() 
                 i = 0
                 print('=' * 30)
                 print('Kondisi Muncul alamat')
@@ -36,8 +36,8 @@ async def main():
                 baris = pesan.split('\n')
                 for baris_teks in baris:
                     if '/mg2024_x_' in baris_teks:
-                        alamat.append(baris_teks.strip())  # Menambahkan ke list
-                print(alamat)  # Mencetak list alamat
+                        alamat.append(baris_teks.strip()) 
+                print(alamat) 
                 await asyncio.sleep(1.5)
                 if alamat:
                     
@@ -77,10 +77,16 @@ async def main():
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
             
-            if "Berhasil membeli 5000 KemampuanMencuri" in pesan or "Uang tidak mencukupi" in pesan:
+            if "Berhasil membeli 5000 KemampuanMencuri" in pesan 
+                await asyncio.sleep(1.5)
+                await event.respond(beli)
+                return
+            
+            if "Uang tidak mencukupi" in pesan:
                 await asyncio.sleep(1.5)
                 await event.respond(rumah)
-            
+                return
+                
             if "Kumpulkan poin sebanyak-banyaknya" in pesan or "Permainan dimulai" in pesan:
                 print('=' * 30)
                 print('Kumpulkan poin sebanyak-banyaknya / Permainan dimulai')
@@ -94,20 +100,16 @@ async def main():
                 print('Kondisi Di Tangkap Polisi')
                 print('=' * 30)
                 
-                # Membagi pesan berdasarkan spasi
                 words = pesan.split()
                 
-                # Mencari posisi kata "menit" dalam daftar kata
                 index = words.index('menit')
                 
-                # Mengambil nilai durasi penjara sebelum kata "menit"
                 captured_value = words[index - 1]
                 
-                if captured_value:  # Memastikan nilai yang diekstrak tidak kosong
+                if captured_value:
                     durasi_penjara = int(captured_value)
                     print("Durasi penjara:", durasi_penjara, "menit")
                     
-                    # Mengkonversi durasi penjara ke dalam detik
                     detik = durasi_penjara * 60
                     print("Durasi penjara dalam detik:", detik)
                     

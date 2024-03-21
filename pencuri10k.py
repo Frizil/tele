@@ -38,10 +38,10 @@ async def main():
                     if '/mg2024_x_' in baris_teks:
                         alamat.append(baris_teks.strip()) 
                 print(alamat) 
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.9)
                 if alamat:
                     
-                    await asyncio.sleep(1.5)
+                    await asyncio.sleep(0.9)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
 
@@ -51,17 +51,17 @@ async def main():
                 print('=' * 30)
                 i += 1
                 if 1 <= i <= 2:
-                    await asyncio.sleep(1.5)
+                    await asyncio.sleep(0.9)
                     await event.respond(hapus)
                 elif 3 <= i <= 5:
-                    await asyncio.sleep(1.5)
+                    await asyncio.sleep(0.9)
                     await event.respond(hapus)
                 return
               
             if "Apa kamu yakin ingin menghapus" in pesan:
                 print('=' * 30)
                 print('Konfirmasi Penghapusan Buron')
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.9)
                 await event.click(text="Confirm")
                 return
             
@@ -70,20 +70,20 @@ async def main():
                 print('Kondisi Buron di hapus / Tidak ada buron')
                 print('=' * 30)
                 if i >= 5:
-                    await asyncio.sleep(1.5)
+                    await asyncio.sleep(0.9)
                     await event.respond(beli)
                 elif alamat and i < len(alamat):
-                    await asyncio.sleep(1.5)
+                    await asyncio.sleep(0.9)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
             
             if "Berhasil membeli 5000 KemampuanMencuri" in pesan:
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.9)
                 await event.respond(beli)
                 return
             
             if "Uang tidak mencukupi" in pesan:
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.9)
                 await event.respond(rumah)
                 return
                 
@@ -91,7 +91,7 @@ async def main():
                 print('=' * 30)
                 print('Kumpulkan poin sebanyak-banyaknya / Permainan dimulai')
                 print('=' * 30)
-                await asyncio.sleep(1.5)
+                await asyncio.sleep(0.9)
                 await event.respond(rumah)
                 return
               
@@ -120,7 +120,7 @@ async def main():
                         print('Lanjut Mencuri')
                         print('=' * 30)
                         
-                        await asyncio.sleep(1.5)
+                        await asyncio.sleep(0.9)
                         await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
                         

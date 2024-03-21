@@ -16,6 +16,7 @@ i = 0
 #bot = 'catlovy'
 bot = 'KampungMaifamBot'
 alamat = []  
+beli = "/mg2024_shop_5000"
 
 async def main():
     async with TelegramClient(sesi_fil, api_id, api_hash) as clien:
@@ -70,13 +71,16 @@ async def main():
                 print('=' * 30)
                 if i >= 5:
                     await asyncio.sleep(1.5)
-                    await event.respond(rumah)
+                    await event.respond(beli)
                 elif alamat and i < len(alamat):
-                    
                     await asyncio.sleep(1.5)
                     await event.respond((alamat[i].replace('🏘', '')) + str(jenis))
                 return
-              
+            
+            if "Berhasil membeli 5000 KemampuanMencuri" in pesan or "Uang tidak mencukupi" in pesan:
+                await asyncio.sleep(1.5)
+                await event.respond(rumah)
+            
             if "Kumpulkan poin sebanyak-banyaknya" in pesan or "Permainan dimulai" in pesan:
                 print('=' * 30)
                 print('Kumpulkan poin sebanyak-banyaknya / Permainan dimulai')

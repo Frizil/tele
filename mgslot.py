@@ -36,8 +36,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
 
 
     client.start()
-    print(time.asctime(), '-', 'Start')
-    client.loop.create_task(mancingddh(client,245))
+    print(time.asctime(), '-', 'Start')
     client.run_until_disconnected()
     print(time.asctime(), '-', 'Stop')
 

@@ -37,32 +37,32 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         if "Berhasil menambahkan" in pesan or "Kandang ternak khusus penuh" in pesan:
             print(time.asctime(), pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond('/ambilHewan')
             return
         
         if "Kamu berhasil mendapat" in pesan:
             print(time.asctime(), pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(ternak)
             return
           
         
         if "Kamu tidak memiliki cukup energi" in pesan:
             print(time.asctime(), 'Isi Ulang Energi')
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(restore)
             return
                 
         if "Energi berhasil" in pesan:
             print(time.asctime(), 'Energi pulih')
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(ternak) 
             return
           
         elif "Tidak ada yang bisa diambil" in pesan:
             print(time.asctime(), pesan)
-            time.sleep(2)
+            time.sleep(1.5)
             await event.respond(ternak)
             return
         

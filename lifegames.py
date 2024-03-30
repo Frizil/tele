@@ -39,12 +39,12 @@ async def main():
 
             elif "🎰 Zifri telah bertaruh" in message:
                 print(time.asctime(), message)
-                await wait_for(2)
+                await wait_for(5)
                 await client.send_message(group_id, "Bbet " + str(random.choice(bet)))
 
             elif not sender.bot and not sender.user_id and 'send' in message:
                 print(time.asctime(), message)
-                await wait_for(2)
+                await wait_for(5)
                 await event.reply('Ppay *')
 
         await client.run_until_disconnected()

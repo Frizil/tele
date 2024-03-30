@@ -89,7 +89,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
     client.start() 
     print(time.asctime(), '-', 'mulai')
-    client.loop.create_task(lifegames(client,5))
+    client.loop.create_task(lifegames(client,10))
     print(time.asctime(), '-', 'ddh')
     client.run_until_disconnected() 
     print(time.asctime(), '-', 'berhenti')

@@ -1,7 +1,9 @@
-#!/usr/bin/env python3
-import time, asyncio, sys
-
+import time, os, asyncio, sys, re, random, datetime
+from time import sleep
+from random import randint
+from datetime import datetime
 from telethon import TelegramClient, events, utils, Button
+from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
 
 api_id = 18850178 
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'

@@ -36,7 +36,7 @@ async def bentar(w):
 
 async def lifegames(client,w):
     while True:
-        await client.send_message(bot[0], judi)
+        await client.send_message(bot_id[0], judi)
         await bentar(w)
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:

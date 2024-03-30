@@ -40,9 +40,9 @@ async def lifegames(client,w):
         await bentar(w)
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, ternak))
+    client.loop.run_until_complete(client.send_message(bot_id[2], ternak))
 
-    @client.on(events.NewMessage(from_users=bot_id))
+    @client.on(events.NewMessage(from_users=bot_id[2]))
     async def handler(event):
         pesan = event.raw_text
         global tnk
@@ -89,7 +89,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
     client.start() 
     print(time.asctime(), '-', 'mulai')
-    client.loop.create_task(lifegames(client,10))
+    client.loop.create_task(lifegames(client,5))
     print(time.asctime(), '-', 'ddh')
     client.run_until_disconnected() 
     print(time.asctime(), '-', 'berhenti')

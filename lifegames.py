@@ -10,15 +10,15 @@ from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
 
 api_id = 18850178 
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
-sesi_file = 'Judi'
+sesi_file = input('Akun :')
 
-cmd = 'Bbet 5+37'
+cmd = 'Bbet 1+4'
 grup = -1001944528171
 
 bet = (
 '1',
-'1+42',
-'5+41',
+'1+4',
+'5+4',
 '69',
 '4646'
 )

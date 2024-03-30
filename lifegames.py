@@ -23,7 +23,7 @@ bet = (
 '4646'
 )
 
-user_id = 5199147926
+user_id = 1396547380
 
 async def bentar(w):
     await asyncio.sleep(w)
@@ -36,13 +36,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         pesan = event.raw_text
         from_ = await event.client.get_entity(event.from_id)
                 
-        if "🚓 Finns sepertinya kamu mencoba melanggar hukum.." in pesan:
+        if "🚓 Zifri sepertinya kamu mencoba melanggar hukum.." in pesan:
             print(time.asctime(), pesan)
             await bentar(600)
             await client.send_message(grup, cmd)
             return
         
-        if "🎰 Finns telah bertaruh" in pesan:
+        if "🎰 Zifri telah bertaruh" in pesan:
             print(time.asctime(), pesan)
             await bentar(2)
             await client.send_message(grup, "Bbet "+str(random.choice(bet)))

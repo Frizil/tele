@@ -1,62 +1,53 @@
-import time, os
 import asyncio
-import sys, re
+import time
 import random
-from time import sleep
-from random import randint
-from datetime import datetime
-from telethon import TelegramClient, events, utils, Button
-from telethon.tl.functions.messages import GetBotCallbackAnswerRequest
+from telethon import TelegramClient, events, Button
 
-api_id = 18850178 
+api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
-sesi_file = input('Akun :')
+session_file = input('Akun :')
 
 cmd = 'Bbet 1+4'
-grup = -1001944528171
+group_id = -1001944528171
 
 bet = (
-'1',
-'1+5',
-'5+5',
-'69',
-'4646'
+    '1',
+    '1+5',
+    '5+5',
+    '69',
+    '4646'
 )
 
 user_id = 1396547380
 
-async def bentar(w):
-    await asyncio.sleep(w)
-    
-with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(grup , cmd))
-    
-    @client.on(events.NewMessage(chats=grup))
-    async def handler(event):
-        pesan = event.raw_text
-        from_ = await event.client.get_entity(event.from_id)
-                
-        if "🚓 Zifri sepertinya kamu mencoba melanggar hukum.." in pesan:
-            print(time.asctime(), pesan)
-            await bentar(600)
-            await client.send_message(grup, cmd)
-            return
-        
-        if "🎰 Zifri telah bertaruh" in pesan:
-            print(time.asctime(), pesan)
-            await bentar(2)
-            await client.send_message(grup, "Bbet "+str(random.choice(bet)))
-            return
+async def wait_for(seconds):
+    await asyncio.sleep(seconds)
 
-        elif not from_.bot and not from_.user_id and 'send' in pesan:
-            print(time.asctime(), pesan)
-            await bentar(2)
-            await event.reply('Ppay *')
-            return
-        
-                
-    client.start() 
-    client.run_until_disconnected() 
-    print(time.asctime(), '-', 'berhenti')
-	
-	
+async def main():
+    async with TelegramClient(session_file, api_id, api_hash) as client:
+        await client.send_message(group_id, cmd)
+
+        @client.on(events.NewMessage(chats=group_id))
+        async def handler(event):
+            message = event.raw_text
+            sender = await event.client.get_entity(event.sender_id)
+
+            if "🚓 Zifri sepertinya kamu mencoba melanggar hukum.." in message:
+                print(time.asctime(), message)
+                await wait_for(600)
+                await client.send_message(group_id, cmd)
+
+            elif "🎰 Zifri telah bertaruh" in message:
+                print(time.asctime(), message)
+                await wait_for(2)
+                await client.send_message(group_id, "Bbet " + str(random.choice(bet)))
+
+            elif not sender.bot and not sender.user_id and 'send' in message:
+                print(time.asctime(), message)
+                await wait_for(2)
+                await event.reply('Ppay *')
+
+        await client.run_until_disconnected()
+
+asyncio.run(main())
+print(time.asctime(), '-', 'berhenti')

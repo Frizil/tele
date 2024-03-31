@@ -7,15 +7,13 @@ api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
 session_file = input('Akun :')
 
-cmd = 'Bbet 1+4'
+cmd = 'Bbet 1+45'
 group_id = -1001944528171
 
 bet = (
-    '1',
-    '1+5',
-    '5+5',
+    '1+45',
+    '5+45',
     '69',
-    '4646'
 )
 
 user_id = 1396547380

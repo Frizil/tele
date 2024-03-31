@@ -40,7 +40,7 @@ async def main():
                 await wait_for(5)
                 await client.send_message(group_id, "Bbet " + str(random.choice(bet)))
 
-            elif not sender.bot and 'send' in message:
+            elif not sender.bot and 'mas' in message:
                 print(time.asctime(), message)
                 await wait_for(5)
                 await event.reply('Ppay *')

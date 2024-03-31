@@ -16,7 +16,7 @@ bet = (
     '69',
 )
 
-user_id = 1396547380
+user_id = 5199147926
 
 async def wait_for(seconds):
     await asyncio.sleep(seconds)
@@ -30,17 +30,17 @@ async def main():
             message = event.raw_text
             sender = await event.client.get_entity(event.sender_id)
 
-            if "🚓 Zifri sepertinya kamu mencoba melanggar hukum.." in message:
+            if "🚓 Finns sepertinya kamu mencoba melanggar hukum.." in message:
                 print(time.asctime(), message)
                 await wait_for(600)
                 await client.send_message(group_id, cmd)
 
-            elif "🎰 Zifri telah bertaruh" in message:
+            elif "🎰 Finns telah bertaruh" in message:
                 print(time.asctime(), message)
                 await wait_for(5)
                 await client.send_message(group_id, "Bbet " + str(random.choice(bet)))
 
-            elif not sender.bot and not sender.user_id and 'send' in message:
+            elif not sender.bot and 'send' in message:
                 print(time.asctime(), message)
                 await wait_for(5)
                 await event.reply('Ppay *')

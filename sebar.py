@@ -1,47 +1,59 @@
-import time
 import asyncio
-from telethon.sync import TelegramClient, events, utils, Button
+from telethon.sync import TelegramClient
+from telethon.tl.functions.messages import GetDialogsRequest
+from telethon.tl.types import InputPeerEmpty, InputPeerChannel
+from telethon.tl.functions.messages import GetHistoryRequest
+from telethon.tl.functions.messages import ForwardMessagesRequest
 
 api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
+
 sesi_file = 'Zifri'
 
-group_list = [
-    'BIO_RPP_30',
-    'bio_lpm_rpps',
-    'BIORPP55',
-    'BIORPP4_S2',
-    'LPMBANG',
-]
+client = TelegramClient(sesi_file, api_id, api_hash)
 
-message = """
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-**BANG LPM BANG BARU BUKA NIH
-BANG JOIN DONG BANG GAS KAN
-JOIN BIAR RAME BANG BANG BANG
-UDAH JOIN BOLEH SEBARIN JUGA**
+keywords = ['nd', 'need', 'temenan', 'sini']
 
-@LPMBANG @LPMBANG @LPMBANG
-@LPMBANG @LPMBANG @LPMBANG
-@LPMBANG @LPMBANG @LPMBANG
+async def main():
+    async with client:
+        dialogs = await client(GetDialogsRequest(
+            offset_date=None,
+            offset_id=0,
+            offset_peer=InputPeerEmpty(),
+            limit=100,  # Set limit to the maximum allowed value
+            hash=0
+        ))
+        
+        for dialog in dialogs.dialogs:
+            if dialog.title == 'LPMBANG':
+                destination_entity = dialog.entity
+                break
+        
+        source_entity = None
+        for dialog in dialogs.dialogs:
+            if dialog.title == 'BIO_RPP_30':
+                source_entity = dialog.entity
+                break
+        
+        if source_entity is not None:
+            messages = await client(GetHistoryRequest(
+                peer=source_entity,
+                limit=100,  # Set limit to the maximum allowed value
+                offset_date=None,
+                offset_id=0,
+                max_id=0,
+                min_id=0,
+                add_offset=0,
+                hash=0
+            ))
+            
+            for message in messages.messages:
+                if any(keyword in message.message.lower() for keyword in keywords):
+                    await asyncio.sleep(5)
+                    await client(ForwardMessagesRequest(
+                        from_peer=source_entity,
+                        to_peer=destination_entity,
+                        id=[message.id]
+                    ))
 
-**BOLEH SFS, CARI CP, TEMAN DAN LAINNYA YAH!!!**
------ ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
-
-__— Kang sebar by @coffeeseduh —__
-"""
-
-async def send_message_to_groups():
-    async with TelegramClient(sesi_file, api_id, api_hash) as client:
-        print(time.asctime(), "- Userbot Started")
-        while True:
-            for group_username in group_list:
-                try:
-                    await client.send_message(group_username, message, link_preview=False)
-                    print(f"Pesan berhasil dikirim ke {group_username}")
-                except Exception as e:
-                    print(f"Terjadi kesalahan saat mengirim pesan ke {group_username}: {e}")
-                await asyncio.sleep(2)
-            await asyncio.sleep(60)
-
-asyncio.run(send_message_to_groups())
+client.loop.run_until_complete(main())

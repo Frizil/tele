@@ -10,7 +10,7 @@ sesi_file = 'Zifri'
 
 client = TelegramClient(sesi_file, api_id, api_hash)
 
-keywords = ['sfs', 'Sfs', 'need', 'temenan', 'cp']
+keywords = ['sfs', 'Sfs', 'need', 'temenan', 'cp', 'tmnan', 'ND', 'NEED', 'nd', 'pacaran', 'cowo' , 'cewe']
 
 async def main():
     async with client:
@@ -42,8 +42,8 @@ async def main():
             ))
             
             for message in messages.messages:
-                if len(message.message.split()) < 25 and any(keyword in message.message.lower() for keyword in keywords):
-                    await asyncio.sleep(30)
+                if len(message.message.split()) < 15 and any(keyword in message.message.lower() for keyword in keywords):
+                    await asyncio.sleep(10)
                     await client(ForwardMessagesRequest(
                         from_peer=source_entity,
                         to_peer=destination_entity,

@@ -1,13 +1,10 @@
 import asyncio
 from telethon.sync import TelegramClient
-from telethon.tl.functions.messages import GetDialogsRequest
-from telethon.tl.types import InputPeerEmpty, InputPeerChannel
-from telethon.tl.functions.messages import GetHistoryRequest
-from telethon.tl.functions.messages import ForwardMessagesRequest
+from telethon.tl.functions.messages import GetDialogsRequest, GetHistoryRequest, ForwardMessagesRequest
+from telethon.tl.types import InputPeerEmpty
 
 api_id = 18850178
 api_hash = '34d2d64d0bb5827789bc7bf7c0d34b69'
-
 sesi_file = 'Zifri'
 
 client = TelegramClient(sesi_file, api_id, api_hash)
@@ -20,25 +17,21 @@ async def main():
             offset_date=None,
             offset_id=0,
             offset_peer=InputPeerEmpty(),
-            limit=100,  # Set limit to the maximum allowed value
+            limit=100,
             hash=0
         ))
         
-        for dialog in dialogs.dialogs:
-            if dialog.title == 'LPMBANG':
-                destination_entity = dialog.entity
-                break
+        # Replace 'destination_group_id' and 'source_group_id' with the actual group IDs
+        destination_group_id = -1001332967453  # Example destination group ID
+        source_group_id = -1002067531778  # Example source group ID
         
-        source_entity = None
-        for dialog in dialogs.dialogs:
-            if dialog.title == 'BIO_RPP_30':
-                source_entity = dialog.entity
-                break
+        destination_entity = await client.get_input_entity(destination_group_id)
+        source_entity = await client.get_input_entity(source_group_id)
         
         if source_entity is not None:
             messages = await client(GetHistoryRequest(
                 peer=source_entity,
-                limit=100,  # Set limit to the maximum allowed value
+                limit=100,
                 offset_date=None,
                 offset_id=0,
                 max_id=0,

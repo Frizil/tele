@@ -43,7 +43,7 @@ async def main():
             
             for message in messages.messages:
                 if len(message.message.split()) < 25 and any(keyword in message.message.lower() for keyword in keywords):
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(30)
                     await client(ForwardMessagesRequest(
                         from_peer=source_entity,
                         to_peer=destination_entity,

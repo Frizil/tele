@@ -22,8 +22,8 @@ async def main():
         ))
         
         # Replace 'destination_group_id' and 'source_group_id' with the actual group IDs
-        destination_group_id = -1001332967453  # Example destination group ID
-        source_group_id = -1002067531778  # Example source group ID
+        destination_group_id = -1002067531778  # Example destination group ID
+        source_group_id = -1001332967453  # Example source group ID
         
         destination_entity = await client.get_input_entity(destination_group_id)
         source_entity = await client.get_input_entity(source_group_id)
@@ -42,11 +42,12 @@ async def main():
             
             for message in messages.messages:
                 if any(keyword in message.message.lower() for keyword in keywords):
-                    await asyncio.sleep(5)
+                    await asyncio.sleep(2)
                     await client(ForwardMessagesRequest(
                         from_peer=source_entity,
                         to_peer=destination_entity,
                         id=[message.id]
                     ))
+                    print(f"Pesan diterima dari grup dengan ID: {source_group_id}, dan diteruskan ke grup dengan ID: {destination_group_id}")
 
 client.loop.run_until_complete(main())

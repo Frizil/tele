@@ -12,21 +12,21 @@ group_list = [
     'bio_lpm_rpps',
     'BIORPP55',
     'BIORPP4_S2',
+    'LPMBANG',
 ]
 
 message = """
-**GW TAU LU SEMUA GABUT BANGET
-SINI MENDING COBAIN BOT GAME ONE PIECE**
+**BANG BANG BANG LPM BANG BARU BUKA NIH
+BANG BANG JOIN DONG BANG BANG GAS KAN
+JOIN BIAR RAME BANG YANG UDAH JOIN BOLEH SEBARIN JUGA**
 
-[GAS COBAIN GAS COBAIN GAS COBAIN](https://t.me/GrandPiratesBot?start=5199147926)
+@LPMBANG @LPMBANG @LPMBANG
+@LPMBANG @LPMBANG @LPMBANG
+@LPMBANG @LPMBANG @LPMBANG
 
-**MAU LANGSUNG DAPAT BANYAK KRU???
-LANGSUNG AJA**
-
-[SINI SINI SINI SINI SINI SINI](https://t.me/GrandPiratesGroup/124810)
+**BOLEH JUALAN, CARI CP, TEMAN DAN LAINNYA RAMEIN YAH!!!**
 
 __— Jaseb by @coffeeseduh —__
-
 """
 
 async def send_message_to_groups():
@@ -40,6 +40,6 @@ async def send_message_to_groups():
                 except Exception as e:
                     print(f"Terjadi kesalahan saat mengirim pesan ke {group_username}: {e}")
                 await asyncio.sleep(2)
-            await asyncio.sleep(60)
+            await asyncio.sleep(10)
 
 asyncio.run(send_message_to_groups())

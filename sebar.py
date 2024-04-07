@@ -51,5 +51,5 @@ async def main():
                     ))
                     print(f"Pesan diterima dari grup dengan ID: {source_group_id}, dan diteruskan ke grup dengan ID: {destination_group_id}")
 
-client.loop.run_until_complete(main())
 print(time.asctime(), '-', 'Mulai')
+client.loop.run_until_complete(main())

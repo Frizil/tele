@@ -26,10 +26,10 @@ UDAH JOIN BOLEH SEBARIN JUGA**
 @LPMBANG @LPMBANG @LPMBANG
 @LPMBANG @LPMBANG @LPMBANG
 
-**BOLEH JUALAN, CARI CP, TEMAN DAN LAINNYA YAH!!!**
+**BOLEH SFS, CARI CP, TEMAN DAN LAINNYA YAH!!!**
 ----- ○ ----- ○ ----- ○ ----- ○ ----- ○ -----
 
-__— Jaseb by @coffeeseduh —__
+__— Kang sebar by @coffeeseduh —__
 """
 
 async def send_message_to_groups():
@@ -43,6 +43,6 @@ async def send_message_to_groups():
                 except Exception as e:
                     print(f"Terjadi kesalahan saat mengirim pesan ke {group_username}: {e}")
                 await asyncio.sleep(2)
-            await asyncio.sleep(10)
+            await asyncio.sleep(60)
 
 asyncio.run(send_message_to_groups())

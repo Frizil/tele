@@ -10,7 +10,7 @@ sesi_file = 'Zifri'
 
 client = TelegramClient(sesi_file, api_id, api_hash)
 
-keywords = [' ']
+keywords = ['sfs', 'Sfs', 'need', 'temenan', 'cp']
 
 async def main():
     async with client:

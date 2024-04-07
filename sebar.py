@@ -1,4 +1,5 @@
 import asyncio
+import time
 from telethon.sync import TelegramClient
 from telethon.tl.functions.messages import GetDialogsRequest, GetHistoryRequest, ForwardMessagesRequest
 from telethon.tl.types import InputPeerEmpty
@@ -9,7 +10,7 @@ sesi_file = 'Zifri'
 
 client = TelegramClient(sesi_file, api_id, api_hash)
 
-keywords = ['nd', 'need', 'temenan', 'sini']
+keywords = [' ']
 
 async def main():
     async with client:
@@ -41,8 +42,8 @@ async def main():
             ))
             
             for message in messages.messages:
-                if any(keyword in message.message.lower() for keyword in keywords):
-                    await asyncio.sleep(2)
+                if len(message.message.split()) < 100 and any(keyword in message.message.lower() for keyword in keywords):
+                    await asyncio.sleep(10)
                     await client(ForwardMessagesRequest(
                         from_peer=source_entity,
                         to_peer=destination_entity,
@@ -51,3 +52,4 @@ async def main():
                     print(f"Pesan diterima dari grup dengan ID: {source_group_id}, dan diteruskan ke grup dengan ID: {destination_group_id}")
 
 client.loop.run_until_complete(main())
+print(time.asctime(), '-', 'Mulai')

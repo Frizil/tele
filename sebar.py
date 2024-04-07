@@ -1,7 +1,7 @@
 import asyncio
 import time
 from telethon.sync import TelegramClient
-from telethon.tl.functions.messages import GetDialogsRequest, GetHistoryRequest, ForwardMessagesRequest
+from telethon.tl.functions.messages import GetDialogsRequest, GetHistoryRequest, ForwardMessagesRequest, SendMessageRequest
 from telethon.tl.types import InputPeerEmpty
 
 api_id = 18850178
@@ -42,14 +42,20 @@ async def main():
             ))
             
             for message in messages.messages:
+                sender = await client.get_entity(message.sender_id)
+                sender_username = sender.username if sender.username else "No username"
+                sender_user_id = sender.id
                 if len(message.message.split()) < 25 and any(keyword in message.message.lower() for keyword in keywords):
-                    await asyncio.sleep(10)
-                    await client(ForwardMessagesRequest(
+                    await asyncio.sleep(15)
+                    forwarded_message = await client(ForwardMessagesRequest(
                         from_peer=source_entity,
                         to_peer=destination_entity,
                         id=[message.id]
                     ))
-                    print(f"Pesan diterima dari grup dengan ID: {source_group_id}, dan diteruskan ke grup dengan ID: {destination_group_id}")
+                    reply_message = f"Pesan dari {sender_username} dengan ID: {sender_user_id}"
+                    await asyncio.sleep(2)
+                    await client(SendMessageRequest(forwarded_message.to_id, reply_message))  # Reply to the forwarded message with the sender's information
+                    print(reply_message)
 
 print(time.asctime(), '-', 'Mulai')
 client.loop.run_until_complete(main())

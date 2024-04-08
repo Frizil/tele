@@ -24,7 +24,7 @@ async def main():
         
         # Replace 'destination_group_id' and 'source_group_id' with the actual group IDs
         destination_group_id = -1002067531778  # Example destination group ID
-        source_group_id = -1001332967453  # Example source group ID
+        source_group_id = -1001312846378  # Example source group ID
         
         destination_entity = await client.get_input_entity(destination_group_id)
         source_entity = await client.get_input_entity(source_group_id)

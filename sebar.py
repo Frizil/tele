@@ -8,7 +8,7 @@ sesi_file = 'Zifri'
 
 async def forward_messages():
     async with TelegramClient(sesi_file, api_id, api_hash) as client:
-        source_group_id = -1001332967453  # Example source group ID
+        source_group_id = -1001312846378  # Example source group ID
         destination_group_id = -1002067531778  # Example destination group ID
         
         source_entity = await client.get_entity(source_group_id)

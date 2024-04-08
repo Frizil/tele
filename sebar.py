@@ -52,5 +52,5 @@ async def main():
                     print(f"Pesan diterima dari grup dengan ID: {source_group_id}, dan diteruskan ke grup dengan ID: {destination_group_id}")
 
 print(time.asctime(), '-', 'Mulai')
-asyncio.run(main())
+client.start()
 client.run_until_disconnected()

@@ -16,6 +16,7 @@ async def forward_messages():
         
         async for message in client.iter_messages(source_entity):
             if len(message.text.split()) < 50:
+                await asyncio.sleep(5)
                 await client.forward_messages(destination_entity, message)
 
 async def main():

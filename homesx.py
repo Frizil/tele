@@ -11,10 +11,10 @@ sesi_fil = input('Akun : ')
 
 bot = ['danaudalamhutan', 'KampungMaifamXBot', 'KampungMaifamX4Bot', 'KampungMaifamBot']
 result = "/casino_hasil"
-mode = "/casino_FortuneDice_"
-#mode = "/casino_FiftyFifty_"
-#judi = mode+str(random.randint(1,2))+"_1e12"
-judi = mode+str(random.randint(1,2))+"_5e10"
+#mode = "/casino_FortuneDice_"
+mode = "/casino_FiftyFifty_"
+judi = mode+str(random.randint(1,2))+"_1e12"
+#judi = mode+str(random.randint(1,2))+"_5e10"
 hapus = 'Hapus menggunakan Uang'
 total = 0
 

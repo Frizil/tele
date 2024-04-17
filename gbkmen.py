@@ -15,7 +15,7 @@ bot_id = "KampungMaifamXBot"
 #grup = "heliavan"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
-tskg = '/gbk_task_G'
+tskf = '/gbk_task_F'
 
 narasi_gbk = {
     "memang melelahkan",
@@ -25,7 +25,14 @@ narasi_gbk = {
     "Hal-hal ajaib yang ada",
     "Sudah mulai lelah?",
     "Ada banyak lokasi-lokasi",
-    "menemukan sebuah"
+    "menemukan sebuah",
+    "Seorang bajak laut terkenal",
+    "Tempat-tempat langka",
+    "Gunung ini menyimpan kekuatan sihir",
+    "Hal paling misterius dari gunung",
+    "Meskipun gunung ini sangat tinggi",
+    "Sudah merasa berjalan cukup jauh",
+    
 }
 
 narasi_1 = "Tempat ini dipenuhi tupai" #area_Tupai
@@ -37,6 +44,10 @@ narasi_6 = "Gua kecil di bagian dasar" #gua_gibi
 narasi_7 = "Taman bunga matahari" #taman_matahari
 narasi_8 = "mayoritas berwarna merah" #kebun_merah
 narasi_9 = "terdapat berbagai macam burung" #surga_burung
+narasi_10 = "Tempat hidup para monyet" #hutan monyet
+narasi_11 = "Taman mawar yang dipenuhi mawar" #rumah mawar
+narasi_12 = "Gua ini menyimpan permata" #GOA L
+narasi_13 = "Area subur yang dipenuhi buah-buahan" #kebun emas
 
 area_tupai = {
     "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[A]", "Pisang[B]", "Pisang[C]", "Pisang[D]", "Pisang[E]"
@@ -74,13 +85,29 @@ surga_burung = {
     "Apel[A]", "Apel[B]", "Apel[S]", "Avokad[A]", "Avokad[B]", "Avokad[S]", "Pisang[A]", "Pisang[B]", "Pisang[S]", "TelurBurungHantu", "TelurBurungUnta", "TelurElang", "TelurGagak", "TelurKakakTua", "TelurMerak", "TelurPhoenix", "TelurPuyuh"
 }
 
+hutan_monyet = {
+    "Mentimun", "Mentimun[A]" ,"Mentimun[B]", "Mentimun[C]", "Mentimun[D]", "Mentimun[E]", "Mentimun[S]", "PisangKeramat", "PisangKeramat[C]", "PisangKeramat[D]", "PisangKeramat[E]"
+}
+
+rumah_mawar = {
+    "MawarHitam", "MawarMerah", "MawarMerahJambu", "MawarPutih", "MawarUngu"
+}
+
+goal = {
+    "Amethyst", "GreenJade", "LemonQuartz", "Moonstone", "RoseQuartz"
+}
+
+kebun_emas = {
+    "AnggurEmas", "ApelEmas", "ManggaEmas" , "PepayaEmas", "PisangEmas"
+}
+
 jalan = narasi_gbk
 
 ch = -1001522767385
 #ch = "heliavan"
 
-emoji_list = ['🌻','🍄','🍌','🌰','🥜','🍎','🍓', '🍅','▪️'] 
-full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚', '🥑']
+emoji_list = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚', '🥑', '🥀', '◻️', '🍐', '🥭', '🍇', '🥒']
+full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥒', '🥕', '🥔', '🐟', '🥚', '🥑', '🥀', '◻️', '🍐', '🥭', '🍇', '🥒']
 jumlah = 0
 misi = []
 narasi = []
@@ -91,7 +118,7 @@ tasks = []
 
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot_id, tskg))
+    client.loop.run_until_complete(client.send_message(bot_id, tskf))
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text
@@ -103,7 +130,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print("Tidak ada tugas yang sedang diambil. Menanggapi dengan tugas baru.")
                 print('-' * 30)
                 time.sleep(2.0)
-                await event.respond(tskg)
+                await event.respond(tskf)
             if "Ongoing Task" in pesan:
                 time.sleep(2)
                 print('-' * 30)
@@ -184,6 +211,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         narasi = narasi_8
                     elif jenis_tugas in surga_burung:
                         narasi = narasi_9
+                    elif jenis_tugas in hutan_monyet:
+                        narasi = narasi_10
+                    elif jenis_tugas in rumah_mawar:
+                        narasi = narasi_11
+                    elif jenis_tugas in goal:
+                        narasi = narasi_12
+                    elif jenis_tugas in kebun_emas:
+                        narasi = narasi_13
                     else:
                         narasi = '⛰ Gunung Belakang Kebun ⛰'
                     
@@ -231,6 +266,14 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     narasi_awal = narasi_8
                 elif jenis_tugas_awal in surga_burung:
                     narasi_awal = narasi_9
+                elif jenis_tugas in hutan_monyet:
+                    narasi_awal = narasi_10
+                elif jenis_tugas in rumah_mawar:
+                    narasi_awal = narasi_11
+                elif jenis_tugas in goal:
+                    narasi_awal = narasi_12
+                elif jenis_tugas in kebun_emas:
+                    narasi_awal = narasi_13
                 else:
                     print("\nJenis item tidak ditemukan di dalam area")
                     narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
@@ -281,14 +324,14 @@ Selamat menyelesaikan tugas!!
                     misi.append({"koin_list": koin_list, "exp_list": exp_list, "misi_list": misi_list})
             
             #KALAU MAU CARI KOIN TERBANYAK
-            #def get_koin(misi):
-                #return misi.get("koin_list")
-            #misi.sort(key=get_koin, reverse=True)
+            def get_koin(misi):
+                return misi.get("koin_list")
+            misi.sort(key=get_koin, reverse=True)
             
             #KALAU MAU CARI EXP TERBANYAK
-            def get_exp(misi):
-                return misi.get("exp_list")
-            misi.sort(key=get_exp, reverse=True)
+            #def get_exp(misi):
+                #return misi.get("exp_list")
+            #misi.sort(key=get_exp, reverse=True)
             time.sleep(1.5)
             await event.respond(misi[0].get("misi_list"))
             return
@@ -299,7 +342,7 @@ Selamat menyelesaikan tugas!!
             time.sleep(2)
             await client.forward_messages(ch, event.message)
             time.sleep(2)
-            await event.respond(tskg)
+            await event.respond(tskf)
             return
         
         elif any(loc in pesan for loc in jalan):
@@ -309,7 +352,7 @@ Selamat menyelesaikan tugas!!
         
         elif "Tugas tidak ditemukan" in pesan or "silakan pilih tugas lain" in pesan:
             time.sleep(1.5)
-            await event.respond(tskg)
+            await event.respond(tskf)
             return
         
         elif "Gunung dipenuhi" in pesan:
@@ -343,10 +386,10 @@ Selamat menyelesaikan tugas!!
                 await event.respond('/gbk')
             if "Berhasil mengirim ke barang:" in pesan:
                 time.sleep(1.5)
-                await event.respond(tskg)
+                await event.respond(tskf)
             if "kamu kosong" in pesan:
                 time.sleep(1.5)
-                await event.respond(tskg)
+                await event.respond(tskf)
             else:
                 time.sleep(1.5)
                 await event.click(text='Kirim ke Barang')
@@ -388,6 +431,14 @@ Selamat menyelesaikan tugas!!
                     narasi = narasi_8
                 elif jenis_tugas in surga_burung:
                     narasi = narasi_9
+                elif jenis_tugas in hutan_monyet:
+                    narasi = narasi_10
+                elif jenis_tugas in rumah_mawar:
+                    narasi = narasi_11
+                elif jenis_tugas in goal:
+                    narasi = narasi_12
+                elif jenis_tugas in kebun_emas:
+                    narasi = narasi_13
                 else:
                     narasi = '⛰ Gunung Belakang Kebun ⛰'
             ambil_tugas = f"""
@@ -405,7 +456,7 @@ __{time.strftime('%x - %X %Z')}__
             print(ambil_tugas)
             #print('\n'+pesan)
             time.sleep(2)
-            await event.respond(tskg)
+            await event.respond(tskf)
             return
         
           
@@ -452,12 +503,12 @@ __{time.strftime('%x - %X %Z')}__
             return
           
         
-        elif 'EXP terpenuhi!! Level pendaki meningkat!!' in pesan:
+        elif 'EXP terpenuhi!! Level pendaki meningkat!!' in pesan or 'Level maksimal tercapai' in pesan:
             print('\n'+'-'*30+f"\nNaik Level Dik\n"+'-'*30)
             time.sleep(1.5)
             await client.forward_messages(ch, event.message)
             time.sleep(1.5)
-            await event.respond(tskg)
+            await event.respond(tskf)
             return
         
     client.start()

@@ -120,7 +120,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
         if "Kamu tidak memiliki" in pesan:
             mer +=1
             
-            if mer %15 == 0 :
+            if mer %10 == 0 :
                 await client.send_message(bot[3], hasil)
                 await bentar(turu)
                 await client.send_message(bot[3], judi+str(random.randint(1,50))+"_5e12")

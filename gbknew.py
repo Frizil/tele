@@ -183,52 +183,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 print(tasks_sorted)
                 
                 narasi = None  # Variabel narasi didefinisikan di luar loop
-                
-                #Menampilkan informasi tugas
-                for task in tasks_sorted:
-                    jenis_tugas = task[0]
-                    total = task[3]
-                    progress = task[2]
-                    
-                    # Menentukan narasi berdasarkan jenis tugas
-                    if jenis_tugas in area_tupai:
-                        narasi = narasi_1
-                    elif jenis_tugas in kebun_terbengkalai:
-                        narasi = narasi_2
-                    elif jenis_tugas in lubang_kelinci_raksasa:
-                        narasi = narasi_3
-                    elif jenis_tugas in gua_beracun:
-                        narasi = narasi_4
-                    elif jenis_tugas in kolam_kecil:
-                        narasi = narasi_5
-                    elif jenis_tugas in gua_gibi:
-                        narasi = narasi_6
-                    elif jenis_tugas in taman_matahari:
-                        narasi = narasi_7
-                    elif jenis_tugas in kebun_merah:
-                        narasi = narasi_8
-                    elif jenis_tugas in surga_burung:
-                        narasi = narasi_9
-                    elif jenis_tugas in hutan_monyet:
-                        narasi = narasi_10
-                    elif jenis_tugas in rumah_mawar:
-                        narasi = narasi_11
-                    elif jenis_tugas in goal:
-                        narasi = narasi_12
-                    elif jenis_tugas in kebun_emas:
-                        narasi = narasi_13
-                    else:
-                        narasi = '⛰ Gunung Belakang Kebun ⛰'
-                    
-      
-                # Menentukan narasi_awal, jenis_tugas_awal, jumlah_awal, dan progres_awal
-                narasi_awal = narasi
-                jumlah_awal = total
-                progres_awal = progress
-                
-                # Memulai mengerjakan tugas yang paling awal
-                #print("Isi list tasks setelah semua operasi append:")
-                #print(tasks)
+
                 narasi_awal = None
                 
                 first_task = tasks_sorted[0]
@@ -244,7 +199,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     jenis_tugas_awal = f"{first_task[0]}[{first_task[1]}]"
                     jumlah_awal = first_task[3]
                     progres_awal = first_task[2]
-                    
+                
+                print(jenis_tugas_awal)
                 # Mengatur narasi dengan narasi dari tugas pertama
                 if jenis_tugas_awal in area_tupai:
                     narasi_awal = narasi_1

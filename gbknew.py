@@ -13,7 +13,7 @@ restore = '/restore_max_confirm'
 #bot_id = "KampungMaifamXBot"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
-tskf = '/gbk_task_F'
+tskf = '/gbk_task_G'
 bot_id = 5199147926
 #bot_id = "heliavan"
 #grup = "heliavan"
@@ -172,8 +172,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         jenis_tugas = task[0]
                         total = task[2]
                         progress = task[1]
-                        tasks.append((jenis_tugas, "", progress, total, ""))  # Menambahkan dengan format yang sesuai
-                        #print("Menambahkan tugas tanpa grade:", task)  # Tampilkan nilai yang di-append
+                        tasks.append((jenis_tugas, "", progress, total, ""))
                         print(f"Jenis tugas: {jenis_tugas}")
                         print(f"Total: {total}x")
                         print(f"Progress: {progress}")
@@ -183,8 +182,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 tasks_with_grade = [(task[0], task[1], task[2], task[3], task[4]) for task in tasks_with_grade]
                 tasks_without_grade = [(task[0], task[1], task[2], task[3], "") for task in tasks_without_grade]
                 
-                # Mengurutkan tugas berdasarkan waktu
-                tasks_sorted = sorted(tasks, key=lambda x: x[3])
+                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+                print(tasks_sorted)
                 
                 narasi = None  # Variabel narasi didefinisikan di luar loop
                 

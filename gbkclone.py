@@ -89,6 +89,8 @@ klem = []
 jenis_tugas = []
 tasks = []
 
+masak = "/masak_MiniBacon_220"
+makan = "/makan_steaksapipremium"
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskg))
@@ -319,12 +321,27 @@ Selamat menyelesaikan tugas!!
           
         elif "Kamu tidak memiliki cukup energi" in pesan:
             time.sleep(1.5)
+            await event.respond(makan)
+            return
+          
+        elif "kamu tidak bisa makan" in pesan:
+            time.sleep(1.5)
             await event.respond(restore)
             return
         
-        elif "Energi berhasil" in pesan:
+        elif "Energi berhasil" in pesan or "Uuuh rasanya enak sekali" in pesan:
             time.sleep(1.5)
-            await event.respond(tsk)
+            await event.respond(masak)
+            return
+          
+        elif "Berhasil memasak" in pesan:
+            time.sleep(1.5)
+            await event.respond(masak)
+            return
+          
+        elif "Kamu tidak bisa memasak" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskg)
             return
         
         elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas" in pesan or "hanya bisa mendaki" in pesan:

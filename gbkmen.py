@@ -1,3 +1,4 @@
+#created by @itz, @hawk ini wm ya dick
 from telethon import TelegramClient, events, utils, Button
 import time, os, asyncio, sys, re, random, logging
 from time import strftime
@@ -10,9 +11,6 @@ sesi_file = input('Mau sesi mana = ')
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
 bot_id = "KampungMaifamXBot"
-#bot_id = 5199147926
-#bot_id = "heliavan"
-#grup = "heliavan"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
 tskf = '/gbk_task_F'
@@ -104,7 +102,6 @@ kebun_emas = {
 jalan = narasi_gbk
 
 ch = -1001522767385
-#ch = "heliavan"
 
 emoji_list = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒']
 full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒']
@@ -116,6 +113,8 @@ klem = []
 jenis_tugas = []
 tasks = []
 
+masak = "/masak_MiniBacon_220"
+makan = "/makan_steaksapipremium"
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
     client.loop.run_until_complete(client.send_message(bot_id, tskf))
@@ -362,12 +361,27 @@ Selamat menyelesaikan tugas!!
           
         elif "Kamu tidak memiliki cukup energi" in pesan:
             time.sleep(1.5)
+            await event.respond(makan)
+            return
+          
+        elif "kamu tidak bisa makan" in pesan:
+            time.sleep(1.5)
             await event.respond(restore)
             return
         
-        elif "Energi berhasil" in pesan:
+        elif "Energi berhasil" in pesan or "Uuuh rasanya enak sekali" in pesan:
             time.sleep(1.5)
-            await event.respond(tsk)
+            await event.respond(masak)
+            return
+          
+        elif "Berhasil memasak" in pesan:
+            time.sleep(1.5)
+            await event.respond(masak)
+            return
+          
+        elif "Kamu tidak bisa memasak" in pesan:
+            time.sleep(1.5)
+            await event.respond(tskf)
             return
         
         elif 'ingin turun gunung' in pesan or "tidak bisa mengambil tugas" in pesan or "hanya bisa mendaki" in pesan:

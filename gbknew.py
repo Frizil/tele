@@ -178,11 +178,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         print(f"Progress: {progress}")
                         print('-' * 30)
                 
-                # Pastikan setiap tuple dalam tasks memiliki panjang yang sama
-                tasks_with_grade = [(task[0], task[1], task[2], task[3], task[4]) for task in tasks_with_grade]
-                tasks_without_grade = [(task[0], task[1], task[2], task[3], "") for task in tasks_without_grade]
                 
-                tasks_sorted = sorted(tasks, key=lambda x: x[4])
+                tasks_sorted = sorted(tasks, key=lambda x: x[3])
                 print(tasks_sorted)
                 
                 narasi = None  # Variabel narasi didefinisikan di luar loop
@@ -280,12 +277,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     narasi_awal = '⛰ Gunung Belakang Kebun ⛰'
       
                 tugas_awal = f"""
-                Mulai mengerjakan tugas
-                ➱ jenis_tugas = {jenis_tugas_awal}
-                ➱ jumlah = {jumlah_awal}x
-                ➱ progres = {progres_awal}
-                ➱ narasi = {narasi_awal}
-                Selamat menyelesaikan tugas!!
+Mulai mengerjakan tugas
+➱ jenis_tugas = {jenis_tugas_awal}
+➱ jumlah = {jumlah_awal}x
+➱ progres = {progres_awal}
+➱ narasi = {narasi_awal}
+Selamat menyelesaikan tugas!!
 """
                 time.sleep(2)
                 print(tugas_awal)

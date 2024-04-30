@@ -122,7 +122,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
         pesan = event.raw_text
-        global misi, jumlah, jenis_tugas, run_task, run_total, run_narasi, run_progress, tasks, tugas_awal
+        global misi, jumlah, jenis_tugas, run_task, run_total, run_narasi, run_progress, tasks, task_nongrade, task_grade,tugas_awal
         
         if "Selesaikan tugas-tugas" in pesan:
             if "Tidak ada tugas" in pesan:
@@ -190,6 +190,8 @@ Task 3 =  {tugas3[0]}  total {tugas3[3]}
                 
                 narasi = None
                 run_narasi = None
+                task_nongrade = None
+                task_grade = None
                 tugas_awal = None
                 
                 tugas_pertama = tugas1
@@ -204,11 +206,11 @@ Task 3 =  {tugas3[0]}  total {tugas3[3]}
                     tugas_awal=task_grade
                 
                 
-                if task_nongrade:
+                if tugas_awal == task_nongrade:
                     run_task = task_nongrade
                     run_total = tugas_pertama[3]
                     run_progress = tugas_pertama[2]
-                elif task_grade:
+                elif tugas_awal == task_grade:
                     run_task = task_grade
                     run_total = tugas_pertama[3]
                     run_progress = tugas_pertama[2]

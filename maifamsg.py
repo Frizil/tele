@@ -97,8 +97,8 @@ async def mancingddh(client,w):
         await bentar(w)
 
 with TelegramClient(sesi_fil, api_id, api_hash) as client:
-    client.loop.run_until_complete(client.send_message(bot[1], masak))
-    @client.on(events.NewMessage(incoming=True, from_users=bot[1]))
+    client.loop.run_until_complete(client.send_message(bot[2], masak))
+    @client.on(events.NewMessage(incoming=True, from_users=bot[2]))
     async def handler(event):
         pesan = event.raw_text
         global mer
@@ -152,7 +152,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
         
         if 'Berhasil menggabungkan' in pesan:
             await bentar(0.9)
-            msg = await client.get_messages(bot[1],ids = idMer)
+            msg = await client.get_messages(bot[2],ids = idMer)
             await msg.click(0,2)
             return
           
@@ -198,7 +198,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
             mer = 0
             time.sleep(2)
             print('Yosh ulang!!')
-            await client.send_message(bot[1], sghc)
+            await client.send_message(bot[2], sghc)
             return
           
         if 'Kumpulkan bonus uang dan gelar spesial' in pesan:
@@ -233,7 +233,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
         
         elif "dimiliki:" in pesan:
             idMer = event.id
-            msg = await client.get_messages(bot[1],ids = idMer)
+            msg = await client.get_messages(bot[2],ids = idMer)
             time.sleep(1.5)
             a = pesan.split()
             b = int(a.index('dimiliki:'))

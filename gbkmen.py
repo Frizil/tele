@@ -204,11 +204,11 @@ Task 3 =  {tugas3[0]}  total {tugas3[3]}
                     tugas_awal=task_grade
                 
                 
-                if tugas_awal == task_nongrade:
+                if task_nongrade:
                     run_task = task_nongrade
                     run_total = tugas_pertama[3]
                     run_progress = tugas_pertama[2]
-                elif tugas_awal == task_grade :
+                elif task_grade:
                     run_task = task_grade
                     run_total = tugas_pertama[3]
                     run_progress = tugas_pertama[2]

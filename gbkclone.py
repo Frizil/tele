@@ -13,7 +13,7 @@ restore = '/restore_max_confirm'
 bot_id = "KampungMaifamBot"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
-tskf = '/gbk_task_F'
+tskf = '/gbk_task_G'
 
 
 narasi_gbk = {

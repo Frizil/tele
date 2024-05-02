@@ -124,7 +124,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             pola_hasil = r"Kapasitas Pekerja: \((\d+)/(\d+)\)\nKapasitas Produksi: \((\d+)/(\d+)\)"
             match_hasil = re.search(pola_hasil, pesan)
             
-            if matches:
+            if matches and boleh:
                 for match in matches:
                     jenis = match[0].replace('b', 'perpanjang')
                     nama = match[1]

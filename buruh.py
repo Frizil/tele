@@ -74,13 +74,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 #data_sorted = sorted(data, key=lambda x: x[3], reverse=False)
                 ambil = data_sorted[0]
                 if ambil[1] != 0:
-                    time.sleep(1.5)
+                    time.sleep(2)
                     await client.send_message(bot_id, ambil[2])
                     #print(ambil)
                 if ambil[1] == 0:
                     data_rekrut.clear()
                     cmd = f"/md2024_rekrut_{str(id_pabrik)}"
-                    time.sleep(1.5)
+                    time.sleep(2)
                     await client.send_message(bot_id, cmd)
             return
           
@@ -101,7 +101,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Pekerja dengan ID" in pesan or "Kamu tidak bisa merekrut buruh" in pesan:
             print(time.asctime(), 'Pekerja Tidak Ditemukan')
             data_rekrut.clear()
-            time.sleep(1.5)
+            time.sleep(2)
             await client.send_message(bot_id, cmd)
             return
              
@@ -111,7 +111,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             id_pabrik = daftar_pabrik[i]
             print(time.asctime(), 'Habis Duit')
             cmd = f"/md2024_pabrik_{id_pabrik}"
-            time.sleep(1.5)
+            time.sleep(2)
             await client.send_message(bot_id, cmd)
             return
           
@@ -134,7 +134,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     
                 if "kontrak berakhir" in kontrak and boleh: 
                     perpanjang = data_perpanjang[0]
-                    time.sleep(1.5)
+                    time.sleep(2)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
                         
             
@@ -146,7 +146,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     id_pabrik = daftar_pabrik[i]
                     cmd = f"/md2024_rekrut_{str(id_pabrik)}"
                     print(time.asctime(), 'Rekrut')
-                    time.sleep(1.5)
+                    time.sleep(2)
                     await client.send_message(bot_id, cmd)
                 
                 else:
@@ -154,25 +154,25 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         id_pabrik = daftar_pabrik[i]
                         cmd = f"/md2024_rekrut_{str(id_pabrik)}"
                         print(time.asctime(), 'Rekrut')
-                        time.sleep(1.5)
+                        time.sleep(2)
                         await client.send_message(bot_id, cmd)
                     if boleh == False:
                         print(time.asctime(), 'Ambil Hasil')
                         klik = await client.get_messages(bot_id, ids=event.message.id)
-                        time.sleep(1.5)
+                        time.sleep(2)
                         await klik.click(text='AmbilHasil')
                     
             else:
                 print(time.asctime(), 'Ambil Hasil')
                 klik = await client.get_messages(bot_id, ids=event.message.id)
-                time.sleep(1.5)
+                time.sleep(2)
                 await klik.click(text='AmbilHasil')
             return
         
         if "Apa kamu yakin ingin memperpanjang" in pesan:
             print(time.asctime(), 'perpanjang')
             klik = await client.get_messages(bot_id, ids=event.message.id)
-            time.sleep(1.5)
+            time.sleep(2)
             await klik.click(text='Confirm')
             return
           
@@ -181,21 +181,21 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             id_pabrik = daftar_pabrik[i]
             data_perpanjang.clear()
             cmd = f"/md2024_pabrik_{id_pabrik}"
-            time.sleep(1.5)
+            time.sleep(2)
             await client.send_message(bot_id, cmd)
             return
             
         if "Berhasil mengambil Hasil Produksi" in pesan:
             print(time.asctime(), 'Berhasil Ambil Hasil')
             cmd = f"/md2024_HasilProduksi"
-            time.sleep(1.5)
+            time.sleep(2)
             await client.send_message(bot_id, cmd)
             return
             
         if "Hasil produksi dari semua" in pesan:
             print(time.asctime(), 'Jual Hasil')
             klik = await client.get_messages(bot_id, ids=event.message.id)
-            time.sleep(1.5)
+            time.sleep(2)
             await klik.click(text='Confirm')
             return
           
@@ -205,7 +205,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             id_pabrik = daftar_pabrik[i]
             cmd = f"/md2024_pabrik_{str(id_pabrik)}"
             print(time.asctime(), 'Berhasil Jual Hasil')
-            time.sleep(1.5)
+            time.sleep(2)
             await client.send_message(bot_id, cmd)
             return
         
@@ -216,7 +216,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 id_pabrik = daftar_pabrik[i]
                 cmd = f"/md2024_pabrik_{id_pabrik}"
                 print(time.asctime(), 'Pabrik Penuh, beralih ke pabrik selanjutnya')
-                time.sleep(1.5)
+                time.sleep(2)
                 await client.send_message(bot_id, cmd)
             else:
                 i = 0

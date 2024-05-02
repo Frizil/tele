@@ -136,8 +136,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     perpanjang = data_perpanjang[0]
                     time.sleep(2)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
+                    
                         
-            
             if match_hasil and not matches:
                 total_pekerja = int(match_hasil.group(1))
                 total_produksi = int(match_hasil.group(3))
@@ -211,7 +211,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         if "Kapasitas pabrik sudah penuh" in pesan:
             i += 1
-            boleh = True
+            boleh = False
             if i < len(daftar_pabrik):
                 id_pabrik = daftar_pabrik[i]
                 cmd = f"/md2024_pabrik_{id_pabrik}"

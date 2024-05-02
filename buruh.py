@@ -82,13 +82,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     cmd = f"/md2024_rekrut_{str(id_pabrik)}"
                     time.sleep(1.5)
                     await client.send_message(bot_id, cmd)
-            else:
-                data_rekrut.clear()
-                id_pabrik = daftar_pabrik[i]
-                print(time.asctime(), 'Habis Duit')
-                cmd = f"/md2024_pabrik_{id_pabrik}"
-                time.sleep(1.5)
-                await client.send_message(bot_id, cmd)
             return
           
         if "Apa kamu yakin ingin merekrut" in pesan:

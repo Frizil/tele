@@ -140,8 +140,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if not extension:
                         print(time.asctime(), 'Cek')
                         klik = await client.get_messages(bot_id, ids=event.message.id)
+                      
                         extension = True
-                        if klik.text == 'AmbilHasil':
+                        if 'AmbilHasil' in klik.text:
                             time.sleep(2.5)
                             await klik.click(text='AmbilHasil')
                             

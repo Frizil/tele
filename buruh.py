@@ -144,7 +144,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     await klik.click(text='AmbilHasil')
                 
                 if "kontrak berakhir" in kontrak and extension: 
-                    cmd = f"/md2024_perpanjang_{nama}_1")"
+                    cmd = f"/md2024_perpanjang_{nama}_1"
                     time.sleep(2.5)
                     await client.send_message(bot_id, cmd)
                 

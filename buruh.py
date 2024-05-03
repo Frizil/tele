@@ -135,8 +135,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     kontrak = match[2]
                     if kontrak == "kontrak berakhir":
                         data_perpanjang.append((jenis, nama, kontrak))
-                        perpanjang = data_perpanjang[0]
-                
+                        
                 if "kontrak berakhir" in kontrak and not extension: 
                     print(time.asctime(), 'Ambil Hasil')
                     klik = await client.get_messages(bot_id, ids=event.message.id)
@@ -145,7 +144,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     await klik.click(text='AmbilHasil')
                 
                 if "kontrak berakhir" in kontrak and extension: 
-                    cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_1"
+                    cmd = f"/md2024_perpanjang_{nama}_1")"
                     time.sleep(2.5)
                     await client.send_message(bot_id, cmd)
                 

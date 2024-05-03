@@ -26,8 +26,8 @@ for i in range(total_pabrik):
     daftar_id = int(input(f"Masukkan ID pabrik ke-{i+1} : "))
     daftar_pabrik.append(daftar_id)
 
-skill_min = int(input("Masukkan batas minimum skill : "))
-uang_max = int(input("Masukkan batas maksimum uang : "))
+skill_min = int(input("Minimum skill buruh : "))
+uang_max = int(input("Maksimum upah per jam : "))
 
 
 i = 0

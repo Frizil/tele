@@ -124,7 +124,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             pola_hasil = r"Kapasitas Pekerja: \((\d+)/(\d+)\)\nKapasitas Produksi: \((\d+)/(\d+)\)"
             match_hasil = re.search(pola_hasil, pesan)
             
-            if matches and boleh:
+            if matches:
                 for match in matches:
                     jenis = match[0].replace('b', 'perpanjang')
                     nama = match[1]
@@ -136,6 +136,12 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
+                    
+                if "kontrak berakhir" not in kontrak and boleh: 
+                    print(time.asctime(), 'Ambil Hasil')
+                    klik = await client.get_messages(bot_id, ids=event.message.id)
+                    time.sleep(2.5)
+                    await klik.click(text='AmbilHasil')
                     
                         
             if match_hasil and not matches:
@@ -163,10 +169,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         await klik.click(text='AmbilHasil')
                     
             else:
-                print(time.asctime(), 'Ambil Hasil')
-                klik = await client.get_messages(bot_id, ids=event.message.id)
+                id_pabrik = daftar_pabrik[i]
+                cmd = f"/md2024_pabrik_{str(id_pabrik)}"
+                print(time.asctime(), 'Cek Pabrik')
                 time.sleep(2.5)
-                await klik.click(text='AmbilHasil')
+                await client.send_message(bot_id, cmd)
             return
         
         if "Apa kamu yakin ingin memperpanjang" in pesan:

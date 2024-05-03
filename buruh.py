@@ -234,6 +234,9 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
             else:
                 i = 0
                 boleh = False
+                extension = False
+                id_pabrik = daftar_pabrik[i]
+                cmd = f"/md2024_pabrik_{id_pabrik}"
                 print(time.asctime(), 'Semua pabrik penuh, tidak dapat melanjutkan operasi')
                 time.sleep(58)
                 await client.send_message(bot_id, cmd)

@@ -17,7 +17,7 @@ elif mpm == '2':
 elif mpm == '3':
     bot_id = 'KampungMaifamX4Bot'
     
-#bot_id = 1396547380
+#bot_id = 5199147926
 
 total_pabrik = int(input("Masukkan jumlah total pabrik : "))
 daftar_pabrik = []
@@ -138,12 +138,21 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                               
                 if data_perpanjang:
                     if not extension:
-                        print(time.asctime(), 'Ambil Hasil')
+                        print(time.asctime(), 'Cek')
                         klik = await client.get_messages(bot_id, ids=event.message.id)
                         extension = True
-                        time.sleep(2.5)
-                        await klik.click(text='AmbilHasil')
-                    
+                        if klik.text == 'AmbilHasil':
+                            time.sleep(2.5)
+                            await klik.click(text='AmbilHasil')
+                            
+                        else:
+                            extension = True
+                            id_pabrik = daftar_pabrik[i]
+                            cmd = f"/md2024_pabrik_{id_pabrik}"
+                            print(time.asctime(), 'Cek Pabrik')
+                            time.sleep(2.5)
+                            await client.send_message(bot_id, cmd)
+                        
                     elif extension:
                         cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_1"
                         time.sleep(2.5)
@@ -166,7 +175,8 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     print(time.asctime(), 'Rekrut')
                     time.sleep(2.5)
                     await client.send_message(bot_id, cmd)
-                
+                    
+
                 else:
                     if boleh == True:
                         id_pabrik = daftar_pabrik[i]
@@ -174,12 +184,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         print(time.asctime(), 'Rekrut')
                         time.sleep(2.5)
                         await client.send_message(bot_id, cmd)
+                        
                     if boleh == False:
                         print(time.asctime(), 'Ambil Hasil')
                         klik = await client.get_messages(bot_id, ids=event.message.id)
                         time.sleep(2.5)
                         await klik.click(text='AmbilHasil')
-                    
+                        
             return
         
         if "Apa kamu yakin ingin memperpanjang" in pesan:

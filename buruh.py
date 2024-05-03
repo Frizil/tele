@@ -143,7 +143,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     time.sleep(2.5)
                     await klik.click(text='AmbilHasil')
                     
-                    
                 if "kontrak berakhir" in kontrak and extension == True: 
                     perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
@@ -182,7 +181,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     
             return
         
-        if "Apa kamu yakin ingin memperpanjang" in pesan and extension == True:
+        if "Apa kamu yakin ingin memperpanjang" in pesan:
             print(time.asctime(), 'perpanjang')
             klik = await client.get_messages(bot_id, ids=event.message.id)
             time.sleep(1)

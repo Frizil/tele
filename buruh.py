@@ -211,7 +211,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         
         if "Kapasitas pabrik sudah penuh" in pesan:
             i += 1
-            boleh = False
+            boleh = True
             if i < len(daftar_pabrik):
                 id_pabrik = daftar_pabrik[i]
                 cmd = f"/md2024_pabrik_{id_pabrik}"

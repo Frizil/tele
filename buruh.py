@@ -135,24 +135,26 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     kontrak = match[2]
                     if kontrak == "kontrak berakhir":
                         data_perpanjang.append((jenis, nama, kontrak))
-                        
-                if "kontrak berakhir" in kontrak and not extension: 
-                    print(time.asctime(), 'Ambil Hasil')
-                    klik = await client.get_messages(bot_id, ids=event.message.id)
-                    extension = True
-                    time.sleep(2.5)
-                    await klik.click(text='AmbilHasil')
-                
-                if "kontrak berakhir" in kontrak and extension: 
-                    cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_1"
-                    time.sleep(2.5)
-                    await client.send_message(bot_id, cmd)
-                
-                if "kontrak berakhir" not in kontrak: 
-                    print(time.asctime(), 'Ambil Hasil')
-                    klik = await client.get_messages(bot_id, ids=event.message.id)
-                    time.sleep(2.5)
-                    await klik.click(text='AmbilHasil')
+                    break
+                  
+                if data_perpanjang: 
+                    if "kontrak berakhir" in kontrak and not extension: 
+                        print(time.asctime(), 'Ambil Hasil')
+                        klik = await client.get_messages(bot_id, ids=event.message.id)
+                        extension = True
+                        time.sleep(2.5)
+                        await klik.click(text='AmbilHasil')
+                    
+                    if "kontrak berakhir" in kontrak and extension: 
+                        cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_1"
+                        time.sleep(2.5)
+                        await client.send_message(bot_id, cmd)
+                    
+                    if "kontrak berakhir" not in kontrak: 
+                        print(time.asctime(), 'Ambil Hasil')
+                        klik = await client.get_messages(bot_id, ids=event.message.id)
+                        time.sleep(2.5)
+                        await klik.click(text='AmbilHasil')
                     
                         
             if match_hasil and not matches:

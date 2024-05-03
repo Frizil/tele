@@ -44,7 +44,6 @@ logging.basicConfig(level=logging.ERROR)
 
 boleh = False
 extension = False
-perpanjang = None
 lanjut = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -52,7 +51,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
 
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
-        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension, perpanjang
+        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension
         pesan = event.raw_text
         
         if "Skill menentukan kecepatan pekerja" in pesan:
@@ -136,29 +135,31 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     kontrak = match[2]
                     if kontrak == "kontrak berakhir":
                         data_perpanjang.append((jenis, nama, kontrak))
+                        perpanjang = data_perpanjang[0]
+                
+                if data_perpanjang:
+                    perpanjang = data_perpanjang[0]
                     
-                if "kontrak berakhir" in kontrak and extension == False: 
-                    print(time.asctime(), 'Ambil Hasil')
-                    klik = await client.get_messages(bot_id, ids=event.message.id)
-                    extension = True
-                    time.sleep(2.5)
-                    await klik.click(text='AmbilHasil')
-                
-                perpanjang = data_perpanjang[0]
-                
-                if "kontrak berakhir" in kontrak and extension == True: 
-                    time.sleep(2.5)
-                    await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
-                
-                if "kontrak berakhir" not in kontrak: 
-                    print(time.asctime(), 'Ambil Hasil')
-                    klik = await client.get_messages(bot_id, ids=event.message.id)
-                    time.sleep(2.5)
-                    await klik.click(text='AmbilHasil')
+                    if "kontrak berakhir" in kontrak and not extension: 
+                        print(time.asctime(), 'Ambil Hasil')
+                        klik = await client.get_messages(bot_id, ids=event.message.id)
+                        extension = True
+                        time.sleep(2.5)
+                        await klik.click(text='AmbilHasil')
+                    
+                    if "kontrak berakhir" in kontrak and extension: 
+                        cmd = f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1"
+                        time.sleep(2.5)
+                        await client.send_message(bot_id, cmd)
+                    
+                    if "kontrak berakhir" not in kontrak: 
+                        print(time.asctime(), 'Ambil Hasil')
+                        klik = await client.get_messages(bot_id, ids=event.message.id)
+                        time.sleep(2.5)
+                        await klik.click(text='AmbilHasil')
                     
                         
             if match_hasil and not matches:
-                perpanjang = None
                 total_pekerja = int(match_hasil.group(1))
                 total_produksi = int(match_hasil.group(3))
                 

@@ -140,20 +140,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if not extension:
                         print(time.asctime(), 'Cek')
                         klik = await client.get_messages(bot_id, ids=event.message.id)
-                      
                         extension = True
-                        if 'AmbilHasil' in klik.text:
-                            time.sleep(2.5)
-                            await klik.click(text='AmbilHasil')
+                        time.sleep(2.5)
+                        await klik.click(text='AmbilHasil')
                             
-                        else:
-                            extension = True
-                            id_pabrik = daftar_pabrik[i]
-                            cmd = f"/md2024_pabrik_{id_pabrik}"
-                            print(time.asctime(), 'Cek Pabrik')
-                            time.sleep(2.5)
-                            await client.send_message(bot_id, cmd)
-                        
                     elif extension:
                         cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_1"
                         time.sleep(2.5)
@@ -177,7 +167,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     time.sleep(2.5)
                     await client.send_message(bot_id, cmd)
                     
-
                 else:
                     if boleh == True:
                         id_pabrik = daftar_pabrik[i]

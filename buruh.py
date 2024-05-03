@@ -168,12 +168,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         time.sleep(2.5)
                         await klik.click(text='AmbilHasil')
                     
-            else:
-                id_pabrik = daftar_pabrik[i]
-                cmd = f"/md2024_pabrik_{str(id_pabrik)}"
-                print(time.asctime(), 'Cek Pabrik')
-                time.sleep(2.5)
-                await client.send_message(bot_id, cmd)
             return
         
         if "Apa kamu yakin ingin memperpanjang" in pesan:

@@ -74,7 +74,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                 #data_sorted = sorted(data, key=lambda x: x[3], reverse=False)
                 ambil = data_sorted[0]
                 if ambil[1] != 0:
-                    time.sleep(2.5)
+                    time.sleep(1.5)
                     await client.send_message(bot_id, ambil[2])
                     #print(ambil)
                 if ambil[1] == 0:

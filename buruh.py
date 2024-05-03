@@ -43,7 +43,7 @@ md = "/md2024"
 logging.basicConfig(level=logging.ERROR)
 
 boleh = False
-
+extension = False
 lanjut = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -51,7 +51,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
 
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
-        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh
+        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension
         pesan = event.raw_text
         
         if "Rekrut buruh pekerja untuk Pabrik" in pesan:
@@ -137,6 +137,13 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         data_perpanjang.append((jenis, nama, kontrak))
                     
                 if "kontrak berakhir" in kontrak: 
+                    print(time.asctime(), 'Ambil Hasil')
+                    klik = await client.get_messages(bot_id, ids=event.message.id)
+                    time.sleep(2.5)
+                    await klik.click(text='AmbilHasil')
+                    extension = True
+                
+                if extension == True
                     perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
@@ -217,6 +224,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Kapasitas pabrik sudah penuh" in pesan:
             i += 1
             boleh = False
+            extension = False
             if i < len(daftar_pabrik):
                 id_pabrik = daftar_pabrik[i]
                 cmd = f"/md2024_pabrik_{id_pabrik}"

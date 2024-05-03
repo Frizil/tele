@@ -26,10 +26,6 @@ for i in range(total_pabrik):
     daftar_id = int(input(f"Masukkan ID pabrik ke-{i+1} : "))
     daftar_pabrik.append(daftar_id)
 
-skill_min = int(input("Minimum skill buruh : "))
-uang_max = int(input("Maksimum upah per jam : "))
-
-
 i = 0
 
 id_pabrik = daftar_pabrik[i]
@@ -43,7 +39,7 @@ md = "/md2024"
 logging.basicConfig(level=logging.ERROR)
 
 boleh = False
-extension = False
+
 lanjut = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -51,7 +47,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
 
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
-        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension
+        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh
         pesan = event.raw_text
         
         if "Rekrut buruh pekerja untuk Pabrik" in pesan:
@@ -66,7 +62,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     skill = int(match[1])
                     rekrut = match[2]
                     uang = int(match[3].replace(',', ''))
-                    if skill >= skill_min and uang <= uang_max:
+                    if skill >= 150 and uang <= 8000:
                         data_rekrut.append((nama, skill, rekrut, uang))
                     else:
                         data_rekrut.append((0,0,0,0))
@@ -136,18 +132,11 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     if kontrak == "kontrak berakhir":
                         data_perpanjang.append((jenis, nama, kontrak))
                     
-                if "kontrak berakhir" in kontrak and extension == False: 
-                    print(time.asctime(), 'Ambil Hasil')
-                    klik = await client.get_messages(bot_id, ids=event.message.id)
-                    extension = True
-                    time.sleep(2.5)
-                    await klik.click(text='AmbilHasil')
-                    
-                if "kontrak berakhir" in kontrak and extension == True: 
+                if "kontrak berakhir" in kontrak: 
                     perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
-                
+                    
                 if "kontrak berakhir" not in kontrak: 
                     print(time.asctime(), 'Ambil Hasil')
                     klik = await client.get_messages(bot_id, ids=event.message.id)
@@ -224,7 +213,6 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Kapasitas pabrik sudah penuh" in pesan:
             i += 1
             boleh = False
-            extension = False
             if i < len(daftar_pabrik):
                 id_pabrik = daftar_pabrik[i]
                 cmd = f"/md2024_pabrik_{id_pabrik}"

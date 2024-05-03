@@ -44,6 +44,7 @@ logging.basicConfig(level=logging.ERROR)
 
 boleh = False
 extension = False
+perpanjang = None
 lanjut = 0
 
 with TelegramClient(sesi_file, api_id, api_hash) as client:
@@ -51,7 +52,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
 
     @client.on(events.NewMessage(from_users=bot_id))
     async def handler(event):
-        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension
+        global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension, perpanjang
         pesan = event.raw_text
         
         if "Skill menentukan kecepatan pekerja" in pesan:
@@ -142,9 +143,10 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     extension = True
                     time.sleep(2.5)
                     await klik.click(text='AmbilHasil')
-                    
+                
+                perpanjang = data_perpanjang[0]
+                
                 if "kontrak berakhir" in kontrak and extension == True: 
-                    perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")
                 
@@ -156,6 +158,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     
                         
             if match_hasil and not matches:
+                perpanjang = None
                 total_pekerja = int(match_hasil.group(1))
                 total_produksi = int(match_hasil.group(3))
                 

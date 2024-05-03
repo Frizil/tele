@@ -172,7 +172,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Apa kamu yakin ingin memperpanjang" in pesan:
             print(time.asctime(), 'perpanjang')
             klik = await client.get_messages(bot_id, ids=event.message.id)
-            time.sleep(2)
+            time.sleep(1)
             await klik.click(text='Confirm')
             return
           
@@ -195,7 +195,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         if "Hasil produksi dari semua" in pesan:
             print(time.asctime(), 'Jual Hasil')
             klik = await client.get_messages(bot_id, ids=event.message.id)
-            time.sleep(2)
+            time.sleep(1)
             await klik.click(text='Confirm')
             return
           

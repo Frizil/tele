@@ -26,6 +26,10 @@ for i in range(total_pabrik):
     daftar_id = int(input(f"Masukkan ID pabrik ke-{i+1} : "))
     daftar_pabrik.append(daftar_id)
 
+skill_min = int(input("Masukkan batas minimum skill : "))
+uang_max = int(input("Masukkan batas maksimum uang : "))
+
+
 i = 0
 
 id_pabrik = daftar_pabrik[i]
@@ -62,7 +66,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     skill = int(match[1])
                     rekrut = match[2]
                     uang = int(match[3].replace(',', ''))
-                    if skill >= 150 and uang <= 8000:
+                    if skill >= skill_min and uang <= uang_max:
                         data_rekrut.append((nama, skill, rekrut, uang))
                     else:
                         data_rekrut.append((0,0,0,0))

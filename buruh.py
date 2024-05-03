@@ -143,7 +143,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     await klik.click(text='AmbilHasil')
                     extension = True
                 
-                if extension == True
+                if extension == True:
                     perpanjang = data_perpanjang[0]
                     time.sleep(2.5)
                     await client.send_message(bot_id, f"/md2024_{perpanjang[0]}_{perpanjang[1]}_1")

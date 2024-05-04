@@ -167,6 +167,20 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                     time.sleep(3)
                     await client.send_message(bot_id, cmd)
                     
+                if total_pekerja >= 11 and total_produksi >= 0:
+                    if boleh == True:
+                        id_pabrik = daftar_pabrik[i]
+                        cmd = f"/md2024_rekrut_{str(id_pabrik)}"
+                        print(time.asctime(), 'Rekrut')
+                        time.sleep(3)
+                        await client.send_message(bot_id, cmd)
+                        
+                    if boleh == False:
+                        print(time.asctime(), 'Ambil Hasil')
+                        klik = await client.get_messages(bot_id, ids=event.message.id)
+                        time.sleep(3)
+                        await klik.click(text='AmbilHasil')
+                    
                 else:
                     if boleh == True:
                         id_pabrik = daftar_pabrik[i]

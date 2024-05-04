@@ -145,7 +145,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
                         await klik.click(text='AmbilHasil')
                             
                     elif extension:
-                        cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_3"
+                        cmd = f"/md2024_{data_perpanjang[0][0]}_{data_perpanjang[0][1]}_5"
                         time.sleep(3)
                         await client.send_message(bot_id, cmd)
                     

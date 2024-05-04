@@ -54,7 +54,7 @@ with TelegramClient(sesi_file, api_id, api_hash) as client:
         global data_rekrut, id_pabrik, cmd, data_perpanjang, md, i, daftar_pabrik, boleh, extension
         pesan = event.raw_text
         
-        if "Skill menentukan kecepatan" in pesan:
+        if "Skill menentukan kecepatan" in pesan or "Pekerja yang tersedia akan diperbarui" in pesan:
             data_rekrut.clear() 
             id_pabrik = daftar_pabrik[i]
             narasi = pesan

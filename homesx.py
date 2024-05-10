@@ -11,10 +11,10 @@ sesi_fil = input('Akun : ')
 
 bot = ['danaudalamhutan', 'KampungMaifamXBot', 'KampungMaifamX4Bot', 'KampungMaifamBot']
 result = "/casino_hasil"
-#mode = "/casino_FortuneDice_"
-mode = "/casino_FiftyFifty_"
-judi = mode+str(random.randint(1,2))+"_1e12"
-#judi = mode+str(random.randint(1,2))+"_5e10"
+mode = "/casino_FortuneDice_"
+#mode = "/casino_FiftyFifty_"
+#judi = mode+str(random.randint(1,2))+"_1e12"
+judi = mode+str(random.randint(1,2))+"_5e10"
 hapus = 'Hapus menggunakan Uang'
 total = 0
 
@@ -74,7 +74,7 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
           
         if any(nca in teks for nca in ncasino):
             sleep(2)
-            await event.respond(judi)
+            await event.respond('/homesx')
             return
           
         if "Rumah Kosong Warga" in teks:
@@ -97,12 +97,12 @@ with TelegramClient(sesi_fil, api_id, api_hash) as client:
                 
         if 'Bagus!!' in teks or 'Uuuh rasanya enak' in teks:
             sleep(1.8)
-            await event.respond(result)
+            await event.respond('/homesx')
             return
             
         if  'Selesaikan permainan' in teks or 'Tidak ada harga buronan' in teks:
             sleep(1.8)
-            await event.respond(result)
+            await event.respond('/homesx')
             return
             
         if 'Kamu terkurung' in teks:

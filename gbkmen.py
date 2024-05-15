@@ -10,10 +10,10 @@ sesi_file = input('Mau sesi mana = ')
 
 gbk = '/gbk_jelajah'
 restore = '/restore_max_confirm'
-bot_id = "KampungMaifamXBot"
+bot_id = "KampungMaifamX4Bot"
 krj = '/gbk_keranjang'
 tsk = '/gbk_Task'
-tskf = '/gbk_task_F'
+tskf = '/gbk_task_E'
 
 
 narasi_gbk = {
@@ -47,6 +47,7 @@ narasi_10 = "Tempat hidup para monyet" #hutan monyet
 narasi_11 = "Taman mawar yang dipenuhi mawar" #rumah mawar
 narasi_12 = "Gua ini menyimpan permata" #GOA L
 narasi_13 = "Area subur yang dipenuhi buah-buahan" #kebun emas
+narasi_14 = "Taman bunga yang begitu" #taman_asmara
 
 area_tupai = {
     "BerryBiasa[A]", "BerryBiasa[B]", "BerryBiasa[C]", "BerryBiasa[D]", "BerryLiar[B]", "BerryLiar[C]", "KacangOak", "KacangOak[A]", "KacangOak[B]", "KacangOak[C]", "KacangOak[D]", "KacangOak[E]", "Pisang", "Pisang[A]", "Pisang[B]", "Pisang[C]", "Pisang[D]", "Pisang[E]"
@@ -100,12 +101,16 @@ kebun_emas = {
     "AnggurEmas", "ApelEmas", "ManggaEmas" , "PepayaEmas", "PisangEmas"
 }
 
+taman_asmara = {
+    "LilacPutih", "BlueViolet", "SalviaBiru" , "NarsisKuning", "AkasiaKuning"
+}
+
 jalan = narasi_gbk
 
 ch = -1001522767385
 
-emoji_list = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒']
-full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒']
+emoji_list = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒', '🌼', '🌺', '🌷']
+full_emoji = ['🌻', '🍄', '🍌', '🌰', '🥜', '🍎', '🍓', '🍅', '▪️', '🥕', '🥔', '🐟', '🥚', '🥑', '◻️', '🍐', '🥭', '🍇','🥀', '🥒', '🌼', '🌺', '🌷']
 jumlah = 0
 misi = []
 narasi = []
@@ -244,6 +249,8 @@ Task 3 =  {tugas3[0]}  total {tugas3[3]}
                     run_narasi = narasi_12
                 elif run_task in kebun_emas:
                     run_narasi = narasi_13
+                elif run_task in taman_asmara:
+                    run_narasi = narasi_14
                 else:
                     print("\nJenis item tidak ditemukan di dalam area")
                     run_narasi = '⛰ Gunung Belakang Kebun ⛰'
